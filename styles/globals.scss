@@ -1,0 +1,23 @@
+@import './Header.scss';
+@import './SelectItem.scss';
+@import './TrangChu.scss';
+@import './DangKy.scss';
+@import './UngVien.scss';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+:root {
+    --height-header: 68px;
+    --height-sub-header: 56px;
+    --main-color: #f37021;
+    --sub-color: #FBE9E7;
+    --height-input-on-search: 40px;
+}

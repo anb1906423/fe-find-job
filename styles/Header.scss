@@ -1,0 +1,109 @@
+.header {
+    height: var(--height-header);
+    background-color: #fff;
+}
+
+.header .logo-box {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.header .logo {
+    height: var(--height-header);
+    width: auto;
+    top: 0;
+    cursor: pointer;
+}
+
+.header ul {
+    display: inline-block;
+    margin: 0;
+}
+
+.header ul li {
+    display: inline-block;
+}
+
+.header ul.menu li a {
+    line-height: var(--height-header);
+    padding: 0 16px;
+    text-decoration: none;
+    color: #000;
+    display: inline-block;
+    transition: all .2s linear;
+}
+
+.header ul.menu li a:hover {
+    background-color: var(--sub-color);
+}
+
+.header-wrapper .sub-header {
+    height: var(--height-sub-header);
+    background-color: var(--main-color);
+    padding-right: 20px;
+}
+
+.header .tai-khoan {
+    margin-right: 20px;
+}
+
+.header .tai-khoan-item {
+    line-height: var(--height-header);
+}
+
+.header ul.tai-khoan li a {
+    padding: 6px 16px;
+    text-decoration: none;
+    background-color: antiquewhite;
+    border-radius: 6px;
+    margin: 0px 2px;
+    border: 1px solid var(--main-color);
+    transition: all .2s linear;
+}
+
+.header ul.tai-khoan li:first-child a {
+    color: white;
+    background-color: var(--main-color);
+}
+
+.header ul.tai-khoan li:last-child a {
+    color: var(--main-color);
+    background-color: white;
+}
+
+.header ul.tai-khoan li a:hover {
+    background-color: var(--sub-color);
+    color: var(--main-color);
+}
+
+//input search
+.sub-header .div-on-form {
+    max-height: var(--height-input-on-search);
+    padding: 0 10px;
+}
+
+.sub-header .div-on-form input {
+    width: 240px;
+    height: var(--height-input-on-search);
+    max-height: var(--height-input-on-search);
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: none;
+}
+
+.sub-header .div-on-form select {
+    border-radius: 4px;
+    padding: 5px 10px;
+    width: 240px;
+    height: var(--height-input-on-search);
+    max-height: var(--height-input-on-search);
+}
+
+.sub-header .div-on-form button {
+    padding: 5px 30px;
+    height: var(--height-input-on-search);
+    border-radius: 4px;
+    border: none;
+    color: var(--main-color);
+    background-color: var(--sub-color);
+}

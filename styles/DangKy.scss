@@ -1,0 +1,24 @@
+.chua-form-dang-nhap,
+.chua-form-dang-ky {
+    background-color: var(--sub-color);
+    max-width: 480px;
+    margin: 0px auto;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--main-color);
+}
+
+.form-dang-nhap .nut-dang-nhap,
+.form-dang-ky .nut-dang-ky {
+    background-color: var(--main-color);
+    color: #fff;
+    margin: 6px 0;
+    border: 1px solid var(--main-color);
+}
+
+.form-dang-nhap .nut-dang-nhap:hover,
+.form-dang-ky .nut-dang-ky:hover {
+    background-color: var(--sub-color);
+    color: var(--main-color);
+    border: 1px solid var(--main-color);
+}
