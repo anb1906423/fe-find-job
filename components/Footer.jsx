@@ -86,7 +86,7 @@ const FooterChuk = () => {
                             </div>
                             <div className="mb-2">
                                 <span>
-                                    <i class="bi bi-facebook"></i>
+                                    <i className="bi bi-facebook"></i>
                                 </span>
                                 <span className="mx-2">Facebook</span>
                             </div>
