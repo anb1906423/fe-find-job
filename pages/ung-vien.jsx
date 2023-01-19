@@ -5,12 +5,23 @@ import { backendAPI } from '../config'
 
 const TrangUngVien = () => {
   const [danhSachUngVien, datDanhSachUngVien] = useState([])
+  
   useEffect(() => {
-    fetch(backendAPI + '/ung-vien')
-      .then((res) => res.json())
-      .then((danhSachUngVien) => {
-        datDanhSachUngVien(danhSachUngVien)
-      })
+    let isMounted = true;
+    const controller = new AbortController();
+
+    const getUngVien = async () => {
+      fetch(backendAPI + '/ung-vien')
+        .then((res) => res.json())
+        .then((danhSachUngVien) => {
+          datDanhSachUngVien(danhSachUngVien)
+        })
+    }
+    getUngVien()
+    return () => {
+      isMounted = false;
+      controller.abort();
+    }
   }, [danhSachUngVien])
 
   return (
