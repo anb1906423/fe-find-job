@@ -5,7 +5,7 @@ import { backendAPI } from '../config';
 
 const TrangUngVien = () => {
   const [danhSachUngVien, datDanhSachUngVien] = useState([])
-  
+
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
@@ -22,7 +22,7 @@ const TrangUngVien = () => {
       isMounted = false;
       controller.abort();
     }
-  }, [danhSachUngVien])
+  }, [])
 
   return (
     <div className="trang-ung-vien">
@@ -32,7 +32,7 @@ const TrangUngVien = () => {
           <p>Danh sách ứng viên đang được cập nhật</p>
         ) : (
           danhSachUngVien.map((item, index) => {
-            return <UngVien />;
+            return <UngVien key={index} />;
           })
         )}
       </div>
