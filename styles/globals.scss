@@ -1,9 +1,13 @@
+// import css của thư viện  
+@import "bootstrap-icons/font/bootstrap-icons.css";
+@import 'tippy.js/dist/tippy.css';
+
 @import './Header.scss';
 @import './SelectItem.scss';
 @import './TrangChu.scss';
 @import './DangKy.scss';
 @import './UngVien.scss';
-@import "bootstrap-icons/font/bootstrap-icons.css";
+
 
 * {
     margin    : 0;

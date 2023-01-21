@@ -37,10 +37,11 @@
 
 .blur-footer {
     position: absolute;
+    width   : auto;
 }
 
 .blur-1 {
-    height: 100%;
+    height: 80%;
     right : 0;
     bottom: 0;
 
@@ -50,7 +51,7 @@
 }
 
 .blur-2 {
-    height: 100%;
+    height: 80%;
     top   : 0;
     left  : 0;
 

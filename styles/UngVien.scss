@@ -1,0 +1,61 @@
+.danh-sach-ung-vien {
+    padding: 40px 0;
+
+
+    .ung-vien {
+        display: flex;
+
+        .ung-vien-item {
+            display      : flex;
+            border       : 1px solid #ccc;
+            margin-bottom: 10px;
+            padding      : 20px;
+            border-radius: 10px;
+
+
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.07);
+                cursor          : pointer;
+            }
+        }
+
+        .avatar {
+            width        : 76px;
+            height       : 76px;
+            object-fit   : cover;
+            border-radius: 50%;
+        }
+
+        .thong-tin-khac {
+            margin-left: 12px;
+        }
+
+        .vi-tri-mong-muon {
+            color      : #02528E;
+            font-weight: 700;
+            display    : inline-block;
+        }
+
+        .hoc-van {
+            display           : -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow          : hidden;
+        }
+
+        .thong-tin-khac-ve-ung-vien {
+            margin-top     : 10px;
+            display        : flex;
+            justify-content: space-between;
+            flex-wrap      : wrap;
+
+            h6 {
+                width: 50%;
+            }
+        }
+
+        .th-thong-tin-khac {
+            width: 50%;
+        }
+    }
+}

@@ -1,31 +1,117 @@
 import React, { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+
+import axios from './api/axiosApi';
 import Heading from '../components/Heading';
 import UngVien from '../components/UngVien';
-import { backendAPI } from '../config';
+import Head from 'next/head';
 
 const TrangUngVien = () => {
-    const [danhSachUngVien, datDanhSachUngVien] = useState([]);
+    // fake dữ liệu đầu vào tạm thời
+    const [danhSachUngVien, datDanhSachUngVien] = useState([
+        {
+            avatar: 'https://static.beecost.vn/upload/uploads/2020/05/hinh-anh-co-gai-buon-2.jpg',
+            viTriMongMuon: 'Dev web',
+            hoVaTen: 'Nguyen Van A',
+            sinhNhat: '31/12/2002',
+            mucLuongMongMuon: '10.000.000',
+            hocvan: 'Đại Học',
+            kinhnghiem: 'Dưới 1 năm',
+        },
+        {
+            avatar: 'https://static.beecost.vn/upload/uploads/2020/05/hinh-anh-co-gai-buon-2.jpg',
+            viTriMongMuon: 'Dev web',
+            hoVaTen: 'Nguyen Van A',
+            sinhNhat: '31/12/2002',
+            mucLuongMongMuon: '10.000.000',
+            hocvan: 'Đại Học',
+            kinhnghiem: 'Dưới 1 năm',
+        },
+        {
+            avatar: 'https://static.beecost.vn/upload/uploads/2020/05/hinh-anh-co-gai-buon-2.jpg',
+            viTriMongMuon: 'Dev web',
+            hoVaTen: 'Nguyen Van A',
+            sinhNhat: '31/12/2002',
+            mucLuongMongMuon: '10.000.000',
+            hocvan: 'Đại Học',
+            kinhnghiem: 'Dưới 1 năm',
+        },
+        {
+            avatar: 'https://static.beecost.vn/upload/uploads/2020/05/hinh-anh-co-gai-buon-2.jpg',
+            viTriMongMuon: 'Dev web',
+            hoVaTen: 'Nguyen Van A',
+            sinhNhat: '31/12/2002',
+            mucLuongMongMuon: '10.000.000',
+            hocvan: 'Đại Học',
+            kinhnghiem: 'Dưới 1 năm',
+        },
+        {
+            avatar: 'https://static.beecost.vn/upload/uploads/2020/05/hinh-anh-co-gai-buon-2.jpg',
+            viTriMongMuon: 'Dev web',
+            hoVaTen: 'Nguyen Van A',
+            sinhNhat: '31/12/2002',
+            mucLuongMongMuon: '10.000.000',
+            hocvan: 'Đại Học',
+            kinhnghiem: 'Dưới 1 năm',
+        },
+        {
+            avatar: 'https://static.beecost.vn/upload/uploads/2020/05/hinh-anh-co-gai-buon-2.jpg',
+            viTriMongMuon: 'Dev web',
+            hoVaTen: 'Nguyen Van A',
+            sinhNhat: '31/12/2002',
+            mucLuongMongMuon: '10.000.000',
+            hocvan: 'Đại Học',
+            kinhnghiem: 'Dưới 1 năm',
+        },
+        {
+            avatar: 'https://static.beecost.vn/upload/uploads/2020/05/hinh-anh-co-gai-buon-2.jpg',
+            viTriMongMuon: 'Dev web',
+            hoVaTen: 'Nguyen Van A',
+            sinhNhat: '31/12/2002',
+            mucLuongMongMuon: '10.000.000',
+            hocvan: 'Đại Học',
+            kinhnghiem: 'Dưới 1 năm',
+        },
+        {
+            avatar: 'https://static.beecost.vn/upload/uploads/2020/05/hinh-anh-co-gai-buon-2.jpg',
+            viTriMongMuon: 'Dev web',
+            hoVaTen: 'Nguyen Van A',
+            sinhNhat: '31/12/2002',
+            mucLuongMongMuon: '10.000.000',
+            hocvan: 'Đại Học',
+            kinhnghiem: 'Dưới 1 năm',
+        },
+    ]);
+
+    // fetch api
     useEffect(() => {
-        // fetch(backendAPI + '/ung-vien')
-        //   .then((res) => res.json())
-        //   .then((danhSachUngVien) => {
-        //     datDanhSachUngVien(danhSachUngVien)
-        //   })
-    }, [danhSachUngVien]);
+        const fetch = async () => {
+            const Res = await axios.get('/ung-vien');
+
+            // if (Res.data) {
+            //     datDanhSachUngVien(Res.data);
+            // }
+        };
+
+        fetch();
+    }, []);
 
     return (
-        <div className="trang-ung-vien">
-            <Heading tieuDe="Tất cả ứng viên" />
-            <div className="danh-sach-ung-vien">
-                {danhSachUngVien.length == 0 ? (
-                    <p>Danh sách ứng viên đang được cập nhật</p>
-                ) : (
-                    danhSachUngVien.map((item, index) => {
-                        return <UngVien />;
-                    })
-                )}
+        <>
+            <Head>
+                <title>Danh sách ưng viên</title>
+            </Head>
+            <div className="trang-ung-vien">
+                <Heading tieuDe="Tất cả ứng viên" />
+                <div className="danh-sach-ung-vien">
+                    {danhSachUngVien && danhSachUngVien.length > 0 ? (
+                        <UngVien dulieu={danhSachUngVien} />
+                    ) : (
+                        <p>Danh sách ứng viên đang được cập nhật</p>
+                    )}
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

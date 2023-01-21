@@ -14,10 +14,10 @@ const FooterChuk = () => {
     return (
         <div className={cx('footer-wrapper-sell')}>
             <>
-                <Image src={Blur1} alt="" className={cx('blur-footer', 'blur-1')} />
-                <Image src={Blur2} alt="" className={cx('blur-footer', 'blur-2')} />
-                <Image src={Blur3} alt="" className={cx('blur-footer', 'blur-3')} />
-                <Image src={Blur4} alt="" className={cx('blur-footer', 'blur-4')} />
+                <Image loading="lazy" src={Blur1} alt="" className={cx('blur-footer', 'blur-1')} />
+                <Image loading="lazy" src={Blur2} alt="" className={cx('blur-footer', 'blur-2')} />
+                <Image loading="lazy" src={Blur3} alt="" className={cx('blur-footer', 'blur-3')} />
+                <Image loading="lazy" src={Blur4} alt="" className={cx('blur-footer', 'blur-4')} />
                 <div className={cx('overlay')}></div>
             </>
             <div className={cx('content')}>
@@ -86,7 +86,7 @@ const FooterChuk = () => {
                             </div>
                             <div className="mb-2">
                                 <span>
-                                    <i class="bi bi-facebook"></i>
+                                    <i className="bi bi-facebook"></i>
                                 </span>
                                 <span className="mx-2">Facebook</span>
                             </div>

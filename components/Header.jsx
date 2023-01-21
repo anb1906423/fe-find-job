@@ -97,7 +97,7 @@ const Header = () => {
                     {menu.map((item, index) => {
                         return (
                             <li className="menu-item fw-bold text-uppercase" key={index}>
-                                <a href={item.href}>{item.title}</a>
+                                <Link href={item.href}>{item.title}</Link>
                             </li>
                         );
                     })}
