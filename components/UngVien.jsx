@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Tippy from '@tippyjs/react';
 import { Col, Row } from 'react-bootstrap';
 
-import LazyImg from '../app/LazyImg/LazyImg';
+import LazyImg from '../app/components/LazyImg/LazyImg';
 
 const UngVien = ({ dulieu }) => {
     return (

@@ -6,11 +6,14 @@ import styles from '../../styles/taikhoan.module.scss';
 import { provinces } from '../../data/data';
 import { UploadImage } from '../../services/siteServices';
 import { REACT_APP_UPLOAD_PRESET } from '../../config';
+import SkeletonLoading from '../../app/components/SkeletonLoading/SkeletonLoading';
+import LoadingProgress from '../../app/components/LoadingProgress';
 
 const cx = classNames.bind(styles);
 
 const MeProfile = () => {
     const [avatar, setAvatar] = useState(null);
+    const [isLoadingAvatar, setIsLoadingAvatar] = useState(false);
     const [hinhAnhDemo, datHinhAnhDemo] = useState(
         'https://res.cloudinary.com/dnn5yfz32/image/upload/v1671186521/pcstezkktuf8maom1naw.jpg',
     );
@@ -57,13 +60,29 @@ const MeProfile = () => {
 
     return (
         <div className={cx('tai-khoan-cua-toi-wp')}>
+            <LoadingProgress />
             <div className="container">
                 <h5 className={cx('tieu-de', 'text-center', 'py-4')}>
                     Xin chào bạn Nguyễn Văn A dưới đây là thông tin của bạn
                 </h5>
                 <div className={cx('content')}>
                     <div className={cx('avatar')}>
-                        <img src={hinhAnhDemo} alt="hình ảnh đại diện" onClick={() => handleClickAvatar()} />
+                        {isLoadingAvatar ? (
+                            <SkeletonLoading
+                                width={110}
+                                height={110}
+                                borderRadius={50}
+                                className={cx('cho-hinh-anh-duoc-load')}
+                            />
+                        ) : (
+                            <img
+                                onLoadStart={() => setIsLoadingAvatar(true)}
+                                onLoad={() => setIsLoadingAvatar(false)}
+                                src={hinhAnhDemo}
+                                alt="hình ảnh đại diện"
+                                onClick={() => handleClickAvatar()}
+                            />
+                        )}
                         <input onChange={(e) => handleChangeFile(e)} ref={ref} type="file" hidden />
                     </div>
                     <div className="row">

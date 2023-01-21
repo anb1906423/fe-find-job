@@ -1,5 +1,6 @@
 .tai-khoan-cua-toi-wp {
     padding: 40px 0;
+    position: relative;
 }
 
 .tieu-de {
@@ -7,34 +8,37 @@
 }
 
 .avatar {
-    display        : flex;
+    display: flex;
     justify-content: center;
-    align-items    : center;
+    align-items: center;
 
     img {
-        width          : 110px;
-        height         : 110px;
-        object-fit     : cover;
+        width: 110px;
+        height: 110px;
+        object-fit: cover;
         object-position: center center;
-        border-radius  : 50%;
-        cursor         : pointer;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .cho-hinh-anh-duoc-load {
+        border-color: transparent;
     }
 }
 
 .content {
-
     label {
-        display      : block;
+        display: block;
         margin-bottom: 4px;
     }
 
     input,
     select {
-        display      : block;
-        width        : 100%;
-        padding      : 10px 8px;
-        border       : 1px solid #ccc;
-        outline      : none;
+        display: block;
+        width: 100%;
+        padding: 10px 8px;
+        border: 1px solid #ccc;
+        outline: none;
         border-radius: 6px;
     }
 }
