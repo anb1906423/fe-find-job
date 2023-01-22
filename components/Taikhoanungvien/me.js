@@ -6,17 +6,21 @@ import styles from '../../styles/taikhoan.module.scss';
 import { provinces } from '../../data/data';
 import { UploadImage } from '../../services/siteServices';
 import { REACT_APP_UPLOAD_PRESET } from '../../config';
-import SkeletonLoading from '../../app/components/SkeletonLoading/SkeletonLoading';
 import LoadingProgress from '../../app/components/LoadingProgress';
 
 const cx = classNames.bind(styles);
 
 const MeProfile = () => {
     const [avatar, setAvatar] = useState(null);
-    const [isLoadingAvatar, setIsLoadingAvatar] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [hinhAnhDemo, datHinhAnhDemo] = useState(
         'https://res.cloudinary.com/dnn5yfz32/image/upload/v1671186521/pcstezkktuf8maom1naw.jpg',
     );
+    const [hoTen, datHoTen] = useState('');
+    const [email, datEmail] = useState('');
+    const [soDienThoai, datSoDienThoai] = useState('');
+    const [linhVucLamVec, datLinhVucLamViec] = useState(null);
+    const [diaDiemLamViec, datDiaDiemLamViec] = useState(null);
 
     const ref = useRef(null);
 
@@ -60,51 +64,50 @@ const MeProfile = () => {
 
     return (
         <div className={cx('tai-khoan-cua-toi-wp')}>
-            <LoadingProgress />
+            {isLoading && <LoadingProgress />}
             <div className="container">
                 <h5 className={cx('tieu-de', 'text-center', 'py-4')}>
                     Xin chào bạn Nguyễn Văn A dưới đây là thông tin của bạn
                 </h5>
                 <div className={cx('content')}>
                     <div className={cx('avatar')}>
-                        {isLoadingAvatar ? (
-                            <SkeletonLoading
-                                width={110}
-                                height={110}
-                                borderRadius={50}
-                                className={cx('cho-hinh-anh-duoc-load')}
-                            />
-                        ) : (
-                            <img
-                                onLoadStart={() => setIsLoadingAvatar(true)}
-                                onLoad={() => setIsLoadingAvatar(false)}
-                                src={hinhAnhDemo}
-                                alt="hình ảnh đại diện"
-                                onClick={() => handleClickAvatar()}
-                            />
-                        )}
+                        <img src={hinhAnhDemo} alt="hình ảnh đại diện" onClick={() => handleClickAvatar()} />
                         <input onChange={(e) => handleChangeFile(e)} ref={ref} type="file" hidden />
                     </div>
                     <div className="row">
                         <div className="col-6 mt-3">
-                            <label>Họ và tên :</label>
-                            <input type="text" placeholder="Nguyen Van A" value="Nguyen van A" />
-                        </div>
-                        <div className="col-6 mt-3">
-                            <label>Email : </label>
+                            <label htmlFor="fullName">Họ và tên :</label>
                             <input
+                                onChange={(e) => datHoTen(e.target.value)}
+                                id="fullName"
                                 type="text"
-                                placeholder="khachhangtruycapweb@gmail.com"
-                                value="khachhangtruycapweb@gmail.com"
+                                placeholder="Nguyen Van A"
+                                value={hoTen}
                             />
                         </div>
                         <div className="col-6 mt-3">
-                            <label>Số điện thoại : </label>
-                            <input type="text" placeholder="012345678" value="012345678" />
+                            <label htmlFor="email">Email : </label>
+                            <input
+                                onChange={(e) => datEmail(e.target.value)}
+                                id="email"
+                                type="email"
+                                placeholder="khachhangtruycapweb@gmail.com"
+                                value={email}
+                            />
+                        </div>
+                        <div className="col-6 mt-3">
+                            <label htmlFor="phone">Số điện thoại : </label>
+                            <input
+                                onChange={(e) => datSoDienThoai(e.target.value)}
+                                id="phone"
+                                type="text"
+                                placeholder="012345678"
+                                value={soDienThoai}
+                            />
                         </div>
                         <div className="col-6 mt-3">
                             <label>Lĩnh vực muốn làm việc : </label>
-                            <select name="" id="">
+                            <select>
                                 <option value="">IT - Công Nghệ Phần Mềm</option>
                                 <option value="">Sale - Chuyên Viên Bán Hàng</option>
                                 <option value="">Teacher - Giáo viên dạy thêm</option>
@@ -126,7 +129,7 @@ const MeProfile = () => {
                                     })}
                             </select>
                         </div>
-                        <div className="col-12">
+                        <div className="col-12 mt-4">
                             <button onClick={handleSublit} className="btn btn-primary">
                                 Lưu thông tin
                             </button>
