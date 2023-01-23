@@ -2,11 +2,11 @@ import classNames from 'classnames/bind';
 import { useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import styles from '../../styles/taikhoan.module.scss';
-import { provinces } from '../../data/data';
-import { UploadImage } from '../../services/siteServices';
-import { REACT_APP_UPLOAD_PRESET } from '../../config';
-import LoadingProgress from '../../app/components/LoadingProgress';
+import styles from '../../../../styles/taikhoan.module.scss';
+import { provinces } from '../../../../data/data';
+import { UploadImage } from '../../../../services/siteServices';
+import { REACT_APP_UPLOAD_PRESET } from '../../../../config';
+import LoadingProgress from '../../../../app/components/LoadingProgress';
 
 const cx = classNames.bind(styles);
 

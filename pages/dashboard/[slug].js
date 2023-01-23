@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
-import AdminWebsite from '../../components/adminWebsite/AdminWebsite';
+import Dashboard from '../../components/dashboard/dashboard';
 
 function index(props) {
     return (
@@ -9,7 +9,7 @@ function index(props) {
                 <title>Chào mừng bạn đến với quản trị viên website</title>
             </Head>
             <div>
-                <AdminWebsite />
+                <Dashboard />
             </div>
         </>
     );

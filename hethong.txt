@@ -1,0 +1,7 @@
+# ActiveLink : 
+    - Có vai trò giống như thẻ Navlink trong react 
+
+# Route 
+    - so sanh path trên url với path mình đặt nếu đúng render ra element 
+    - giống với Routes và Route trong react router dom
+    - nhận vào một cái nameQueryParam cái này là cái tên tha tham số mà mình đăt trong url ( tên của file js hoặc tsx trong thư mục page) vd slug 
