@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Heading from '../../components/Heading';
 import Link from 'next/link';
-import axios from '../api/axiosApi';
+import axios from 'axios';
+import { backendAPI } from '../../config';
+
+const LOGIN_URL = backendAPI + '/dang-ky/nha-tuyen-dung';
 
 const DangKyNhaTuyenDung = () => {
     const emailRef = useRef();
@@ -28,15 +31,12 @@ const DangKyNhaTuyenDung = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post(LOGIN_URL, JSON.stringify({ email, pwd }), {
+            const response = await axios.post(LOGIN_URL, JSON.stringify({ email, matKhau }), {
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 withCredentials: true,
             });
-
-            console.log('check response => ', response);
-
             swtoast.success({
                 text: 'Đăng nhập tài khoản thành công!',
             });
@@ -47,12 +47,11 @@ const DangKyNhaTuyenDung = () => {
             setCookie('user', response.data);
 
             console.log(response.data);
-            window.location.assign('/admin/tat-ca-xe');
+            // window.location.assign('/admin/tat-ca-xe')
             // setAuth({ email, pwd, roles, accessToken });
             setEmail('');
             setPwd('');
             setErr('');
-            // setSuccess(true)
         } catch (err) {
             console.log(err);
             if (!err?.response) {
@@ -64,7 +63,6 @@ const DangKyNhaTuyenDung = () => {
             } else {
                 setErr('Login falled');
             }
-            // setSuccess(false)
             emailRef.current.focus();
         }
     };
