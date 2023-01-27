@@ -31,12 +31,16 @@ const DangKyNhaTuyenDung = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post(LOGIN_URL, JSON.stringify({ email, matKhau }), {
-                headers: {
-                    'Content-Type': 'application/json',
+            const response = await axios.post(
+                LOGIN_URL,
+                JSON.stringify({ tenCty, email, matKhau, soDienThoai, diaChi, maSoThue }),
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    withCredentials: true,
                 },
-                withCredentials: true,
-            });
+            );
             swtoast.success({
                 text: 'Đăng nhập tài khoản thành công!',
             });

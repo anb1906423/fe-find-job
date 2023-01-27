@@ -100,7 +100,7 @@ const MeProfile = () => {
                             <input
                                 onChange={(e) => datSoDienThoai(e.target.value)}
                                 id="phone"
-                                type="text"
+                                type="number"
                                 placeholder="012345678"
                                 value={soDienThoai}
                             />
