@@ -30,7 +30,7 @@
     text-decoration: none;
     color: #000;
     display: inline-block;
-    transition: all .2s linear;
+    transition: all 0.2s linear;
 }
 
 .header ul.menu li a:hover {
@@ -58,7 +58,7 @@
     border-radius: 6px;
     margin: 0px 2px;
     border: 1px solid var(--main-color);
-    transition: all .2s linear;
+    transition: all 0.2s linear;
 }
 
 .header ul.tai-khoan li:first-child a {
@@ -106,4 +106,30 @@
     border: none;
     color: var(--main-color);
     background-color: var(--sub-color);
+}
+
+.user-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.btn-logout {
+    border: 1px solid #ccc !important;
+    padding: 10px;
+    outline: none;
+    border-radius: 10px;
+    background-color: transparent;
+    font-size: 14px;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+}
+
+.span-custom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

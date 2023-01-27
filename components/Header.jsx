@@ -1,9 +1,16 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Link from 'next/link';
+import { FaSearch, FaUserPlus } from 'react-icons/fa';
+import Tippy from '@tippyjs/react';
+
 import SelectItem from './SelectItem';
 import Swal from 'sweetalert2';
-import { provinces } from '../data/data';
-import { FaSearch, FaUserPlus } from 'react-icons/fa';
+import { Menu, provinces } from '../data/data';
+import LazyImg from '../app/components/LazyImg';
+import Button from '../app/components/Button';
+import TippyRender from '../app/components/TippyRender/TippyRender';
 
 const menu = [
     {
@@ -85,6 +92,18 @@ const Header = () => {
         },
     ];
 
+    const Login = useSelector((state) => state.user.isLoggedIn);
+
+    const [isLogin, setIsLogin] = useState(Login);
+
+    useEffect(() => {
+        setIsLogin(Login);
+    }, [Login]);
+
+    function handleMenuChange(menuItem) {
+        console.log(menuItem);
+    }
+
     return (
         <div className="header-wrapper">
             <div className="header w-100 d-flex align-items-center">
@@ -104,17 +123,40 @@ const Header = () => {
                 </ul>
 
                 <ul className="tai-khoan p-2 ms-auto">
-                    {taiKhoan.map((item, index) => {
-                        return (
-                            <li
-                                onClick={item.function}
-                                className="tai-khoan-item menu-item fw-bold text-uppercase"
-                                key={index}
-                            >
-                                <a href={item.href}>{item.title}</a>
-                            </li>
-                        );
-                    })}
+                    {!isLogin ? (
+                        taiKhoan.map((item, index) => {
+                            return (
+                                <li
+                                    onClick={item.function}
+                                    className="tai-khoan-item menu-item fw-bold text-uppercase"
+                                    key={index}
+                                >
+                                    <a href={item.href}>{item.title}</a>
+                                </li>
+                            );
+                        })
+                    ) : (
+                        <>
+                            <TippyRender items={isLogin && Menu} onChange={handleMenuChange}>
+                                {isLogin && (
+                                    <li className="mx-1">
+                                        <LazyImg
+                                            className="user-img"
+                                            link="https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_960_720.png"
+                                            alt="Hình ảnh đại diện người dùng"
+                                        />
+                                    </li>
+                                )}
+                            </TippyRender>
+                            <Tippy content="Đăng xuất tài khoản">
+                                <li className="mx-1">
+                                    <Button className="btn-logout" custom="span-custom">
+                                        <i className="bi bi-arrow-bar-right mx-1"></i> Đăng xuất
+                                    </Button>
+                                </li>
+                            </Tippy>
+                        </>
+                    )}
                 </ul>
             </div>
             <div className="sub-header d-flex align-items-center justify-content-end">

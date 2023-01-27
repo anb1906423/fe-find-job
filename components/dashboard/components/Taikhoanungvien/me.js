@@ -14,7 +14,7 @@ const MeProfile = () => {
     const [avatar, setAvatar] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [hinhAnhDemo, datHinhAnhDemo] = useState(
-        'https://res.cloudinary.com/dnn5yfz32/image/upload/v1671186521/pcstezkktuf8maom1naw.jpg',
+        'https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_960_720.png',
     );
     const [hoTen, datHoTen] = useState('');
     const [email, datEmail] = useState('');

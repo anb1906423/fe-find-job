@@ -7,7 +7,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { createStateSyncMiddleware } from 'redux-state-sync';
 import { persistStore } from 'redux-persist';
 
-import createRootReducer from './store/reducers/rootReducer';
+import createRootReducer from './store/reducer/rootReducer';
 import actionTypes from './store/actions/actionTypes';
 
 const environment = process.env.NODE_ENV || 'development';

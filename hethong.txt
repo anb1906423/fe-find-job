@@ -1,7 +1,11 @@
 # ActiveLink : 
     - Có vai trò giống như thẻ Navlink trong react 
 
-# Route 
+# Route :
     - so sanh path trên url với path mình đặt nếu đúng render ra element 
     - giống với Routes và Route trong react router dom
     - nhận vào một cái nameQueryParam cái này là cái tên tha tham số mà mình đăt trong url ( tên của file js hoặc tsx trong thư mục page) vd slug 
+
+# component Popper :
+    - Nhiệm vụ nó sẽ ôm thằng con và nó sẽ ôm thằng con lại tạo cho thằng con
+    một cái box shadow  
