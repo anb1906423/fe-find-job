@@ -1,0 +1,22 @@
+.ho-tro-wp {
+    .label {
+        margin-bottom: 6px;
+    }
+
+    .select {
+        display: block;
+        border: 1px solid #ccc;
+        outline: none;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    .view-pass {
+        margin: 0;
+        margin-top: 6px;
+        padding: 0;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+}
