@@ -2,8 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import Heading from '../../components/Heading';
 import Link from 'next/link';
 import axios from 'axios';
-import { backendAPI } from '../../config';
 import { useSelector } from 'react-redux';
+import Router from 'next/router';
+
+import { backendAPI } from '../../config';
 
 const LOGIN_URL = backendAPI + '/dang-ky/nha-tuyen-dung';
 
@@ -54,6 +56,8 @@ const DangKyNhaTuyenDung = () => {
             console.log(accessToken);
             // console.log(roles);
             setCookie('user', response.data);
+
+            Router.push('/dang-nhap/nha-tuyen-dung');
 
             console.log(response.data);
             // window.location.assign('/admin/tat-ca-xe')

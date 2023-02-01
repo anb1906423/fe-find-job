@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
 import { FaSearch, FaUserPlus } from 'react-icons/fa';
 import Tippy from '@tippyjs/react';
@@ -11,6 +11,7 @@ import { Menu, provinces } from '../data/data';
 import LazyImg from '../app/components/LazyImg';
 import Button from '../app/components/Button';
 import TippyRender from '../app/components/TippyRender/TippyRender';
+import * as actions from '../store/actions';
 
 const menu = [
     {
@@ -93,6 +94,7 @@ const Header = () => {
     ];
 
     const Login = useSelector((state) => state.user.isLoggedIn);
+    const dispatch = useDispatch();
 
     const [isLogin, setIsLogin] = useState(Login);
 
@@ -103,6 +105,11 @@ const Header = () => {
     function handleMenuChange(menuItem) {
         console.log(menuItem);
     }
+
+    // xử lí logout
+    const handleLogOut = () => {
+        dispatch(actions.userLogOut());
+    };
 
     return (
         <div className="header-wrapper">
@@ -149,7 +156,7 @@ const Header = () => {
                                 )}
                             </TippyRender>
                             <Tippy content="Đăng xuất tài khoản">
-                                <li className="mx-1">
+                                <li className="mx-1" onClick={handleLogOut}>
                                     <Button className="btn-logout" custom="span-custom">
                                         <i className="bi bi-arrow-bar-right mx-1"></i> Đăng xuất
                                     </Button>

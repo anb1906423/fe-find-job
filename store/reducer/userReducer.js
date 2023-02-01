@@ -5,6 +5,7 @@ const initialState = {
     userInfo: null,
     userPersist: null,
     role: null,
+    accessToken: '',
 };
 
 const userReducer = (state = initialState, action) => {
@@ -16,6 +17,17 @@ const userReducer = (state = initialState, action) => {
                 userInfo: action.userInfo,
                 userPersist: action.userInfo,
                 role: action.userInfo.role,
+                accessToken: action.userInfo.accessToken,
+            };
+
+        case actionTypes.USER_LOGOUT_SUCCESS:
+            return {
+                ...state,
+                isLoggedIn: false,
+                userInfo: null,
+                userPersist: null,
+                role: null,
+                accessToken: '',
             };
         // case actionTypes.UPDATE_USER_SUCCESS:
         //     return {

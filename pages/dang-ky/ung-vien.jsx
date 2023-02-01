@@ -2,9 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import { swtoast } from '../../mixins/swal.mixin';
-import { backendAPI } from '../../config';
 import { useDispatch, useSelector } from 'react-redux';
+import Router from 'next/router';
 
+import { backendAPI } from '../../config';
 import Heading from '../../components/Heading';
 import axios from '../api/axios';
 import * as actions from '../../store/actions';
@@ -80,13 +81,15 @@ const DangKyUngVien = () => {
                 text: 'Đăng ký tài khoản thành công.',
             });
 
-            dispatch(
-                actions.userLoginSuccess({
-                    role: -1,
-                    name: hoVaTen,
-                    phone: soDienThoai,
-                }),
-            );
+            Router.push('/dang-nhap/ung-vien');
+
+            // dispatch(
+            //     actions.userLoginSuccess({
+            //         role: -1,
+            //         name: hoVaTen,
+            //         phone: soDienThoai,
+            //     }),
+            // );
 
             console.log(JSON.stringify(response?.data));
             console.log(response?.data);
