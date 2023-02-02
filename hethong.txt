@@ -9,3 +9,8 @@
 # component Popper :
     - Nhiệm vụ nó sẽ ôm thằng con và nó sẽ ôm thằng con lại tạo cho thằng con
 một cái box shadow  
+
+# Role phân quyền : 
+    - Ứng viên : -1
+    - Nhà tuyển dụng : 0
+    - Admin website : 1

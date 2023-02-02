@@ -20,26 +20,34 @@ const UngVien = ({ dulieu }) => {
                                     <div className="ung-vien-item">
                                         <div className="avatar-box">
                                             <LazyImg
-                                                link="https://static.beecost.vn/upload/uploads/2020/05/hinh-anh-co-gai-buon-2.jpg"
+                                                link={
+                                                    item.avatar
+                                                        ? item.avatar
+                                                        : 'https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_960_720.png'
+                                                }
                                                 alt="Hình ảnh ứng viên"
                                                 className="avatar"
                                             />
                                         </div>
                                         <div className="thong-tin-khac">
                                             <div>
-                                                <Tippy content="Lập trình viên website">
+                                                <Tippy
+                                                    content={item.viTriMongMuon ? item.viTriMongMuon : 'Đang cập nhật'}
+                                                >
                                                     <h6 className="vi-tri-mong-muon">
                                                         <i className="bi bi-link-45deg"></i>
-                                                        <span className="mx-1">IT lập trình viên website</span>
+                                                        <span className="mx-1">
+                                                            {item.viTriMongMuon ? item.viTriMongMuon : 'Đang cập nhật'}
+                                                        </span>
                                                     </h6>
                                                 </Tippy>
                                             </div>
                                             <div className="ho-va-ten">
                                                 <div className="d-d-inline-block">
-                                                    <Tippy content="Nguyễn Văn A">
+                                                    <Tippy content={item.hoVaTen}>
                                                         <span>
                                                             <i className="bi bi-gender-male"></i>
-                                                            <span className="mx-1">Nguyễn Văn A</span>
+                                                            <span className="mx-1">{item.hoVaTen}</span>
                                                         </span>
                                                     </Tippy>
                                                 </div>
@@ -56,8 +64,8 @@ const UngVien = ({ dulieu }) => {
                                                 <h6 className="kinh-nghiem">
                                                     <i className="bi bi-person-workspace"></i>
                                                     <span className="mx-1">Dưới 1 năm</span>
-                                                </h6>
-                                                <h6 className="muc-luong-mong-muon">
+
+                                                    <h6 className="muc-luong-mong-muon"> </h6>
                                                     <i className="bi bi-star"></i>
                                                     <span className="mx-1">Thỏa thuận</span>
                                                 </h6>

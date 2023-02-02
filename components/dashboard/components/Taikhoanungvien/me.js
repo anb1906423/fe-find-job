@@ -13,6 +13,7 @@ import axios from '../../../../pages/api/axiosApi';
 import { CodeGender, roleUser } from '../../../../util/constant';
 import UngVienProfile from './components/UngVienProfile';
 import NhaTuyenDungProfile from './components/NhaTuyenDungProfile';
+import { useCallback } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -32,15 +33,7 @@ const MeProfile = () => {
         'https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_960_720.png',
     );
 
-    const [hoTen, datHoTen] = useState('');
-    const [email, datEmail] = useState('');
-    const [soDienThoai, datSoDienThoai] = useState('');
-    const [diaChi, datDiaChi] = useState('');
-    const [gioiTinh, datGioiTinh] = useState(true);
-    const [sinhNhat, datSinhNhat] = useState('');
-    const [maSoThue, datMaSoThue] = useState(0);
-    const [linhVucLamVec, datLinhVucLamViec] = useState(null);
-    const [diaDiemLamViec, datDiaDiemLamViec] = useState(null);
+    const [data, setData] = useState();
 
     const ref = useRef(null);
 
@@ -62,22 +55,7 @@ const MeProfile = () => {
 
             const { data } = Res;
 
-            if (roleUserLogin === roleUser.UngVien) {
-                datHoTen(data.hoVaTen);
-                datEmail(data.email);
-                datSoDienThoai(data.soDienThoai);
-                datDiaChi(data.diaChi);
-                datGioiTinh(data.isMale);
-                datSinhNhat(data.sinhNhat.slice(0, 10));
-            }
-
-            if (roleUserLogin === roleUser.NhaTuyenDung) {
-                datHoTen(data.tenCty);
-                datEmail(data.email);
-                datSoDienThoai(data.soDienThoai);
-                datDiaChi(data.diaChi);
-                datMaSoThue(+data.maSoThue);
-            }
+            setData(data);
         } catch (error) {
             console.log(error);
         }
@@ -115,7 +93,7 @@ const MeProfile = () => {
     };
 
     // lưu dữ liệu thay đổi
-    const handleSublit = async () => {
+    const handleSublit = useCallback(async () => {
         if (!avatar) {
             alert('Hãy chọn ảnh!');
             return;
@@ -125,60 +103,26 @@ const MeProfile = () => {
             file: avatar,
             upload_preset: REACT_APP_UPLOAD_PRESET,
         });
-    };
+    }, []);
 
     return (
         <div className={cx('tai-khoan-cua-toi-wp')}>
             {isLoading && <LoadingProgress />}
             {isLogin ? (
                 <div className="container">
-                    <h5 className={cx('tieu-de', 'text-center', 'py-4')}>
-                        Xin chào{' '}
-                        <b>
-                            <i>{hoTen}</i>
-                        </b>{' '}
-                        dưới đây là thông tin của bạn
-                    </h5>
+                    <h5 className={cx('tieu-de', 'text-center', 'py-4')}>Xin chào bạn dưới đây là thông tin của bạn</h5>
                     <div className={cx('content')}>
                         <div className={cx('avatar')}>
                             <img src={hinhAnhDemo} alt="hình ảnh đại diện" onClick={() => handleClickAvatar()} />
                             <input onChange={(e) => handleChangeFile(e)} ref={ref} type="file" hidden />
                         </div>
-
+                        {/* Dựa vào cái role để quết định xem mình sẽ render cái view nào ( để biết thêm hãy đọc hethong.txt ) */}
                         {roleUserLogin === roleUser.UngVien && (
-                            <UngVienProfile
-                                cx={cx}
-                                isEdit={isEdit}
-                                datHoTen={datHoTen}
-                                datDiaChi={datDiaChi}
-                                datGioiTinh={datGioiTinh}
-                                datSinhNhat={datSinhNhat}
-                                datSoDienThoai={datSoDienThoai}
-                                hoTen={hoTen}
-                                soDienThoai={soDienThoai}
-                                email={email}
-                                sinhNhat={sinhNhat}
-                                gioiTinh={gioiTinh}
-                                handleSublit={handleSublit}
-                                diaChi={diaChi}
-                            />
+                            <UngVienProfile handleSublit={handleSublit} cx={cx} data={data} />
                         )}
-                        {roleUserLogin === roleUser.NhaTuyenDung && (
-                            <NhaTuyenDungProfile
-                                cx={cx}
-                                isEdit={isEdit}
-                                datHoTen={datHoTen}
-                                datDiaChi={datDiaChi}
-                                datSoDienThoai={datSoDienThoai}
-                                hoTen={hoTen}
-                                soDienThoai={soDienThoai}
-                                email={email}
-                                handleSublit={handleSublit}
-                                diaChi={diaChi}
-                                maSoThue={maSoThue}
-                                datMaSoThue={datMaSoThue}
-                            />
-                        )}
+                        {/* {roleUserLogin === roleUser.NhaTuyenDung && (
+                            <NhaTuyenDungProfile handleSublit={handleSublit} cx={cx} data={data} />
+                        )} */}
                     </div>
                 </div>
             ) : (

@@ -32,6 +32,7 @@
         margin-bottom: 4px;
     }
 
+    textarea,
     input,
     select {
         display: block;
@@ -40,6 +41,10 @@
         border: 1px solid #ccc;
         outline: none;
         border-radius: 6px;
+    }
+
+    textarea {
+        min-height: 200px;
     }
 }
 

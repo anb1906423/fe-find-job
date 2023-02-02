@@ -1,7 +1,7 @@
 export const majors = [
     {
         label: '-- Tất cả chuyên ngành --',
-        value: '-- Tất cả chuyên ngành --',
+        value: null,
     },
     {
         label: 'Bán hàng / Kinh doanh',
@@ -9,81 +9,107 @@ export const majors = [
     },
     {
         label: 'Dịch vụ khách hàng / Tư vấn / CSKH',
+        value: 'Dịch vụ khách hàng / Tư vấn / CSKH',
     },
     {
         label: 'Kế toán / Kiểm toán',
+        value: 'Kế toán / Kiểm toán',
     },
     {
         label: 'Khách sạn / Nhà hàng',
+        value: 'Khách sạn / Nhà hàng',
     },
     {
         label: 'Du lịch',
+        value: 'Du lịch',
     },
     {
         label: 'CNTT - Phần mềm',
+        value: 'CNTT - Phần mềm',
     },
     {
         label: 'CNTT - Phần cứng / Mạng',
+        value: 'CNTT - Phần cứng / Mạng',
     },
     {
         label: 'Bưu chính viễn thông',
+        value: 'Bưu chính viễn thông',
     },
     {
         label: 'Giải trí',
+        value: 'Giải trí',
     },
     {
         label: 'Thực phẩm / Đồ uống',
+        value: 'Thực phẩm / Đồ uống',
     },
     {
         label: 'Điện / Điện tử / Điện lạnh',
+        value: 'Điện / Điện tử / Điện lạnh',
     },
     {
         label: 'Cơ khí / Ô tô / Tự động hóa',
+        value: 'Cơ khí / Ô tô / Tự động hóa',
     },
     {
         label: 'Sản xuất / Vận hành sản xuất',
+        value: 'Sản xuất / Vận hành sản xuất',
     },
     {
         label: 'Bảo trì / Sữa chữa',
+        value: 'Bảo trì / Sữa chữa',
     },
     {
         label: 'Ngân hàng',
+        value: 'Ngân hàng',
     },
     {
         label: 'Chứng khoán / Vàng / Ngoại tệ',
+        value: 'Chứng khoán / Vàng / Ngoại tệ',
     },
     {
         label: 'Tài chính / Đầu tư',
+        value: 'Tài chính / Đầu tư',
     },
     {
         label: 'Hành chính / Thư ký / Văn phòng',
+        value: 'Hành chính / Thư ký / Văn phòng',
     },
     {
         label: 'Công chức / Viên chức / Cán bộ nhà nước',
+        value: 'Công chức / Viên chức / Cán bộ nhà nước',
     },
     {
         label: 'Giáo dục / Đào tạo / Thư viện',
+        value: 'Giáo dục / Đào tạo / Thư viện',
     },
     {
         label: 'Nhân sự',
+        value: 'Nhân sự',
     },
     {
         label: 'Kho / Vật tư / Thu mua',
+        value: 'Kho / Vật tư / Thu mua',
     },
     {
         label: 'Vận chuyển / Tài xế',
+        value: 'Vận chuyển / Tài xế',
     },
     {
         label: 'Công nhân / Lao động phổ thông',
+        value: 'Công nhân / Lao động phổ thông',
     },
     {
         label: 'Khu chế xuất / Khu công nghiệp',
+        value: 'Khu chế xuất / Khu công nghiệp',
     },
     {
         label: 'Dệt may / Da giày',
+        value: 'Dệt may / Da giày',
     },
     {
         label: 'An ninh / Bảo vệ',
+        value: 'An ninh / Bảo vệ',
     },
 
     //  'Y tế / Chăm sóc sức khỏe', 'Công nghệ thực phẩm / Dinh dưỡng', 'Dược / Công nghệ sinh học', 'Hóa học',
@@ -169,5 +195,120 @@ export const Menu = [
     {
         title: 'Xem cv cá nhân',
         icon: <i className="bi bi-filetype-css"></i>,
+    },
+];
+
+export const ViTriMongMuon = [
+    {
+        label: '---- lựa chọn vị trí ----',
+        value: null,
+    },
+    {
+        label: 'Việc làm quản lí',
+        value: 'Việc làm quản lí',
+    },
+    {
+        label: 'Việc làm senior',
+        value: 'Việc làm senior',
+    },
+    {
+        label: 'Việc làm lương cao',
+        value: 'Việc làm lương cao',
+    },
+    {
+        label: 'Việc làm IT',
+        value: 'Việc làm IT',
+    },
+    {
+        label: 'Tuyển thực tập sinh',
+        value: 'Tuyển thực tập sinh',
+    },
+    {
+        label: 'Việc làm bán thời gian',
+        value: 'Việc làm bán thời gian',
+    },
+];
+
+export const Capbac = [
+    {
+        label: '---- Chọn cấp bậc ----',
+        value: null,
+    },
+    {
+        label: 'Developer',
+        value: 'Developer',
+    },
+    {
+        label: 'Manage Project',
+        value: 'Manage Project',
+    },
+    {
+        label: 'Tester',
+        value: 'Tester',
+    },
+];
+
+export const KinhNghiem = [
+    {
+        label: '---- Chọn kinh nghiệm làm việc ----',
+        value: null,
+    },
+    {
+        label: 'Chua có kinh nghiệm',
+        value: 'Chua có kinh nghiệm',
+    },
+    {
+        label: 'Dưới 1 năm kinh nghiệm',
+        value: 'Dưới 1 năm kinh nghiệm',
+    },
+    {
+        label: 'Từ 1 năm kinh nghiệm - 2 năm kinh nghiệm',
+        value: 'Từ 1 năm kinh nghiệm - 2 năm kinh nghiệm',
+    },
+    {
+        label: 'Từ 3 năm kinh nghiệm - 5 năm kinh nghiệm',
+        value: 'Từ 3 năm kinh nghiệm - 5 năm kinh nghiệm',
+    },
+    {
+        label: 'Khác',
+        value: 'Khác',
+    },
+];
+
+export const HocVan = [
+    {
+        label: '---- Chọn học vấn ----',
+        value: null,
+    },
+    {
+        label: 'Học sinh',
+        value: 'Học sinh',
+    },
+    {
+        label: 'Sinh viên',
+        value: 'Sinh viên',
+    },
+    {
+        label: 'Không học đại học - Tự Học',
+        value: 'Không học đại học - Tự Học',
+    },
+    {
+        label: 'Khác',
+        value: 'Khác',
+    },
+];
+
+export const TinhTrang = [
+    {
+        label: '---- Chọn tình trạng ----',
+        value: null,
+    },
+    {
+        label: 'Độc Thân',
+        value: true,
+    },
+    {
+        label: 'Không Độc Thân Hoặc Không Muón Tiếp Lộ',
+        value: false,
     },
 ];

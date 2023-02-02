@@ -5,96 +5,30 @@ import axios from './api/axiosApi';
 import Heading from '../components/Heading';
 import UngVien from '../components/UngVien';
 import Head from 'next/head';
+import { backendAPI } from '../config';
 
 const TrangUngVien = () => {
     // fake dữ liệu đầu vào tạm thời
-    const [danhSachUngVien, datDanhSachUngVien] = useState([
-        {
-            avatar: 'https://static.beecost.vn/upload/uploads/2020/05/hinh-anh-co-gai-buon-2.jpg',
-            viTriMongMuon: 'Dev web',
-            hoVaTen: 'Nguyen Van A',
-            sinhNhat: '31/12/2002',
-            mucLuongMongMuon: '10.000.000',
-            hocvan: 'Đại Học',
-            kinhnghiem: 'Dưới 1 năm',
-        },
-        {
-            avatar: 'https://static.beecost.vn/upload/uploads/2020/05/hinh-anh-co-gai-buon-2.jpg',
-            viTriMongMuon: 'Dev web',
-            hoVaTen: 'Nguyen Van A',
-            sinhNhat: '31/12/2002',
-            mucLuongMongMuon: '10.000.000',
-            hocvan: 'Đại Học',
-            kinhnghiem: 'Dưới 1 năm',
-        },
-        {
-            avatar: 'https://static.beecost.vn/upload/uploads/2020/05/hinh-anh-co-gai-buon-2.jpg',
-            viTriMongMuon: 'Dev web',
-            hoVaTen: 'Nguyen Van A',
-            sinhNhat: '31/12/2002',
-            mucLuongMongMuon: '10.000.000',
-            hocvan: 'Đại Học',
-            kinhnghiem: 'Dưới 1 năm',
-        },
-        {
-            avatar: 'https://static.beecost.vn/upload/uploads/2020/05/hinh-anh-co-gai-buon-2.jpg',
-            viTriMongMuon: 'Dev web',
-            hoVaTen: 'Nguyen Van A',
-            sinhNhat: '31/12/2002',
-            mucLuongMongMuon: '10.000.000',
-            hocvan: 'Đại Học',
-            kinhnghiem: 'Dưới 1 năm',
-        },
-        {
-            avatar: 'https://static.beecost.vn/upload/uploads/2020/05/hinh-anh-co-gai-buon-2.jpg',
-            viTriMongMuon: 'Dev web',
-            hoVaTen: 'Nguyen Van A',
-            sinhNhat: '31/12/2002',
-            mucLuongMongMuon: '10.000.000',
-            hocvan: 'Đại Học',
-            kinhnghiem: 'Dưới 1 năm',
-        },
-        {
-            avatar: 'https://static.beecost.vn/upload/uploads/2020/05/hinh-anh-co-gai-buon-2.jpg',
-            viTriMongMuon: 'Dev web',
-            hoVaTen: 'Nguyen Van A',
-            sinhNhat: '31/12/2002',
-            mucLuongMongMuon: '10.000.000',
-            hocvan: 'Đại Học',
-            kinhnghiem: 'Dưới 1 năm',
-        },
-        {
-            avatar: 'https://static.beecost.vn/upload/uploads/2020/05/hinh-anh-co-gai-buon-2.jpg',
-            viTriMongMuon: 'Dev web',
-            hoVaTen: 'Nguyen Van A',
-            sinhNhat: '31/12/2002',
-            mucLuongMongMuon: '10.000.000',
-            hocvan: 'Đại Học',
-            kinhnghiem: 'Dưới 1 năm',
-        },
-        {
-            avatar: 'https://static.beecost.vn/upload/uploads/2020/05/hinh-anh-co-gai-buon-2.jpg',
-            viTriMongMuon: 'Dev web',
-            hoVaTen: 'Nguyen Van A',
-            sinhNhat: '31/12/2002',
-            mucLuongMongMuon: '10.000.000',
-            hocvan: 'Đại Học',
-            kinhnghiem: 'Dưới 1 năm',
-        },
-    ]);
+    const [danhSachUngVien, datDanhSachUngVien] = useState();
 
     // fetch api
     useEffect(() => {
         const fetch = async () => {
-            const Res = await axios.get('/ung-vien');
+            try {
+                const Res = await axios.get(`${backendAPI}/ung-vien`);
 
-            // if (Res.data) {
-            //     datDanhSachUngVien(Res.data);
-            // }
+                const { data } = Res;
+
+                datDanhSachUngVien(data);
+            } catch (error) {
+                console.log(error);
+            }
         };
 
         fetch();
     }, []);
+
+    console.log(danhSachUngVien);
 
     return (
         <>
