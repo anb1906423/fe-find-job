@@ -13,16 +13,16 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
     const [diaChi, datDiaChi] = useState('');
     const [gioiTinh, datGioiTinh] = useState(true);
     const [sinhNhat, datSinhNhat] = useState('');
-    const [linhVucLamVec, datLinhVucLamViec] = useState('');
-    const [diaDiemLamViec, datDiaDiemLamViec] = useState('');
-    const [viTriMongMuon, datViTriMongMuon] = useState('');
-    const [capBacUngTuyen, datCapBacUngTuyen] = useState('');
-    const [kinhNghiemLamViec, datKinhNghiemLamViec] = useState('');
-    const [hocVan, datHocVan] = useState('');
+    const [linhVucLamVec, datLinhVucLamViec] = useState(null);
+    const [diaDiemLamViec, datDiaDiemLamViec] = useState(null);
+    const [viTriMongMuon, datViTriMongMuon] = useState(null);
+    const [capBacUngTuyen, datCapBacUngTuyen] = useState(null);
+    const [kinhNghiemLamViec, datKinhNghiemLamViec] = useState(null);
+    const [hocVan, datHocVan] = useState(null);
     const [mucLuong, datMucLuong] = useState(0);
     const [des, setDes] = useState('');
     const [mucTieuNgheNghiep, datMucTieuNgheNghiep] = useState('');
-    const [docThan, datDocThan] = useState('');
+    const [docThan, datDocThan] = useState(null);
 
     useEffect(() => {
         if (!_.isEmpty(data)) {
@@ -101,7 +101,7 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                 </div>
                 <div className="col-6 mt-3">
                     <label>Vị trí mong muốn : </label>
-                    <select value={(viTriMongMuon = '')} onChange={(e) => datViTriMongMuon(e.target.value)}>
+                    <select value={viTriMongMuon} onChange={(e) => datViTriMongMuon(e.target.value)}>
                         {ViTriMongMuon &&
                             ViTriMongMuon.length > 0 &&
                             ViTriMongMuon.map((item) => {
@@ -117,7 +117,7 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                 </div>
                 <div className="col-6 mt-3">
                     <label>Cấp bậc ứng tuyển : </label>
-                    <select value={(capBacUngTuyen = '')} onChange={(e) => datCapBacUngTuyen(e.target.value)}>
+                    <select value={capBacUngTuyen} onChange={(e) => datCapBacUngTuyen(e.target.value)}>
                         {Capbac &&
                             Capbac.length > 0 &&
                             Capbac.map((item) => {
@@ -133,7 +133,7 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                 </div>
                 <div className="col-6 mt-3">
                     <label>Kinh nghiệm làm việc : </label>
-                    <select value={(kinhNghiemLamViec = '')} onChange={(e) => datKinhNghiemLamViec(e.target.value)}>
+                    <select value={kinhNghiemLamViec} onChange={(e) => datKinhNghiemLamViec(e.target.value)}>
                         {KinhNghiem &&
                             KinhNghiem.length > 0 &&
                             KinhNghiem.map((item) => {
@@ -149,7 +149,7 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                 </div>
                 <div className="col-6 mt-3">
                     <label>Học vấn : </label>
-                    <select value={(hocVan = '')} onChange={(e) => datHocVan(e.target.value)}>
+                    <select value={hocVan} onChange={(e) => datHocVan(e.target.value)}>
                         {HocVan &&
                             HocVan.length > 0 &&
                             HocVan.map((item) => {
@@ -166,7 +166,7 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                 <div className="col-6 mt-3">
                     <label htmlFor="price">Mức lương mong muốn : </label>
                     <input
-                        value={(mucLuong = '')}
+                        value={mucLuong}
                         onChange={(e) => datMucLuong(e.target.value)}
                         id="price"
                         type="text"
@@ -175,7 +175,7 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                 </div>
                 <div className="col-6 mt-3">
                     <label>Lĩnh vực muốn làm việc : </label>
-                    <select value={(linhVucLamVec = '')} onChange={(e) => datLinhVucLamViec(e.target.value)}>
+                    <select value={linhVucLamVec} onChange={(e) => datLinhVucLamViec(e.target.value)}>
                         {majors &&
                             majors.length > 0 &&
                             majors.map((item) => {
@@ -195,7 +195,7 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                         onChange={(e) => {
                             datDiaDiemLamViec(e.target.value);
                         }}
-                        value={(diaDiemLamViec = '')}
+                        value={diaDiemLamViec}
                     >
                         {provinces &&
                             provinces.length > 0 &&
@@ -216,7 +216,7 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                         onChange={(e) => {
                             datDocThan(e.target.value);
                         }}
-                        value={(docThan = '')}
+                        value={docThan}
                     >
                         {TinhTrang &&
                             TinhTrang.length > 0 &&
@@ -234,7 +234,7 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                 <div className="col-12 mt-3">
                     <label htmlFor="muctie-nghe-nghiep">Mục tiêu nghề nghiệp : </label>
                     <textarea
-                        value={(mucTieuNgheNghiep = '')}
+                        value={mucTieuNgheNghiep}
                         onChange={(e) => datMucTieuNgheNghiep(e.target.value)}
                         id="muctie-nghe-nghiep"
                         type="text"
@@ -244,7 +244,7 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                 <div className="col-12 mt-3">
                     <label htmlFor="desc">Giới thiệu ngắn về bản thân : </label>
                     <textarea
-                        value={(des = '')}
+                        value={des}
                         onChange={(e) => setDes(e.target.value)}
                         id="desc"
                         type="text"
