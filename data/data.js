@@ -312,3 +312,46 @@ export const TinhTrang = [
         value: false,
     },
 ];
+
+export const MucLuong = [
+    {
+        label: '---- Chọn mực lương ----',
+        value: '',
+    },
+    {
+        label: '1 triệu - 2 triệu',
+        value: '1 triệu - 2 triệu',
+    },
+    {
+        label: '2 triệu - 5 triệu',
+        value: '2 triệu - 5 triệu',
+    },
+    {
+        label: '6 triệu - 10 triệu',
+        value: '6 triệu - 10 triệu',
+    },
+    {
+        label: '11 triệu - 20 triệu',
+        value: '11 triệu - 20 triệu',
+    },
+    {
+        label: '21 triệu - 30 triệu',
+        value: '21 triệu - 30 triệu',
+    },
+    {
+        label: '31 triệu - 50 triệu',
+        value: '31 triệu - 50 triệu',
+    },
+    {
+        label: '51 triệu - 100 triệu',
+        value: '51 triệu - 100 triệu',
+    },
+    {
+        label: 'Trên 100 triệu',
+        value: 'Trên 100 triệu',
+    },
+    {
+        label: 'Thỏa thuận',
+        value: 'Thỏa thuận',
+    },
+];

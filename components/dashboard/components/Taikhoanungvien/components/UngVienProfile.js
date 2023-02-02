@@ -4,7 +4,17 @@ import { v4 as uuidv4 } from 'uuid';
 import _ from 'lodash';
 import { useState, memo, useEffect } from 'react';
 
-import { Capbac, HocVan, KinhNghiem, TinhTrang, ViTriMongMuon, majors, provinces } from '../../../../../data/data';
+import {
+    Capbac,
+    HocVan,
+    KinhNghiem,
+    MucLuong,
+    TinhTrang,
+    ViTriMongMuon,
+    majors,
+    provinces,
+} from '../../../../../data/data';
+import useValidate from '../../../../../app/hook/useValidate';
 
 function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
     const [hoTen, datHoTen] = useState('');
@@ -13,16 +23,16 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
     const [diaChi, datDiaChi] = useState('');
     const [gioiTinh, datGioiTinh] = useState(true);
     const [sinhNhat, datSinhNhat] = useState('');
-    const [linhVucLamVec, datLinhVucLamViec] = useState(null);
-    const [diaDiemLamViec, datDiaDiemLamViec] = useState(null);
-    const [viTriMongMuon, datViTriMongMuon] = useState(null);
-    const [capBacUngTuyen, datCapBacUngTuyen] = useState(null);
-    const [kinhNghiemLamViec, datKinhNghiemLamViec] = useState(null);
-    const [hocVan, datHocVan] = useState(null);
-    const [mucLuong, datMucLuong] = useState(0);
+    const [linhVucLamVec, datLinhVucLamViec] = useState('');
+    const [diaDiemLamViec, datDiaDiemLamViec] = useState('');
+    const [viTriMongMuon, datViTriMongMuon] = useState('');
+    const [capBacUngTuyen, datCapBacUngTuyen] = useState('');
+    const [kinhNghiemLamViec, datKinhNghiemLamViec] = useState('');
+    const [hocVan, datHocVan] = useState('');
+    const [mucLuong, datMucLuong] = useState('');
     const [des, setDes] = useState('');
     const [mucTieuNgheNghiep, datMucTieuNgheNghiep] = useState('');
-    const [docThan, datDocThan] = useState(null);
+    const [docThan, datDocThan] = useState(true);
 
     useEffect(() => {
         if (!_.isEmpty(data)) {
@@ -31,7 +41,7 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
             datSoDienThoai(data.soDienThoai);
             datDiaChi(data.diaChi);
             datGioiTinh(data.isMale);
-            datSinhNhat(data.sinhNhat.slice(0, 10));
+            datSinhNhat(data.sinhNhat);
             datLinhVucLamViec(data.linhVucNgheNghiep);
             datDiaDiemLamViec(data.diaDiemMongMuonLamViec);
             datViTriMongMuon(data.viTriMongMuon);
@@ -44,6 +54,47 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
             datDocThan(data.docThan);
         }
     }, [data]);
+
+    // ES6+
+    const handleBuildData = () => {
+        const check = useValidate([
+            hoTen,
+            soDienThoai,
+            diaChi,
+            gioiTinh,
+            sinhNhat,
+            linhVucLamVec,
+            diaDiemLamViec,
+            viTriMongMuon,
+            capBacUngTuyen,
+            kinhNghiemLamViec,
+            hocVan,
+            mucLuong,
+            des,
+            mucTieuNgheNghiep,
+            docThan,
+        ]);
+
+        if (!check) return {};
+
+        return {
+            hoVaTen: hoTen,
+            soDienThoai,
+            diaChi,
+            isMale: gioiTinh,
+            sinhNhat: sinhNhat,
+            linhVucNgheNghiep: linhVucLamVec,
+            diaDiemMongMuonLamViec: diaDiemLamViec,
+            viTriMongMuon,
+            capBac: capBacUngTuyen,
+            kinhNghiem: kinhNghiemLamViec,
+            hocVan,
+            mucLuongMongMuon: mucLuong,
+            gioiThieu: des,
+            mucTieuNgheNghiep,
+            docThan,
+        };
+    };
 
     return (
         <>
@@ -60,7 +111,14 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                 </div>
                 <div className="col-6 mt-3">
                     <label htmlFor="email">Email : </label>
-                    <input disabled id="email" type="email" placeholder="khachhangtruycapweb@gmail.com" value={email} />
+                    <input
+                        disabled
+                        id="email"
+                        type="email"
+                        placeholder="khachhangtruycapweb@gmail.com"
+                        onChange={() => {}}
+                        value={email}
+                    />
                 </div>
                 <div className="col-6 mt-3">
                     <label htmlFor="address">Địa chỉ : </label>
@@ -87,7 +145,7 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                     <input
                         onChange={(e) => datSinhNhat(e.target.value)}
                         id="birthDay"
-                        type="date"
+                        type="text"
                         placeholder="012345678"
                         value={sinhNhat}
                     />
@@ -165,13 +223,19 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                 </div>
                 <div className="col-6 mt-3">
                     <label htmlFor="price">Mức lương mong muốn : </label>
-                    <input
-                        value={mucLuong}
-                        onChange={(e) => datMucLuong(e.target.value)}
-                        id="price"
-                        type="text"
-                        placeholder="10.000.000 đ"
-                    />
+                    <select value={mucLuong} onChange={(e) => datMucLuong(e.target.value)}>
+                        {MucLuong &&
+                            MucLuong.length > 0 &&
+                            MucLuong.map((item) => {
+                                const id = uuidv4();
+
+                                return (
+                                    <option key={id} value={item.value}>
+                                        {item.label}
+                                    </option>
+                                );
+                            })}
+                    </select>
                 </div>
                 <div className="col-6 mt-3">
                     <label>Lĩnh vực muốn làm việc : </label>
@@ -252,7 +316,7 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                     />
                 </div>
                 <div className="col-12 mt-4">
-                    <button onClick={handleSublit} className="btn btn-primary">
+                    <button onClick={() => handleSublit(handleBuildData())} className="btn btn-primary">
                         Lưu thông tin
                     </button>
                 </div>
