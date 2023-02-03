@@ -14,6 +14,8 @@ import { CodeGender, roleUser } from '../../../../util/constant';
 import UngVienProfile from './components/UngVienProfile';
 import NhaTuyenDungProfile from './components/NhaTuyenDungProfile';
 import { useCallback } from 'react';
+import Loading from '../../../../app/components/loading/loading';
+import _, { xor } from 'lodash';
 
 const cx = classNames.bind(styles);
 
@@ -28,10 +30,8 @@ const MeProfile = () => {
 
     const [avatar, setAvatar] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [isEdit, setIsEdit] = useState(true);
-    const [hinhAnhDemo, datHinhAnhDemo] = useState(
-        'https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_960_720.png',
-    );
+    const [isUpLoadAvatar, setIsUpLoadAvatar] = useState(true);
+    const [hinhAnhDemo, datHinhAnhDemo] = useState('');
 
     const [data, setData] = useState();
 
@@ -56,6 +56,10 @@ const MeProfile = () => {
             const { data } = Res;
 
             setData(data);
+            datHinhAnhDemo(
+                data.avatar ? data.avatar : 'https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_960_720.png',
+            );
+            setIsUpLoadAvatar(data.avatar ? false : true);
         } catch (error) {
             console.log(error);
         }
@@ -81,8 +85,10 @@ const MeProfile = () => {
     const handleChangeFile = (e) => {
         const file = e.target.files[0];
 
+        console.log(file);
+
         if (file) {
-            if (file.size >= 1500000) {
+            if (file.size <= 1500000) {
                 alert('Vui lòng chọn file có dung lượng dưới 1.5MB');
                 return;
             }
@@ -93,55 +99,87 @@ const MeProfile = () => {
     };
 
     // lưu dữ liệu thay đổi
-    const handleSublit = useCallback(async () => {
-        if (!avatar) {
+    const handleSublit = useCallback(async (data) => {
+        if (!avatar && isUpLoadAvatar) {
             alert('Hãy chọn ảnh!');
             return;
         }
+
+        if (_.isEmpty(data)) return;
+
+        setIsLoading(true);
+
         // đăng tải ảnh
-        const Res = await UploadImage({
-            file: avatar,
-            upload_preset: REACT_APP_UPLOAD_PRESET,
-        });
-    }, []);
+        let ResImg;
+
+        if (isUpLoadAvatar) {
+            ResImg = await UploadImage({
+                file: avatar,
+                upload_preset: REACT_APP_UPLOAD_PRESET,
+            });
+        }
+
+        if (!ResImg && isUpLoadAvatar) return;
+
+        const dataBuild = { ...data, avatar: isUpLoadAvatar ? ResImg.data.url : hinhAnhDemo };
+
+        try {
+            const Res = await axios.put(`${backendAPI}/ung-vien/${userID}`, dataBuild, { withCredentials: true });
+
+            if (Res) {
+                fetch();
+                alert('Bạn đã cập nhật thông tin thành công !');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+        setIsLoading(false);
+    });
+
+    console.log(avatar);
 
     return (
-        <div className={cx('tai-khoan-cua-toi-wp')}>
-            {isLoading && <LoadingProgress />}
-            {isLogin ? (
-                <div className="container">
-                    <h5 className={cx('tieu-de', 'text-center', 'py-4')}>Xin chào bạn dưới đây là thông tin của bạn</h5>
-                    <div className={cx('content')}>
-                        <div className={cx('avatar')}>
-                            <img src={hinhAnhDemo} alt="hình ảnh đại diện" onClick={() => handleClickAvatar()} />
-                            <input onChange={(e) => handleChangeFile(e)} ref={ref} type="file" hidden />
-                        </div>
-                        {/* Dựa vào cái role để quết định xem mình sẽ render cái view nào ( để biết thêm hãy đọc hethong.txt ) */}
-                        {roleUserLogin === roleUser.UngVien && (
-                            <UngVienProfile handleSublit={handleSublit} cx={cx} data={data} />
-                        )}
-                        {/* {roleUserLogin === roleUser.NhaTuyenDung && (
+        <>
+            {isLoading && <Loading />}
+            <div className={cx('tai-khoan-cua-toi-wp')}>
+                {isLoading && <LoadingProgress />}
+                {isLogin ? (
+                    <div className="container">
+                        <h5 className={cx('tieu-de', 'text-center', 'py-4')}>
+                            Xin chào bạn dưới đây là thông tin của bạn
+                        </h5>
+                        <div className={cx('content')}>
+                            <div className={cx('avatar')}>
+                                <img src={hinhAnhDemo} alt="hình ảnh đại diện" onClick={() => handleClickAvatar()} />
+                                <input onChange={(e) => handleChangeFile(e)} ref={ref} type="file" hidden />
+                            </div>
+                            {/* Dựa vào cái role để quết định xem mình sẽ render cái view nào ( để biết thêm hãy đọc hethong.txt ) */}
+                            {roleUserLogin === roleUser.UngVien && (
+                                <UngVienProfile handleSublit={handleSublit} cx={cx} data={data} />
+                            )}
+                            {/* {roleUserLogin === roleUser.NhaTuyenDung && (
                             <NhaTuyenDungProfile handleSublit={handleSublit} cx={cx} data={data} />
                         )} */}
+                        </div>
                     </div>
-                </div>
-            ) : (
-                <div className={cx('chua-dang-nhap')}>
-                    <p className="text-center">
-                        <span>
-                            Bạn chưa đăng nhập ấn vào{' '}
-                            <Link href="/dang-nhap/ung-vien" className="mx-1">
-                                đây đăng nhập với ứng viên
-                            </Link>{' '}
-                            hoặc{' '}
-                            <Link href="/dang-nhap/nha-tuyen-dung" className="mx-1">
-                                đây đăng nhập với Nhà tuyển dụng
-                            </Link>
-                        </span>
-                    </p>
-                </div>
-            )}
-        </div>
+                ) : (
+                    <div className={cx('chua-dang-nhap')}>
+                        <p className="text-center">
+                            <span>
+                                Bạn chưa đăng nhập ấn vào{' '}
+                                <Link href="/dang-nhap/ung-vien" className="mx-1">
+                                    đây đăng nhập với ứng viên
+                                </Link>{' '}
+                                hoặc{' '}
+                                <Link href="/dang-nhap/nha-tuyen-dung" className="mx-1">
+                                    đây đăng nhập với Nhà tuyển dụng
+                                </Link>
+                            </span>
+                        </p>
+                    </div>
+                )}
+            </div>
+        </>
     );
 };
 
