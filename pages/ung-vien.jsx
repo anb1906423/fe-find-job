@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
-import { swtoast } from '../../mixins/swal.mixin';
+import { swtoast } from '../mixins/swal.mixin';
 import { useDispatch, useSelector } from 'react-redux';
 import Router from 'next/router';
 
-import { backendAPI } from '../../config';
-import Heading from '../../components/Heading';
-import axios from '../api/axios';
-import * as actions from '../../store/actions';
+import { backendAPI } from '../config';
+import Heading from '../components/Heading';
+import axios from './api/axios';
+import * as actions from '../store/actions';
 
 const PHONENUMBER_REGEX = /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
 const EMAIL_REGEX =
