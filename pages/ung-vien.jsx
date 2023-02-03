@@ -5,7 +5,10 @@ import axios from './api/axiosApi';
 import Heading from '../components/Heading';
 import UngVien from '../components/UngVien';
 import Head from 'next/head';
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
 import { swtoast } from '../mixins/swal.mixin';
 import { useDispatch, useSelector } from 'react-redux';
 import Router from 'next/router';

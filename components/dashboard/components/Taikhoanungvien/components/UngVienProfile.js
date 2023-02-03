@@ -23,7 +23,10 @@ function UngVienProfile({ cx = () => { }, data, handleSublit = () => { } }) {
     const [diaChi, datDiaChi] = useState('');
     const [gioiTinh, datGioiTinh] = useState(true);
     const [sinhNhat, datSinhNhat] = useState('');
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
     const [linhVucLamVec, datLinhVucLamViec] = useState(null);
     const [diaDiemLamViec, datDiaDiemLamViec] = useState(null);
     const [viTriMongMuon, datViTriMongMuon] = useState(null);
@@ -31,6 +34,7 @@ function UngVienProfile({ cx = () => { }, data, handleSublit = () => { } }) {
     const [kinhNghiemLamViec, datKinhNghiemLamViec] = useState(null);
     const [hocVan, datHocVan] = useState(null);
     const [mucLuong, datMucLuong] = useState(0);
+<<<<<<< Updated upstream
     const [des, setDes] = useState('');
     const [mucTieuNgheNghiep, datMucTieuNgheNghiep] = useState('');
     const [docThan, datDocThan] = useState(null);
@@ -46,6 +50,11 @@ function UngVienProfile({ cx = () => { }, data, handleSublit = () => { } }) {
     const [mucTieuNgheNghiep, datMucTieuNgheNghiep] = useState('');
     const [docThan, datDocThan] = useState(true);
 >>>>>>> origin/main
+=======
+    const [des, setDes] = useState('');
+    const [mucTieuNgheNghiep, datMucTieuNgheNghiep] = useState('');
+    const [docThan, datDocThan] = useState(null);
+>>>>>>> Stashed changes
 
     useEffect(() => {
         if (!_.isEmpty(data)) {
