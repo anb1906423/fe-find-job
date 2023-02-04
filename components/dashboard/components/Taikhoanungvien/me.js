@@ -88,7 +88,7 @@ const MeProfile = () => {
         console.log(file);
 
         if (file) {
-            if (file.size <= 1500000) {
+            if (file.size >= 1500000) {
                 alert('Vui lòng chọn file có dung lượng dưới 1.5MB');
                 return;
             }

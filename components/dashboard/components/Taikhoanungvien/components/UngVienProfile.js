@@ -16,29 +16,13 @@ import {
 } from '../../../../../data/data';
 import useValidate from '../../../../../app/hook/useValidate';
 
-function UngVienProfile({ cx = () => { }, data, handleSublit = () => { } }) {
+function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
     const [hoTen, datHoTen] = useState('');
     const [email, datEmail] = useState('');
     const [soDienThoai, datSoDienThoai] = useState('');
     const [diaChi, datDiaChi] = useState('');
     const [gioiTinh, datGioiTinh] = useState(true);
     const [sinhNhat, datSinhNhat] = useState('');
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
-    const [linhVucLamVec, datLinhVucLamViec] = useState(null);
-    const [diaDiemLamViec, datDiaDiemLamViec] = useState(null);
-    const [viTriMongMuon, datViTriMongMuon] = useState(null);
-    const [capBacUngTuyen, datCapBacUngTuyen] = useState(null);
-    const [kinhNghiemLamViec, datKinhNghiemLamViec] = useState(null);
-    const [hocVan, datHocVan] = useState(null);
-    const [mucLuong, datMucLuong] = useState(0);
-<<<<<<< Updated upstream
-    const [des, setDes] = useState('');
-    const [mucTieuNgheNghiep, datMucTieuNgheNghiep] = useState('');
-    const [docThan, datDocThan] = useState(null);
-=======
     const [linhVucLamVec, datLinhVucLamViec] = useState('');
     const [diaDiemLamViec, datDiaDiemLamViec] = useState('');
     const [viTriMongMuon, datViTriMongMuon] = useState('');
@@ -49,12 +33,6 @@ function UngVienProfile({ cx = () => { }, data, handleSublit = () => { } }) {
     const [des, setDes] = useState('');
     const [mucTieuNgheNghiep, datMucTieuNgheNghiep] = useState('');
     const [docThan, datDocThan] = useState(true);
->>>>>>> origin/main
-=======
-    const [des, setDes] = useState('');
-    const [mucTieuNgheNghiep, datMucTieuNgheNghiep] = useState('');
-    const [docThan, datDocThan] = useState(null);
->>>>>>> Stashed changes
 
     useEffect(() => {
         if (!_.isEmpty(data)) {
@@ -138,7 +116,7 @@ function UngVienProfile({ cx = () => { }, data, handleSublit = () => { } }) {
                         id="email"
                         type="email"
                         placeholder="khachhangtruycapweb@gmail.com"
-                        onChange={() => {}}
+                        onChange={(e) => datEmail(e.target.value)}
                         value={email}
                     />
                 </div>
@@ -245,15 +223,6 @@ function UngVienProfile({ cx = () => { }, data, handleSublit = () => { } }) {
                 </div>
                 <div className="col-6 mt-3">
                     <label htmlFor="price">Mức lương mong muốn : </label>
-<<<<<<< HEAD
-                    <input
-                        value={mucLuong}
-                        onChange={(e) => datMucLuong(e.target.value)}
-                        id="price"
-                        type="text"
-                        placeholder="10.000.000 đ"
-                    />
-=======
                     <select value={mucLuong} onChange={(e) => datMucLuong(e.target.value)}>
                         {MucLuong &&
                             MucLuong.length > 0 &&
@@ -267,7 +236,6 @@ function UngVienProfile({ cx = () => { }, data, handleSublit = () => { } }) {
                                 );
                             })}
                     </select>
->>>>>>> origin/main
                 </div>
                 <div className="col-6 mt-3">
                     <label>Lĩnh vực muốn làm việc : </label>

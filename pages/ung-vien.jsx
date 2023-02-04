@@ -5,52 +5,11 @@ import axios from './api/axiosApi';
 import Heading from '../components/Heading';
 import UngVien from '../components/UngVien';
 import Head from 'next/head';
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
-import { swtoast } from '../mixins/swal.mixin';
-import { useDispatch, useSelector } from 'react-redux';
-import Router from 'next/router';
-
-import { backendAPI } from '../config';
-import Heading from '../components/Heading';
-import axios from './api/axios';
-import * as actions from '../store/actions';
-
-const PHONENUMBER_REGEX = /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
-const EMAIL_REGEX =
-    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-const PWD_REGEX = /^[a-zA-Z0-9]+$/;
-
-const DangKyUngVien = () => {
-    const isLogin = useSelector((state) => state.user.isLoggedIn);
-
-    const hoVaTenRef = useRef();
-    const dispatch = useDispatch();
-
-    const emailRef = useRef();
-    const matKhauRef = useRef();
-    const diaChiRef = useRef();
-    const soDienThoaiRef = useRef();
-    const sinhNhatRef = useRef();
-
-    const [hoVaTen, setHoVaTen] = useState('');
-    const [email, setEmail] = useState('');
-    const [matKhau, setMatKhau] = useState('');
-    const [diaChi, setDiaChi] = useState('');
-    const [soDienThoai, setSoDienThoai] = useState('');
-    const [sinhNhat, setSinhNhat] = useState('');
-    const [isMale, setIsMale] = useState();
-
-    const [err, setErr] = useState('');
-=======
 import { backendAPI } from '../config';
 
 const TrangUngVien = () => {
     // fake dữ liệu đầu vào tạm thời
     const [danhSachUngVien, datDanhSachUngVien] = useState([]);
->>>>>>> origin/main
 
     // fetch api
     useEffect(() => {
