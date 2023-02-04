@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Router from 'next/router';
+import { swtoast } from "../../mixins/swal.mixin";
 
 import axios from '../api/axiosApi';
 import useValidate from '../../app/hook/useValidate';
@@ -45,12 +46,16 @@ const DangNhapUngVien = () => {
                 };
 
                 dispatch(actions.userLoginSuccess(data));
-
+                swtoast.success({
+                    text: "Đăng nhập tài khoản thành công"
+                })
                 Router.push('/');
             }
         } catch (error) {
             if (error && error.response && error.response.status === StatusCode.SaiTkOrMk) {
-                alert(error.response.data.message);
+                swtoast.fire({
+                    text: error.response.data.message,
+                });
                 return;
             }
         }

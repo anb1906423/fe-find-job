@@ -1,3 +1,4 @@
+import { swtoast } from "../../../mixins/swal.mixin";
 const useValidate = (arrayClone) => {
     console.log('check : ', arrayClone);
 
@@ -10,7 +11,9 @@ const useValidate = (arrayClone) => {
 
         if (arrayClone[i] === '' || arrayClone[i].length === 0) {
             isValid = false;
-            alert('Bạn đã nhập thiếu trường !');
+            swtoast.fire({
+                text: "Thông tin tài khoản hoặc mật khẩu không được để trống!"
+            })
             break;
         }
     }

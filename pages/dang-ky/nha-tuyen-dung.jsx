@@ -4,10 +4,16 @@ import Link from 'next/link';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import Router from 'next/router';
+import { swtoast } from '../../mixins/swal.mixin';
+import { UploadImage } from '../../services/siteServices'
 
-import { backendAPI } from '../../config';
+import { REACT_APP_UPLOAD_PRESET, backendAPI } from '../../config';
 
 const LOGIN_URL = backendAPI + '/dang-ky/nha-tuyen-dung';
+const PHONENUMBER_REGEX = /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
+const EMAIL_REGEX =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+const PWD_REGEX = /^[a-zA-Z0-9]+$/;
 
 const DangKyNhaTuyenDung = () => {
     const isLogin = useSelector((state) => state.user.isLoggedIn);
@@ -36,11 +42,51 @@ const DangKyNhaTuyenDung = () => {
 
     const xuLyDangNhap = async (e) => {
         e.preventDefault();
+        if (!EMAIL_REGEX.test(email)) {
+            emailRef.current.focus();
+            setErr('Địa chỉ email không hợp lệ!');
+            return;
+        }
+        if (!PWD_REGEX.test(matKhau)) {
+            matKhauRef.current.focus();
+            setErr('Mật khẩu không hợp lệ!');
+            return;
+        }
+        if (matKhau.length < 8) {
+            matKhauRef.current.focus();
+            setErr('Mật khẩu phải ít nhất 8 ký tự!');
+            return;
+        }
+        if (tenCty.length == 0) {
+            tenCtyRef.current.focus()
+            setErr('Tên công ty không được để trống!');
+            return
+        }
+        if (diaChi.length == 0) {
+            diaChiRef.current.focus()
+            setErr('Địa chỉ liên hệ không được để trống!');
+            return
+        }
+        if (!PHONENUMBER_REGEX.test(soDienThoai) && soDienThoai.length != 0 || soDienThoai.length === 0) {
+            soDienThoaiRef.current.focus();
+            setErr('Số điện thoại không hợp lệ!');
+            return;
+        }
+        if (maSoThue.length == 0) {
+            maSoThueRef.current.focus()
+            setErr('Mã số thuế không được để trống!');
+            return
+        }
+
+        const ResImg = await UploadImage({
+            file: logoCty,
+            upload_preset: REACT_APP_UPLOAD_PRESET,
+        });
 
         try {
             const response = await axios.post(
                 LOGIN_URL,
-                JSON.stringify({ tenCty, email, matKhau, soDienThoai, diaChi, maSoThue }),
+                JSON.stringify({ logoCty: ResImg.data.url, tenCty, email, matKhau, soDienThoai, diaChi, maSoThue }),
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -49,13 +95,13 @@ const DangKyNhaTuyenDung = () => {
                 },
             );
             swtoast.success({
-                text: 'Đăng nhập tài khoản thành công!',
+                text: 'Đăng ký tài khoản thành công!',
             });
             const accessToken = response?.data?.accessToken;
             const roles = response?.data?.roles;
             console.log(accessToken);
             // console.log(roles);
-            setCookie('user', response.data);
+            // setCookie('user', response.data);
 
             Router.push('/dang-nhap/nha-tuyen-dung');
 
@@ -63,20 +109,21 @@ const DangKyNhaTuyenDung = () => {
             // window.location.assign('/admin/tat-ca-xe')
             // setAuth({ email, pwd, roles, accessToken });
             setEmail('');
-            setPwd('');
+            setMatKhau('');
             setErr('');
         } catch (err) {
             console.log(err);
             if (!err?.response) {
                 setErr('No server response!');
             } else if (err.response.status === 400) {
-                setErr('Missing email or password!');
+                setErr('Thông tin chứa dấu * là bắt buộc!');
             } else if (err.response.status === 401) {
                 setErr('Email or password is incorrect!');
+            } else if (err.response.status === 422) {
+                setErr('Địa chỉ email đã được sử dụng!')
             } else {
                 setErr('Login falled');
             }
-            emailRef.current.focus();
         }
     };
 
@@ -182,10 +229,17 @@ const DangKyNhaTuyenDung = () => {
                                         id="inputGroupFile04"
                                         aria-describedby="inputGroupFileAddon04"
                                         aria-label="Upload"
-                                        value={logoCty}
-                                        onChange={(e) => setLogoCty(e.target.value)}
+                                        onChange={(e) => setLogoCty(e.target.files[0])}
                                     />
                                 </div>
+                            </div>
+                            <div>
+                                <p
+                                    className='text-danger'
+                                    style={{
+                                        margin: "0"
+                                    }}
+                                >{err}</p>
                             </div>
                             <div className="col-12">
                                 <button type="submit" className="btn nut-dang-ky w-100">

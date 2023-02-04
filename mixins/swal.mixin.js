@@ -26,6 +26,7 @@ export const swalert = Swal.mixin({
 export const swtoast = {
     fire(config) {
         swToastInstance.fire({
+            icon: "warning",
             ...config,
             toast: true,
         });

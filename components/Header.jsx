@@ -7,6 +7,7 @@ import Tippy from '@tippyjs/react';
 
 import SelectItem from './SelectItem';
 import Swal from 'sweetalert2';
+import { swalert } from '../mixins/swal.mixin';
 import { Menu, provinces } from '../data/data';
 import LazyImg from '../app/components/LazyImg';
 import Button from '../app/components/Button';
@@ -108,7 +109,20 @@ const Header = () => {
 
     // xử lí logout
     const handleLogOut = () => {
-        dispatch(actions.userLogOut());
+        swalert
+            .fire({
+                title: "Đăng xuất",
+                icon: "warning",
+                text: "Bạn chắc chắn muốn đăng xuất?",
+                showCloseButton: true,
+                showCancelButton: true,
+            })
+            .then(async (result) => {
+                if (result.isConfirmed) {
+                    window.location.assign('/')
+                    dispatch(actions.userLogOut());
+                }
+            })
     };
 
     return (

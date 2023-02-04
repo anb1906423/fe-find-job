@@ -61,6 +61,11 @@ const DangKyUngVien = () => {
             setErr('Mật khẩu phải ít nhất 8 ký tự!');
             return;
         }
+        if (hoVaTen.length == 0) {
+            hoVaTenRef.current.focus()
+            setErr("Họ và tên không được để trống!")
+            return
+        }
         if (!PHONENUMBER_REGEX.test(soDienThoai) && soDienThoai.length != 0) {
             soDienThoaiRef.current.focus();
             setErr('Số điện thoại không hợp lệ!');
@@ -94,6 +99,7 @@ const DangKyUngVien = () => {
             console.log(JSON.stringify(response?.data));
             console.log(response?.data);
             console.log(JSON.stringify(response));
+            setErr("")
         } catch (err) {
             if (!err?.response) {
                 setErr('No Server Response!');

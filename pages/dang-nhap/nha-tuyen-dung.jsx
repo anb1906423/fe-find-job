@@ -9,6 +9,7 @@ import axios from '../api/axiosApi';
 import { backendAPI } from '../../config';
 import { StatusCode } from '../../util/constant';
 import * as actions from '../../store/actions';
+import { swtoast } from "../../mixins/swal.mixin";
 
 const DangNhapNhaTuyenDung = () => {
     const [email, setEmail] = useState('');
@@ -45,12 +46,16 @@ const DangNhapNhaTuyenDung = () => {
                 console.log(data);
 
                 dispatch(actions.userLoginSuccess(data));
-
+                swtoast.success({
+                    text: "Đăng nhập tài khoản thành công"
+                })
                 Router.push('/');
             }
         } catch (error) {
             if (error && error.response && error.response.status === StatusCode.SaiTkOrMk) {
-                alert(error.response.data.message);
+                swtoast.fire({
+                    text: error.response.data.message,
+                });
                 return;
             }
         }
