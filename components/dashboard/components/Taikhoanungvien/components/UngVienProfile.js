@@ -116,7 +116,7 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                         id="email"
                         type="email"
                         placeholder="khachhangtruycapweb@gmail.com"
-                        onChange={() => {}}
+                        onChange={(e) => datEmail(e.target.value)}
                         value={email}
                     />
                 </div>
