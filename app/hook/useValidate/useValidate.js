@@ -12,7 +12,7 @@ const useValidate = (arrayClone) => {
         if (arrayClone[i] === '' || arrayClone[i].length === 0) {
             isValid = false;
             swtoast.fire({
-                text: "Thông tin tài khoản hoặc mật khẩu không được để trống!"
+                text: "Vui lòng cung cấp đầy đủ thông tin!"
             })
             break;
         }

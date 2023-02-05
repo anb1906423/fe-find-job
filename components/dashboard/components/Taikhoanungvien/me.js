@@ -16,7 +16,7 @@ import NhaTuyenDungProfile from './components/NhaTuyenDungProfile';
 import { useCallback } from 'react';
 import Loading from '../../../../app/components/loading/loading';
 import _, { xor } from 'lodash';
-
+import { swtoast } from '../../../../mixins/swal.mixin';
 const cx = classNames.bind(styles);
 
 const MeProfile = () => {
@@ -89,7 +89,9 @@ const MeProfile = () => {
 
         if (file) {
             if (file.size >= 1500000) {
-                alert('Vui lòng chọn file có dung lượng dưới 1.5MB');
+                swtoast.fire({
+                    text: "Vui lòng chọn file có dung lượng dưới 1.5MB"
+                })
                 return;
             }
 
@@ -101,7 +103,7 @@ const MeProfile = () => {
     // lưu dữ liệu thay đổi
     const handleSublit = useCallback(async (data) => {
         if (!avatar && isUpLoadAvatar) {
-            alert('Hãy chọn ảnh!');
+            // alert('Hãy chọn ảnh!');
             return;
         }
 
@@ -128,7 +130,9 @@ const MeProfile = () => {
 
             if (Res) {
                 fetch();
-                alert('Bạn đã cập nhật thông tin thành công !');
+                swtoast.success({
+                    text: "Bạn đã cập nhật thông tin thành công!"
+                })
             }
         } catch (error) {
             console.log(error);
