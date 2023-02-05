@@ -5,6 +5,7 @@ import Tippy from '@tippyjs/react';
 import { Col, Row } from 'react-bootstrap';
 
 import LazyImg from '../app/components/LazyImg/LazyImg';
+import convertTime from '../app/@func/convertTime/convertTime';
 
 const UngVien = ({ dulieu }) => {
     return (
@@ -36,6 +37,7 @@ const UngVien = ({ dulieu }) => {
                                                 >
                                                     <h6 className="vi-tri-mong-muon">
                                                         <i className="bi bi-link-45deg"></i>
+
                                                         <span className="mx-1">
                                                             {item.viTriMongMuon ? item.viTriMongMuon : 'Đang cập nhật'}
                                                         </span>
@@ -46,7 +48,11 @@ const UngVien = ({ dulieu }) => {
                                                 <div className="d-d-inline-block">
                                                     <Tippy content={item.hoVaTen}>
                                                         <span>
-                                                            <i className="bi bi-gender-male"></i>
+                                                            {item.isMale ? (
+                                                                <i className="bi bi-gender-male"></i>
+                                                            ) : (
+                                                                <i class="bi bi-gender-female"></i>
+                                                            )}
                                                             <span className="mx-1">{item.hoVaTen}</span>
                                                         </span>
                                                     </Tippy>
@@ -55,19 +61,30 @@ const UngVien = ({ dulieu }) => {
                                             <div className="thong-tin-khac-ve-ung-vien">
                                                 <h6 className="sinh-nhat">
                                                     <i className="bi bi-calendar"></i>
-                                                    <span className="mx-1">09 / 12 / 2003</span>
+                                                    <span className="mx-1">
+                                                        {item.sinhNhat ? convertTime(item.sinhNhat) : 'Đang cập nhật'}
+                                                    </span>
                                                 </h6>
                                                 <h6 className="hoc-van">
                                                     <i className="bi bi-mortarboard"></i>
-                                                    <span className="mx-1">Đại học</span>
+                                                    <span className="mx-1">
+                                                        {' '}
+                                                        {item.hocVan ? item.hocVan : 'Đang cập nhật'}
+                                                    </span>
                                                 </h6>
                                                 <h6 className="kinh-nghiem">
                                                     <i className="bi bi-person-workspace"></i>
-                                                    <span className="mx-1">Dưới 1 năm</span>
+                                                    <span className="mx-1">
+                                                        {item.mucLuongMongMuon
+                                                            ? item.mucLuongMongMuon
+                                                            : 'Đang cập nhật'}
+                                                    </span>
 
-                                                    <h6 className="muc-luong-mong-muon"> </h6>
+                                                    <h5 className="muc-luong-mong-muon"></h5>
                                                     <i className="bi bi-star"></i>
-                                                    <span className="mx-1">Thỏa thuận</span>
+                                                    <span className="mx-1">
+                                                        {item.kinhNghiem ? item.kinhNghiem : 'Đang cập nhật'}
+                                                    </span>
                                                 </h6>
                                             </div>
                                         </div>
@@ -91,69 +108,3 @@ UngVien.propTypes = {
 };
 
 export default UngVien;
-
-{
-    /* <table className="table">
-                <thead className="thead-dark">
-                    <tr>
-                        <th scope="col">STT</th>
-                        <th scope="col">Avatar</th>
-                        <th scope="col">Vị trí mong muốn</th>
-                        <th scope="col">Họ Và Tên</th>
-                        <th scope="col" className="th-thong-tin-khac">
-                            Thông tin khác
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {dulieu &&
-                        dulieu.length > 0 &&
-                        dulieu.map((item, index) => {
-                            const id = uuidv4();
-                            return (
-                                <tr key={id}>
-                                    <th scope="row">{index + 1}</th>
-                                    <td>
-                                        <LazyImg link={item.avatar} alt="Hình ảnh hiển thị" className="avatar" />
-                                    </td>
-                                    <td>{item.viTriMongMuon}</td>
-                                    <td>{item.hoVaTen}</td>
-                                    <td>
-                                        <h6 className="sinh-nhat">Ngày sinh : {item.sinhNhat}</h6>
-                                        <h6 className="hoc-van">
-                                            Học vấn : Từng làm dev web tại vccop , Tham gia freelance dự án alotera Từng
-                                            làm dev web tại vccop , Tham gia freelance dự án aloteraTừng làm dev web tại
-                                            vccop , Tham gia freelance dự án aloteraTừng làm dev web tại vccop , Tham
-                                            gia freelance dự án aloteraTừng làm dev web tại vccop , Tham gia freelance
-                                            dự án aloteraTừng làm dev web tại vccop , Tham gia freelance dự án alotera
-                                        </h6>
-                                        <h6 className="muc-luong-mong-muon">
-                                            Mức lương mong muốn đạt được : {item.mucLuongMongMuon}
-                                        </h6>
-                                    </td>
-                                </tr>
-                            );
-                        })}
-                </tbody>
-            </table> */
-}
-
-/* 
-<div className="ung-vien">
-            <div className="avatar-box">
-                <img src={props.avatar} alt="" className="avatar" />
-            </div>
-            <div className="thong-tin-khac">
-                <h6 className="vi-tri-mong-muon">{props.viTriMongMuon}</h6>
-                <div className="ho-va-ten">
-                    <p>{props.hoVaTen}</p>
-                </div>
-                <div className="thong-tin-khac">
-                    <h6 className="sinh-nhat">{props.sinhNhat}</h6>
-                    <h6 className="hoc-van">{props.hovVan}</h6>
-                    <h6 className="hoc-van">{props.hovVan}</h6>
-                    <h6 className="muc-luong-mong-muon">{props.mucLuongMongMuon}</h6>
-                </div>
-            </div>
-        </div>
- */
