@@ -1,23 +1,101 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
+import _ from 'lodash';
+import { useState, memo, useEffect } from 'react';
 
-import { provinces } from '../../../../../data/data';
+import {
+    Capbac,
+    HocVan,
+    KinhNghiem,
+    MucLuong,
+    TinhTrang,
+    ViTriMongMuon,
+    majors,
+    provinces,
+} from '../../../../../data/data';
+import useValidate from '../../../../../app/hook/useValidate';
 
-function NhaTuyenDungProfile({
-    cx = () => {},
-    isEdit = true,
-    datHoTen = () => {},
-    datDiaChi = () => {},
-    datSoDienThoai = () => {},
-    hoTen = '',
-    soDienThoai = '',
-    email = '',
-    datMaSoThue = () => {},
-    maSoThue = '',
-    handleSublit = () => {},
-    diaChi = '',
-}) {
+function NhaTuyenDungProfile({ cx = () => {}, data, handleSublit = () => {} }) {
+    const [hoTen, datHoTen] = useState('');
+    const [email, datEmail] = useState('');
+    const [soDienThoai, datSoDienThoai] = useState('');
+    const [diaChi, datDiaChi] = useState('');
+    const [gioiTinh, datGioiTinh] = useState(true);
+    const [sinhNhat, datSinhNhat] = useState('');
+    const [linhVucLamVec, datLinhVucLamViec] = useState('');
+    const [diaDiemLamViec, datDiaDiemLamViec] = useState('');
+    const [viTriMongMuon, datViTriMongMuon] = useState('');
+    const [capBacUngTuyen, datCapBacUngTuyen] = useState('');
+    const [kinhNghiemLamViec, datKinhNghiemLamViec] = useState('');
+    const [hocVan, datHocVan] = useState('');
+    const [mucLuong, datMucLuong] = useState('');
+    const [des, setDes] = useState('');
+    const [mucTieuNgheNghiep, datMucTieuNgheNghiep] = useState('');
+    const [docThan, datDocThan] = useState(true);
+
+    useEffect(() => {
+        if (!_.isEmpty(data)) {
+            datHoTen(data.hoVaTen);
+            datEmail(data.email);
+            datSoDienThoai(data.soDienThoai);
+            datDiaChi(data.diaChi);
+            datGioiTinh(data.isMale);
+            datSinhNhat(data.sinhNhat);
+            datLinhVucLamViec(data.linhVucNgheNghiep);
+            datDiaDiemLamViec(data.diaDiemMongMuonLamViec);
+            datViTriMongMuon(data.viTriMongMuon);
+            datCapBacUngTuyen(data.capBac);
+            datKinhNghiemLamViec(data.kinhNghiem);
+            datHocVan(data.hocVan);
+            datMucLuong(data.mucLuongMongMuon);
+            setDes(data.gioiThieu);
+            datMucTieuNgheNghiep(data.mucTieuNgheNghiep);
+            datDocThan(data.docThan);
+        }
+    }, [data]);
+
+    // ES6+
+    const handleBuildData = () => {
+        const check = useValidate([
+            hoTen,
+            soDienThoai,
+            diaChi,
+            gioiTinh,
+            sinhNhat,
+            linhVucLamVec,
+            diaDiemLamViec,
+            viTriMongMuon,
+            capBacUngTuyen,
+            kinhNghiemLamViec,
+            hocVan,
+            mucLuong,
+            des,
+            mucTieuNgheNghiep,
+            docThan,
+        ]);
+
+        if (!check) return {};
+
+        return {
+            hoVaTen: hoTen,
+            soDienThoai,
+            diaChi,
+            isMale: gioiTinh,
+            sinhNhat: sinhNhat,
+            linhVucNgheNghiep: linhVucLamVec,
+            diaDiemMongMuonLamViec: diaDiemLamViec,
+            viTriMongMuon,
+            capBac: capBacUngTuyen,
+            kinhNghiem: kinhNghiemLamViec,
+            hocVan,
+            mucLuongMongMuon: mucLuong,
+            gioiThieu: des,
+            mucTieuNgheNghiep,
+            docThan,
+        };
+    };
+
     return (
         <>
             <div className="row">
@@ -33,7 +111,14 @@ function NhaTuyenDungProfile({
                 </div>
                 <div className="col-6 mt-3">
                     <label htmlFor="email">Email : </label>
-                    <input disabled id="email" type="email" placeholder="khachhangtruycapweb@gmail.com" value={email} />
+                    <input
+                        disabled
+                        id="email"
+                        type="email"
+                        placeholder="khachhangtruycapweb@gmail.com"
+                        onChange={(e) => datEmail(e.target.value)}
+                        value={email}
+                    />
                 </div>
                 <div className="col-6 mt-3">
                     <label htmlFor="address">Địa chỉ : </label>
@@ -56,16 +141,6 @@ function NhaTuyenDungProfile({
                     />
                 </div>
                 <div className="col-6 mt-3">
-                    <label htmlFor="maSoThue">Mã số thuế : </label>
-                    <input
-                        onChange={(e) => datMaSoThue(e.target.value)}
-                        id="maSoThue"
-                        type="number"
-                        placeholder="012345678"
-                        value={maSoThue}
-                    />
-                </div>
-                {/* <div className="col-6 mt-3">
                     <label htmlFor="birthDay">Ngày sinh : </label>
                     <input
                         onChange={(e) => datSinhNhat(e.target.value)}
@@ -74,45 +149,177 @@ function NhaTuyenDungProfile({
                         placeholder="012345678"
                         value={sinhNhat}
                     />
-                </div> */}
-                {/* <div className="col-6 mt-3">
+                </div>
+                <div className="col-6 mt-3">
                     <label htmlFor="gender">Giới tính : </label>
                     <select onChange={(e) => datGioiTinh(e.target.value)} name="" id="" value={gioiTinh}>
                         <option value="true">Nam</option>
                         <option value="false">Nữ</option>
                     </select>
-                </div> */}
-                {/* <div className="col-6 mt-3">
+                </div>
+                <div className="col-6 mt-3">
+                    <label>Vị trí mong muốn : </label>
+                    <select value={viTriMongMuon} onChange={(e) => datViTriMongMuon(e.target.value)}>
+                        {ViTriMongMuon &&
+                            ViTriMongMuon.length > 0 &&
+                            ViTriMongMuon.map((item) => {
+                                const id = uuidv4();
+
+                                return (
+                                    <option key={id} value={item.value}>
+                                        {item.label}
+                                    </option>
+                                );
+                            })}
+                    </select>
+                </div>
+                <div className="col-6 mt-3">
+                    <label>Cấp bậc ứng tuyển : </label>
+                    <select value={capBacUngTuyen} onChange={(e) => datCapBacUngTuyen(e.target.value)}>
+                        {Capbac &&
+                            Capbac.length > 0 &&
+                            Capbac.map((item) => {
+                                const id = uuidv4();
+
+                                return (
+                                    <option key={id} value={item.value}>
+                                        {item.label}
+                                    </option>
+                                );
+                            })}
+                    </select>
+                </div>
+                <div className="col-6 mt-3">
+                    <label>Kinh nghiệm làm việc : </label>
+                    <select value={kinhNghiemLamViec} onChange={(e) => datKinhNghiemLamViec(e.target.value)}>
+                        {KinhNghiem &&
+                            KinhNghiem.length > 0 &&
+                            KinhNghiem.map((item) => {
+                                const id = uuidv4();
+
+                                return (
+                                    <option key={id} value={item.value}>
+                                        {item.label}
+                                    </option>
+                                );
+                            })}
+                    </select>
+                </div>
+                <div className="col-6 mt-3">
+                    <label>Học vấn : </label>
+                    <select value={hocVan} onChange={(e) => datHocVan(e.target.value)}>
+                        {HocVan &&
+                            HocVan.length > 0 &&
+                            HocVan.map((item) => {
+                                const id = uuidv4();
+
+                                return (
+                                    <option key={id} value={item.value}>
+                                        {item.label}
+                                    </option>
+                                );
+                            })}
+                    </select>
+                </div>
+                <div className="col-6 mt-3">
+                    <label htmlFor="price">Mức lương mong muốn : </label>
+                    <select value={mucLuong} onChange={(e) => datMucLuong(e.target.value)}>
+                        {MucLuong &&
+                            MucLuong.length > 0 &&
+                            MucLuong.map((item) => {
+                                const id = uuidv4();
+
+                                return (
+                                    <option key={id} value={item.value}>
+                                        {item.label}
+                                    </option>
+                                );
+                            })}
+                    </select>
+                </div>
+                <div className="col-6 mt-3">
                     <label>Lĩnh vực muốn làm việc : </label>
-                    <select>
-                        <option value="">IT - Công Nghệ Phần Mềm</option>
-                        <option value="">Sale - Chuyên Viên Bán Hàng</option>
-                        <option value="">Teacher - Giáo viên dạy thêm</option>
+                    <select value={linhVucLamVec} onChange={(e) => datLinhVucLamViec(e.target.value)}>
+                        {majors &&
+                            majors.length > 0 &&
+                            majors.map((item) => {
+                                const id = uuidv4();
+
+                                return (
+                                    <option key={id} value={item.value}>
+                                        {item.label}
+                                    </option>
+                                );
+                            })}
                     </select>
                 </div>
                 <div className="col-6 mt-3">
                     <label>Địa điểm làm việc : </label>
-                    <select name="" id="">
+                    <select
+                        onChange={(e) => {
+                            datDiaDiemLamViec(e.target.value);
+                        }}
+                        value={diaDiemLamViec}
+                    >
                         {provinces &&
                             provinces.length > 0 &&
                             provinces.map((item) => {
                                 const id = uuidv4();
 
                                 return (
-                                    <option key={id} value="">
+                                    <option key={id} value={item}>
                                         {item}
                                     </option>
                                 );
                             })}
                     </select>
-                </div> */}
-                {isEdit && (
-                    <div className="col-12 mt-4">
-                        <button onClick={handleSublit} className="btn btn-primary">
-                            Lưu thông tin
-                        </button>
-                    </div>
-                )}
+                </div>
+                <div className="col-6 mt-3">
+                    <label>Tình trạng hiện tại : </label>
+                    <select
+                        onChange={(e) => {
+                            datDocThan(e.target.value);
+                        }}
+                        value={docThan}
+                    >
+                        {TinhTrang &&
+                            TinhTrang.length > 0 &&
+                            TinhTrang.map((item) => {
+                                const id = uuidv4();
+
+                                return (
+                                    <option key={id} value={item.value}>
+                                        {item.label}
+                                    </option>
+                                );
+                            })}
+                    </select>
+                </div>
+                <div className="col-12 mt-3">
+                    <label htmlFor="muctie-nghe-nghiep">Mục tiêu nghề nghiệp : </label>
+                    <textarea
+                        value={mucTieuNgheNghiep}
+                        onChange={(e) => datMucTieuNgheNghiep(e.target.value)}
+                        id="muctie-nghe-nghiep"
+                        type="text"
+                        placeholder="Mục tiêu nghề nghiệp của bạn...."
+                    />
+                </div>
+                <div className="col-12 mt-3">
+                    <label htmlFor="desc">Giới thiệu ngắn về bản thân : </label>
+                    <textarea
+                        value={des}
+                        onChange={(e) => setDes(e.target.value)}
+                        id="desc"
+                        type="text"
+                        placeholder="Giới thiệu ngắn...."
+                    />
+                </div>
+                <div className="col-12 mt-4">
+                    <button onClick={() => handleSublit(handleBuildData())} className="btn btn-primary">
+                        Lưu thông tin
+                    </button>
+                </div>
             </div>
         </>
     );
@@ -120,17 +327,7 @@ function NhaTuyenDungProfile({
 
 NhaTuyenDungProfile.propTypes = {
     cx: PropTypes.func,
-    isEdit: PropTypes.bool,
-    datHoTen: PropTypes.func,
-    datDiaChi: PropTypes.func,
-    datSoDienThoai: PropTypes.func,
-    hoTen: PropTypes.string,
-    maSoThue: PropTypes.number,
-    soDienThoai: PropTypes.string,
-    email: PropTypes.string,
     handleSublit: PropTypes.func,
-    diaChi: PropTypes.string,
-    datMaSoThue: PropTypes.func,
 };
 
-export default NhaTuyenDungProfile;
+export default memo(NhaTuyenDungProfile);
