@@ -11,3 +11,7 @@ export const UploadImage = (data) => {
         },
     });
 };
+
+export const UngVienLienDeXuat = () => {
+    return axios.get('/ung-vien');
+};

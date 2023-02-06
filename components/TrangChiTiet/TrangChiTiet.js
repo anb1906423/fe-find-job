@@ -2,13 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import { Col, Row } from 'react-bootstrap';
+import Router, { useRouter } from 'next/router';
 
 import styles from './trangChiTiet.module.scss';
 import LazyImg from '../../app/components/LazyImg/LazyImg';
+import Dexuatungvien from './components/dexuatungvien/Dexuatungvien';
+import { useCallback } from 'react';
 
 const cx = classNames.bind(styles);
 
 function TrangChiTiet(props) {
+    const params = useRouter();
+
+    const handleClick = useCallback(
+        (id) => {
+            Router.push(`/thong-tin-chi-tiet-ung-vien/${id}`);
+        },
+        [params.query.id],
+    );
+
     return (
         <div className={cx('trang-chi-tiet-wp')}>
             <div className="container">
@@ -271,134 +283,10 @@ function TrangChiTiet(props) {
                         </div>
                     </Col>
                     <Col lg={3} className={cx('de-xuat-ung-vien-wp')}>
-                        <div className={cx('suggest-ung-vien')}>
-                            <div className={cx('item-result-ung-vien')}>
-                                <div className={cx('anh-ung-vien-de-xuat')}>
-                                    <LazyImg
-                                        link="https://haycafe.vn/wp-content/uploads/2022/02/Anh-gai-xinh-de-thuong.jpg"
-                                        alt="Hình ảnh ứng viên"
-                                    />
-                                </div>
-                                <div className={cx('thong-tin-ung-vien-de-xuat')}>
-                                    <h5>Lập trình viên website lập trình không giới hạn</h5>
-                                    <p className={cx('ten-ung-vien')}>Nguyễn Văn Tuấn</p>
-                                    <p className={cx('trinh-do-va-kinh-nghiem')}>
-                                        <span className={cx('trinh-do', 'chung-css')}>
-                                            <i className="bi bi-folder2-open"></i>
-                                            Trung Cấp
-                                        </span>
-                                        <span className={cx('kinh-nghiem', 'chung-css')}>
-                                            <i className="bi bi-star"></i>5 năm kinh nghiệm làm việc
-                                        </span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div className={cx('item-result-ung-vien')}>
-                                <div className={cx('anh-ung-vien-de-xuat')}>
-                                    <LazyImg
-                                        link="https://haycafe.vn/wp-content/uploads/2022/02/Anh-gai-xinh-de-thuong.jpg"
-                                        alt="Hình ảnh ứng viên"
-                                    />
-                                </div>
-                                <div className={cx('thong-tin-ung-vien-de-xuat')}>
-                                    <h5>Lập trình viên website lập trình không giới hạn</h5>
-                                    <p className={cx('ten-ung-vien')}>Nguyễn Văn Tuấn</p>
-                                    <p className={cx('trinh-do-va-kinh-nghiem')}>
-                                        <span className={cx('trinh-do', 'chung-css')}>
-                                            <i className="bi bi-folder2-open"></i>
-                                            Trung Cấp
-                                        </span>
-                                        <span className={cx('kinh-nghiem', 'chung-css')}>
-                                            <i className="bi bi-star"></i>5 năm kinh nghiệm làm việc
-                                        </span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div className={cx('item-result-ung-vien')}>
-                                <div className={cx('anh-ung-vien-de-xuat')}>
-                                    <LazyImg
-                                        link="https://haycafe.vn/wp-content/uploads/2022/02/Anh-gai-xinh-de-thuong.jpg"
-                                        alt="Hình ảnh ứng viên"
-                                    />
-                                </div>
-                                <div className={cx('thong-tin-ung-vien-de-xuat')}>
-                                    <h5>Lập trình viên website lập trình không giới hạn</h5>
-                                    <p className={cx('ten-ung-vien')}>Nguyễn Văn Tuấn</p>
-                                    <p className={cx('trinh-do-va-kinh-nghiem')}>
-                                        <span className={cx('trinh-do', 'chung-css')}>
-                                            <i className="bi bi-folder2-open"></i>
-                                            Trung Cấp
-                                        </span>
-                                        <span className={cx('kinh-nghiem', 'chung-css')}>
-                                            <i className="bi bi-star"></i>5 năm kinh nghiệm làm việc
-                                        </span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div className={cx('item-result-ung-vien')}>
-                                <div className={cx('anh-ung-vien-de-xuat')}>
-                                    <LazyImg
-                                        link="https://haycafe.vn/wp-content/uploads/2022/02/Anh-gai-xinh-de-thuong.jpg"
-                                        alt="Hình ảnh ứng viên"
-                                    />
-                                </div>
-                                <div className={cx('thong-tin-ung-vien-de-xuat')}>
-                                    <h5>Lập trình viên website lập trình không giới hạn</h5>
-                                    <p className={cx('ten-ung-vien')}>Nguyễn Văn Tuấn</p>
-                                    <p className={cx('trinh-do-va-kinh-nghiem')}>
-                                        <span className={cx('trinh-do', 'chung-css')}>
-                                            <i className="bi bi-folder2-open"></i>
-                                            Trung Cấp
-                                        </span>
-                                        <span className={cx('kinh-nghiem', 'chung-css')}>
-                                            <i className="bi bi-star"></i>5 năm kinh nghiệm làm việc
-                                        </span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div className={cx('item-result-ung-vien')}>
-                                <div className={cx('anh-ung-vien-de-xuat')}>
-                                    <LazyImg
-                                        link="https://haycafe.vn/wp-content/uploads/2022/02/Anh-gai-xinh-de-thuong.jpg"
-                                        alt="Hình ảnh ứng viên"
-                                    />
-                                </div>
-                                <div className={cx('thong-tin-ung-vien-de-xuat')}>
-                                    <h5>Lập trình viên website lập trình không giới hạn</h5>
-                                    <p className={cx('ten-ung-vien')}>Nguyễn Văn Tuấn</p>
-                                    <p className={cx('trinh-do-va-kinh-nghiem')}>
-                                        <span className={cx('trinh-do', 'chung-css')}>
-                                            <i className="bi bi-folder2-open"></i>
-                                            Trung Cấp
-                                        </span>
-                                        <span className={cx('kinh-nghiem', 'chung-css')}>
-                                            <i className="bi bi-star"></i>5 năm kinh nghiệm làm việc
-                                        </span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div className={cx('item-result-ung-vien')}>
-                                <div className={cx('anh-ung-vien-de-xuat')}>
-                                    <LazyImg
-                                        link="https://haycafe.vn/wp-content/uploads/2022/02/Anh-gai-xinh-de-thuong.jpg"
-                                        alt="Hình ảnh ứng viên"
-                                    />
-                                </div>
-                                <div className={cx('thong-tin-ung-vien-de-xuat')}>
-                                    <h5>Lập trình viên website lập trình không giới hạn</h5>
-                                    <p className={cx('ten-ung-vien')}>Nguyễn Văn Tuấn</p>
-                                    <p className={cx('trinh-do-va-kinh-nghiem')}>
-                                        <span className={cx('trinh-do', 'chung-css')}>
-                                            <i className="bi bi-folder2-open"></i>
-                                            Trung Cấp
-                                        </span>
-                                        <span className={cx('kinh-nghiem', 'chung-css')}>
-                                            <i className="bi bi-star"></i>5 năm kinh nghiệm làm việc
-                                        </span>
-                                    </p>
-                                </div>
-                            </div>
+                        <div className={cx('title-suggest')}>
+                            <span>Ứng viên đề xuất</span>
                         </div>
+                        <Dexuatungvien params={params} cx={cx} handleClick={handleClick} />
                     </Col>
                 </Row>
             </div>
