@@ -355,3 +355,45 @@ export const MucLuong = [
         value: 'Thỏa thuận',
     },
 ];
+
+export const VungDuLieu = [
+    {
+        label: '---- Chọn vùng ----',
+        value: '',
+    },
+    {
+        label: 'Miền Bắc',
+        value: 'Miền Bắc',
+    },
+    {
+        label: 'Miền Trung',
+        value: 'Miền Trung',
+    },
+    {
+        label: 'Miền Nam',
+        value: 'Miền Nam',
+    },
+];
+
+export const TrinhDoTiengAnh = [
+    {
+        label: '---- Chọn trình độ tiếng anh ----',
+        value: '',
+    },
+    {
+        label: 'Trung bình',
+        value: 'Trung bình',
+    },
+    {
+        label: 'Khá',
+        value: 'Khá',
+    },
+    {
+        label: 'Giỏi',
+        value: 'Giỏi',
+    },
+    {
+        label: 'Không muốn tiếp lộ',
+        value: 'Không muốn tiếp lộ',
+    },
+];

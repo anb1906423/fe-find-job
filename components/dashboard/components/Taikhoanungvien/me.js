@@ -56,16 +56,22 @@ const MeProfile = () => {
             const { data } = Res;
 
             setData(data);
+
+            // Xin loi anh chi logic doan nay hoi dau mat <3
             datHinhAnhDemo(
-                data.avatar ? data.avatar : 'https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_960_720.png',
+                roleUserLogin === roleUser.UngVien
+                    ? data.avatar
+                    : data.logoCty
+                    ? roleUserLogin === roleUser.UngVien
+                        ? data.avatar
+                        : data.logoCty
+                    : 'https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_960_720.png',
             );
             setIsUpLoadAvatar(data.avatar ? false : true);
         } catch (error) {
             console.log(error);
         }
     };
-
-    // console.log(roleUserLogin);
 
     useEffect(() => {
         if (isLogin) {
@@ -161,9 +167,9 @@ const MeProfile = () => {
                             {roleUserLogin === roleUser.UngVien && (
                                 <UngVienProfile handleSublit={handleSublit} cx={cx} data={data} />
                             )}
-                            {/* {roleUserLogin === roleUser.NhaTuyenDung && (
-                            <NhaTuyenDungProfile handleSublit={handleSublit} cx={cx} data={data} />
-                        )} */}
+                            {roleUserLogin === roleUser.NhaTuyenDung && (
+                                <NhaTuyenDungProfile handleSublit={handleSublit} cx={cx} data={data} />
+                            )}
                         </div>
                     </div>
                 ) : (

@@ -11,3 +11,11 @@ export const UploadImage = (data) => {
         },
     });
 };
+
+export const UngVienLienDeXuat = () => {
+    return axios.get('/ung-vien');
+};
+
+export const LayThongTinUngVien = (id) => {
+    return axios.get(`/ung-vien/${id}`);
+};

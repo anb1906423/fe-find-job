@@ -5,9 +5,10 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import Router from 'next/router';
 import { swtoast } from '../../mixins/swal.mixin';
-import { UploadImage } from '../../services/siteServices'
+import { UploadImage } from '../../services/siteServices';
 
 import { REACT_APP_UPLOAD_PRESET, backendAPI } from '../../config';
+import Loading from '../../app/components/loading/loading';
 
 const LOGIN_URL = backendAPI + '/dang-ky/nha-tuyen-dung';
 const PHONENUMBER_REGEX = /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
@@ -34,6 +35,8 @@ const DangKyNhaTuyenDung = () => {
     const [logoCty, setLogoCty] = useState('');
     const [err, setErr] = useState('');
 
+    const [isLoading, setIsLoading] = useState(false);
+
     useEffect(() => {
         if (isLogin) return;
 
@@ -58,25 +61,27 @@ const DangKyNhaTuyenDung = () => {
             return;
         }
         if (tenCty.length == 0) {
-            tenCtyRef.current.focus()
+            tenCtyRef.current.focus();
             setErr('Tên công ty không được để trống!');
-            return
+            return;
         }
         if (diaChi.length == 0) {
-            diaChiRef.current.focus()
+            diaChiRef.current.focus();
             setErr('Địa chỉ liên hệ không được để trống!');
-            return
+            return;
         }
-        if (!PHONENUMBER_REGEX.test(soDienThoai) && soDienThoai.length != 0 || soDienThoai.length === 0) {
+        if ((!PHONENUMBER_REGEX.test(soDienThoai) && soDienThoai.length != 0) || soDienThoai.length === 0) {
             soDienThoaiRef.current.focus();
             setErr('Số điện thoại không hợp lệ!');
             return;
         }
         if (maSoThue.length == 0) {
-            maSoThueRef.current.focus()
+            maSoThueRef.current.focus();
             setErr('Mã số thuế không được để trống!');
-            return
+            return;
         }
+
+        setIsLoading(true);
 
         const ResImg = await UploadImage({
             file: logoCty,
@@ -120,15 +125,18 @@ const DangKyNhaTuyenDung = () => {
             } else if (err.response.status === 401) {
                 setErr('Email or password is incorrect!');
             } else if (err.response.status === 422) {
-                setErr('Địa chỉ email đã được sử dụng!')
+                setErr('Địa chỉ email đã được sử dụng!');
             } else {
                 setErr('Login falled');
             }
         }
+
+        setIsLoading(false);
     };
 
     return (
         <div className="trang-dang-ky-nha-tuyen-dung">
+            {isLoading && <Loading />}
             {!isLogin ? (
                 <>
                     <Heading tieuDe="Đăng ký nhà tuyển dụng" />
@@ -235,11 +243,13 @@ const DangKyNhaTuyenDung = () => {
                             </div>
                             <div>
                                 <p
-                                    className='text-danger'
+                                    className="text-danger"
                                     style={{
-                                        margin: "0"
+                                        margin: '0',
                                     }}
-                                >{err}</p>
+                                >
+                                    {err}
+                                </p>
                             </div>
                             <div className="col-12">
                                 <button type="submit" className="btn nut-dang-ky w-100">

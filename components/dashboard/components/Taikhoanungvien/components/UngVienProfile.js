@@ -33,6 +33,7 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
     const [des, setDes] = useState('');
     const [mucTieuNgheNghiep, datMucTieuNgheNghiep] = useState('');
     const [docThan, datDocThan] = useState(true);
+    const [trinhDoTiengAnh, datTrinhDoTiengAnh] = useState('');
 
     useEffect(() => {
         if (!_.isEmpty(data)) {
@@ -52,6 +53,7 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
             setDes(data.gioiThieu);
             datMucTieuNgheNghiep(data.mucTieuNgheNghiep);
             datDocThan(data.docThan);
+            // datTrinhDoTiengAnh(data.)
         }
     }, [data]);
 

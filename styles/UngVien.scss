@@ -1,6 +1,15 @@
 .danh-sach-ung-vien {
     padding: 40px 0;
 
+    a {
+        color: currentColor;
+        text-decoration: none;
+
+        &:hover {
+            color: currentColor;
+        }
+    }
+
     .ung-vien {
         display: flex;
 

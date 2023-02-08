@@ -2,13 +2,7 @@ import PropTypes from 'prop-types';
 import { memo, useEffect, useRef, useState } from 'react';
 
 const LazyImg = ({ link = '', alt = 'Hiển thị hình ảnh', className = '', onClick = () => {} }) => {
-    const [src, setSrc] = useState(link);
-
     const ref = useRef(null);
-
-    useEffect(() => {
-        setSrc(link);
-    }, [link]);
 
     useEffect(() => {
         const imgElement = ref.current;
@@ -30,9 +24,9 @@ const LazyImg = ({ link = '', alt = 'Hiển thị hình ảnh', className = '', 
         });
 
         observer.observe(imgElement);
-    }, [ref.current]);
+    }, [ref.current, link]);
 
-    return <img ref={ref} src="" onClick={onClick} className={className} lazy-src={src} alt={alt} />;
+    return <img ref={ref} src="" onClick={onClick} className={className} lazy-src={link} alt={alt} />;
 };
 
 LazyImg.propTypes = {
