@@ -96,11 +96,11 @@ const MeProfile = () => {
         if (file) {
             if (file.size >= 1500000) {
                 swtoast.fire({
-                    text: "Vui lòng chọn file có dung lượng dưới 1.5MB"
-                })
+                    text: 'Vui lòng chọn file có dung lượng dưới 1.5MB',
+                });
                 return;
             }
-
+            setIsUpLoadAvatar(true);
             setAvatar(file);
             datHinhAnhDemo(URL.createObjectURL(file));
         }
@@ -137,8 +137,8 @@ const MeProfile = () => {
             if (Res) {
                 fetch();
                 swtoast.success({
-                    text: "Bạn đã cập nhật thông tin thành công!"
-                })
+                    text: 'Bạn đã cập nhật thông tin thành công!',
+                });
             }
         } catch (error) {
             console.log(error);
