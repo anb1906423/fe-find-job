@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames/bind';
 
-import styles from '../../styles/adminWebsite.module.scss';
+import styles from '../../styles/dashboard.module.scss';
 import EmployerList from './components/danhsachnhatuyendung/EmployerList';
 import EmployerAccountList from './components/taikhoannhatuyendung/EmployerAccountList';
 import ActiveLink from '../../app/@func/ActiveLink';
@@ -17,9 +17,9 @@ function Dashboard() {
 
     return (
         <div className={cx('dash-board-wp')}>
-            <div className="px-2 py-4 overflow-hidden">
+            <div className="px-2 overflow-hidden">
                 <div className="row">
-                    <div className="col-3">
+                    <div className={cx('col-3', 'left')}>
                         <div className={cx('wp-left')}>
                             {role === 0 && (
                                 <>
@@ -27,18 +27,18 @@ function Dashboard() {
                                         activeClassName={cx('active')}
                                         href="/dashboard/danh-sach-nha-tuyen-dung"
                                     >
-                                        <span>List Employer</span>
+                                        <span>Danh Sách Nhà Tuyển Dụng</span>
                                     </ActiveLink>
                                     <ActiveLink
                                         activeClassName={cx('active')}
                                         href="/dashboard/danh-sach-tai-khoan-nha-tuyen-dung"
                                     >
-                                        <span>List Account Employer</span>
+                                        <span>Danh Sách Tài Khoản Ứng Viên</span>
                                     </ActiveLink>
                                 </>
                             )}
                             <ActiveLink activeClassName={cx('active')} href="/dashboard/tai-khoan-cua-toi">
-                                <span>Profile</span>
+                                <span>Trang Cá Nhân</span>
                             </ActiveLink>
                         </div>
                     </div>

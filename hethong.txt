@@ -14,3 +14,7 @@ một cái box shadow
     - Ứng viên : -1
     - Nhà tuyển dụng : 0
     - Admin website : 1
+
+# LightBox Image : 
+    -Sử dụng thư viện có tên react-awesome-lightbox
+    - Truy cập để đọc thêm thông tin "https://www.npmjs.com/package/react-awesome-lightbox"

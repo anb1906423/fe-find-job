@@ -1,12 +1,17 @@
-.wp-left {
-    a {
-        text-decoration: none;
-        color: #333;
-        display: block;
-        border-bottom: 1px solid #ccc;
-        border-radius: 20px;
-        margin: 10px 0;
-        overflow: hidden;
+.left {
+    background-color: rgb(249, 250, 251);
+    border-right: 1px dotted #ccc;
+
+    .wp-left {
+        a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
 
         span {
             color: currentColor;
@@ -19,7 +24,7 @@
             font-weight: 600;
 
             &.active {
-                color: #ee4d2d;
+                color: rgb(32, 101, 209);
             }
 
             &:hover {
@@ -27,7 +32,7 @@
                 color: #ee4d2d;
 
                 &.active {
-                    color: #ee4d2d;
+                    color: rgb(32, 101, 209);
                     background-color: transparent;
                     cursor: default;
                 }
