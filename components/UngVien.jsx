@@ -57,7 +57,7 @@ const UngVien = ({ dulieu }) => {
                                                                 {item.isMale ? (
                                                                     <i className="bi bi-gender-male"></i>
                                                                 ) : (
-                                                                    <i class="bi bi-gender-female"></i>
+                                                                    <i className="bi bi-gender-female"></i>
                                                                 )}
                                                                 <span className="mx-1">{item.hoVaTen}</span>
                                                             </span>
