@@ -7,5 +7,8 @@
     "[html]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "explorer.compactFolders": false
+    "explorer.compactFolders": false,
+    "[scss]": {
+        "editor.defaultFormatter": "MikeBovenlander.formate"
+    }
 }

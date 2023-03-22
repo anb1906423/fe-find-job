@@ -2,11 +2,6 @@ import classNames from 'classnames/bind';
 import Image from 'next/image';
 
 import styles from '../styles/footer.module.scss';
-import Logo from '../public/img/logo.png';
-import Blur1 from '../public/img/blur1.png';
-import Blur2 from '../public/img/blur2.png';
-import Blur3 from '../public/img/blur3.png';
-import Blur4 from '../public/img/blur4.png';
 
 const cx = classNames.bind(styles);
 
@@ -14,10 +9,10 @@ const FooterChuk = () => {
     return (
         <div className={cx('footer-wrapper-sell')}>
             <>
-                <Image loading="lazy" src={Blur1} alt="" className={cx('blur-footer', 'blur-1')} />
-                <Image loading="lazy" src={Blur2} alt="" className={cx('blur-footer', 'blur-2')} />
-                <Image loading="lazy" src={Blur3} alt="" className={cx('blur-footer', 'blur-3')} />
-                <Image loading="lazy" src={Blur4} alt="" className={cx('blur-footer', 'blur-4')} />
+                <img loading="lazy" src="./img/blur1.png" alt="Hinh anh blur" className={cx('blur-footer', 'blur-1')} />
+                <img loading="lazy" src="./img/blur2.png" alt="Hinh anh blur" className={cx('blur-footer', 'blur-2')} />
+                <img loading="lazy" src="./img/blur3.png" alt="Hinh anh blur" className={cx('blur-footer', 'blur-3')} />
+                <img loading="lazy" src="./img/blur4.png" alt="Hinh anh blur" className={cx('blur-footer', 'blur-4')} />
                 <div className={cx('overlay')}></div>
             </>
             <div className={cx('content')}>
@@ -25,7 +20,7 @@ const FooterChuk = () => {
                     <div className={cx('d-flex', 'my-2')}>
                         <div>
                             <div className={cx('header-footer')}>
-                                <Image src={Logo} alt="Ảnh logo" className={cx('img-logo')} />
+                                <img src="./img/logo.png" alt="Ảnh logo" className={cx('img-logo')} />
                                 <div>
                                     <span>Tìm kiếm công việc</span>
                                     <span>với mọi người</span>

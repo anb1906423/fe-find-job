@@ -19,3 +19,15 @@ export const UngVienLienDeXuat = () => {
 export const LayThongTinUngVien = (id) => {
     return axios.get(`/ung-vien/${id}`);
 };
+
+export const getAllKinhghiem = () => {
+    return axios.get('/kinh-nghiem');
+};
+
+export const getAllNganhNghe = () => {
+    return axios.get('/nganh-nghe');
+};
+
+export const getAllViTriMongMuon = () => {
+    return axios.get('/cap-bac');
+};
