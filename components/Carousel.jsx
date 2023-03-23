@@ -7,12 +7,12 @@ const slides = [
     },
     {
         id: 2,
-        src: './img/Bạn cần2.png',
+        src: './img/2.png',
         alt: 'Slide 3',
     },
     {
         id: 3,
-        src: './img/Bạn cần (1).png',
+        src: './img/3.png',
         alt: 'Slide 4',
     },
 ];
