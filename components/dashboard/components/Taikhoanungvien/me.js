@@ -67,7 +67,19 @@ const MeProfile = () => {
                         : data.logoCty
                     : 'https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_960_720.png',
             );
-            setIsUpLoadAvatar(data.avatar ? false : true);
+            setIsUpLoadAvatar(
+                roleUserLogin === roleUser.UngVien ? (data.avatar ? false : true) : data.logoCty ? false : true,
+            );
+
+            setAvatar(
+                roleUserLogin === roleUser.UngVien
+                    ? data.avatar
+                        ? data.avatar
+                        : null
+                    : data.logoCty
+                    ? data.logoCty
+                    : null,
+            );
         } catch (error) {
             console.log(error);
         }
@@ -107,11 +119,12 @@ const MeProfile = () => {
     };
 
     // lưu dữ liệu thay đổi
-    const handleSublit = useCallback(async (data) => {
+    const handleSublit = async (data) => {
         if (!avatar && isUpLoadAvatar) {
             // alert('Hãy chọn ảnh!');
             return;
         }
+        console.log(data);
 
         if (_.isEmpty(data)) return;
 
@@ -129,10 +142,24 @@ const MeProfile = () => {
 
         if (!ResImg && isUpLoadAvatar) return;
 
-        const dataBuild = { ...data, avatar: isUpLoadAvatar ? ResImg.data.url : hinhAnhDemo };
+        const uploadRender = roleUserLogin === roleUser.UngVien ? 'avatar' : 'logoCty';
+
+        const dataBuild = { ...data, [uploadRender]: isUpLoadAvatar ? ResImg.data.url : hinhAnhDemo };
+
+        console.log('tét');
 
         try {
-            const Res = await axios.put(`${backendAPI}/ung-vien/${userID}`, dataBuild, { withCredentials: true });
+            const Res = await axios.put(
+                `${backendAPI}/${
+                    roleUserLogin === roleUser.UngVien
+                        ? 'ung-vien'
+                        : roleUserLogin === roleUser.NhaTuyenDung
+                        ? 'nha-tuyen-dung'
+                        : 'admin'
+                }/${userID}`,
+                dataBuild,
+                { withCredentials: true },
+            );
 
             if (Res) {
                 fetch();
@@ -144,9 +171,7 @@ const MeProfile = () => {
             console.log(error);
         }
         setIsLoading(false);
-    });
-
-    console.log(avatar);
+    };
 
     return (
         <>
@@ -168,7 +193,7 @@ const MeProfile = () => {
                                 <UngVienProfile handleSublit={handleSublit} cx={cx} data={data} />
                             )}
                             {roleUserLogin === roleUser.NhaTuyenDung && (
-                                <NhaTuyenDungProfile handleSublit={handleSublit} cx={cx} data={data} />
+                                <NhaTuyenDungProfile handleSubmit={handleSublit} cx={cx} data={data} />
                             )}
                         </div>
                     </div>

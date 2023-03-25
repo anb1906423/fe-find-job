@@ -122,23 +122,7 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
             trinhDoTiengAnh,
         } = ungVienState;
 
-        const check = useValidate([
-            hoVaTen,
-            soDienThoai,
-            diaChi,
-            gioiTinh,
-            sinhNhat,
-            linhVucLamVec,
-            diaDiemLamViec,
-            viTriMongMuon,
-            capBacUngTuyen,
-            kinhNghiemLamViec,
-            hocVan,
-            mucLuong,
-            des,
-            mucTieuNgheNghiep,
-            docThan,
-        ]);
+        const check = useValidate([hoVaTen]);
 
         if (!check) return {};
 
@@ -199,9 +183,7 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                         disabled
                         id="email"
                         type="email"
-                        placeholder="khachhangtruycapweb@gmail.com"
-                        onChange={handleChange}
-                        value={ungVienState.email}
+                        placeholder={ungVienState.email ? ungVienState.email : 'khachhangtruycapweb@gmail.com'}
                     />
                 </div>
                 <div className="col-6 mt-3">
@@ -262,7 +244,7 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                             ungVienState.CapbacRender.length > 0 &&
                             ungVienState.CapbacRender.map((item) => {
                                 return (
-                                    <option key={item.id} value={item.id}>
+                                    <option key={item.id} value={item.ten}>
                                         {item.ten}
                                     </option>
                                 );
@@ -276,7 +258,7 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                             ungVienState.kinhNghiemLamViecRender.length > 0 &&
                             ungVienState.kinhNghiemLamViecRender.map((item) => {
                                 return (
-                                    <option key={item.id} value={item.id}>
+                                    <option key={item.id} value={item.ten}>
                                         {item.ten}
                                     </option>
                                 );
@@ -322,7 +304,7 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                             ungVienState.nghanhNgheRender.length > 0 &&
                             ungVienState.nghanhNgheRender.map((item) => {
                                 return (
-                                    <option key={item.id} value={item.id}>
+                                    <option key={item.id} value={item.ten}>
                                         {item.ten}
                                     </option>
                                 );

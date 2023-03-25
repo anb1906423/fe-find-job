@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import Script from 'next/script';
 
 import '../styles/globals.scss';
+import '../styles/profile.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 const Layout = dynamic(() => import('../components/Layout'), {
     ssr: false,

@@ -4,74 +4,62 @@ import { v4 as uuidv4 } from 'uuid';
 import _ from 'lodash';
 import { useState, memo, useEffect } from 'react';
 
-import {
-    Capbac,
-    HocVan,
-    KinhNghiem,
-    MucLuong,
-    TinhTrang,
-    ViTriMongMuon,
-    majors,
-    provinces,
-} from '../../../../../data/data';
+import { VungDuLieu } from '../../../../../data/data';
 import useValidate from '../../../../../app/hook/useValidate';
-import { getAllKinhghiem, getAllNganhNghe, getAllViTriMongMuon } from '../../../../../services/siteServices';
-import convertTime from '../../../../../app/@func/convertTime/convertTime';
+import { UploadImage, getAllLinhVucKinhDoanh, getAllQuiMo } from '../../../../../services/siteServices';
+import { swtoast } from '../../../../../mixins/swal.mixin';
+import { REACT_APP_UPLOAD_PRESET } from '../../../../../config';
+import Loading from '../../../../../app/components/loading/loading';
 
-function NhaTuyenDungProfile({ cx = () => {}, data, handleSublit = () => {} }) {
+function NhaTuyenDungProfile({ cx = () => {}, data, handleSubmit = () => {} }) {
     const ref = useRef(null);
+    const refBanner = useRef(null);
 
-    const [ungVienState, setUngVienSate] = useState({
-        hoVaTen: '',
+    const [isLoading, setIsLoading] = useState(false);
+
+    const [nhaTuyendungState, setNhaTuyendungState] = useState({
+        logoCty: '',
+        tenCty: '',
+        banner: '',
         email: '',
         soDienThoai: '',
         diaChi: '',
-        gioiTinh: true,
-        sinhNhat: '',
-        linhVucLamVec: '',
-        diaDiemLamViec: '',
-        viTriMongMuon: '',
-        capBacUngTuyen: '',
-        kinhNghiemLamViec: '',
-        hocVan: '',
-        mucLuong: '',
-        des: '',
-        mucTieuNgheNghiep: '',
-        docThan: true,
-        trinhDoTiengAnh: '',
+        khuVuc: '',
+        gioiThieu: '',
+        maSoThue: '',
+        quiMo: '',
+        website: '',
+        linhVucNgheNghiep: '',
+        anhCongTy: '',
 
-        kinhNghiemLamViecRender: [],
-        nghanhNgheRender: [],
-        CapbacRender: [],
-        HocVanRender: [],
-        KinhNghiemRender: [],
-        MucLuongRender: [],
-        TinhTrangRender: [],
-        ViTriMongMuonRender: [],
-        majorsRender: [],
+        BannerFile: null,
+        BannerPreView: '',
+
+        isUploaded: false,
+
+        QuyMoRende: [],
+        LinhVucNgheNghiepRender: [],
     });
 
     useEffect(() => {
         if (!_.isEmpty(data)) {
-            setUngVienSate((prev) => ({
+            setNhaTuyendungState((prev) => ({
                 ...prev,
-                hoVaTen: data.hoVaTen,
+                tenCty: data.tenCty,
+                logoCty: data.logoCty,
+                banner: data.banner,
                 email: data.email,
                 soDienThoai: data.soDienThoai,
                 diaChi: data.diaChi,
-                gioiTinh: data.isMale,
-                sinhNhat: data.sinhNhat,
-                linhVucLamVec: data.linhVucNgheNghiep,
-                diaDiemLamViec: data.diaDiemMongMuonLamViec,
-                viTriMongMuon: data.viTriMongMuon,
-                capBacUngTuyen: data.capBac,
-                kinhNghiemLamViec: data.kinhNghiem,
-                hocVan: data.hocVan,
-                mucLuong: data.mucLuongMongMuon,
-                des: data.gioiThieu,
-                mucTieuNgheNghiep: data.mucTieuNgheNghiep,
-                docThan: data.docThan,
-                trinhDoTiengAnh: data.trinhDoTiengAnh,
+                khuVuc: data.khuVuc,
+                gioiThieu: data.gioiThieu,
+                maSoThue: data.maSoThue,
+                quiMo: data.quiMo,
+                website: data.website,
+                linhVucNgheNghiep: data.linhVucNgheNghiep,
+                anhCongTy: data.logoCty,
+                BannerPreView: data.banner,
+                isUploaded: data.banner ? false : true,
             }));
         }
     }, [data]);
@@ -79,18 +67,13 @@ function NhaTuyenDungProfile({ cx = () => {}, data, handleSublit = () => {} }) {
     useEffect(() => {
         const fetch = async () => {
             try {
-                const [ResKinhNghiem, ResNghanhNghe, ResCapbac] = await Promise.all([
-                    getAllKinhghiem(),
-                    getAllNganhNghe(),
-                    getAllViTriMongMuon(),
-                ]);
+                const [ResQuiMo, ResLinhVucNgheNghiep] = await Promise.all([getAllQuiMo(), getAllLinhVucKinhDoanh()]);
 
-                if (ResKinhNghiem && ResNghanhNghe) {
-                    setUngVienSate((prev) => ({
+                if (ResQuiMo) {
+                    setNhaTuyendungState((prev) => ({
                         ...prev,
-                        kinhNghiemLamViecRender: ResKinhNghiem.data,
-                        nghanhNgheRender: ResNghanhNghe.data,
-                        CapbacRender: ResCapbac.data,
+                        QuyMoRende: ResQuiMo.data,
+                        LinhVucNgheNghiepRender: ResLinhVucNgheNghiep.data,
                     }));
                 }
             } catch (error) {
@@ -101,69 +84,9 @@ function NhaTuyenDungProfile({ cx = () => {}, data, handleSublit = () => {} }) {
         fetch();
     }, []);
 
-    // ES6+
-    const handleBuildData = () => {
-        const {
-            hoVaTen,
-            soDienThoai,
-            diaChi,
-            gioiTinh,
-            sinhNhat,
-            linhVucLamVec,
-            diaDiemLamViec,
-            viTriMongMuon,
-            capBacUngTuyen,
-            kinhNghiemLamViec,
-            hocVan,
-            mucLuong,
-            des,
-            mucTieuNgheNghiep,
-            docThan,
-            trinhDoTiengAnh,
-        } = ungVienState;
-
-        const check = useValidate([
-            hoVaTen,
-            soDienThoai,
-            diaChi,
-            gioiTinh,
-            sinhNhat,
-            linhVucLamVec,
-            diaDiemLamViec,
-            viTriMongMuon,
-            capBacUngTuyen,
-            kinhNghiemLamViec,
-            hocVan,
-            mucLuong,
-            des,
-            mucTieuNgheNghiep,
-            docThan,
-        ]);
-
-        if (!check) return {};
-
-        return {
-            hoVaTen,
-            soDienThoai,
-            diaChi,
-            isMale: gioiTinh,
-            sinhNhat: sinhNhat,
-            linhVucNgheNghiep: linhVucLamVec,
-            diaDiemMongMuonLamViec: diaDiemLamViec,
-            viTriMongMuon,
-            capBac: capBacUngTuyen,
-            kinhNghiem: kinhNghiemLamViec,
-            hocVan,
-            mucLuongMongMuon: mucLuong,
-            gioiThieu: des,
-            mucTieuNgheNghiep,
-            docThan,
-        };
-    };
-
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setUngVienSate((prevState) => ({
+        setNhaTuyendungState((prevState) => ({
             ...prevState,
             [name]: value,
         }));
@@ -179,18 +102,161 @@ function NhaTuyenDungProfile({ cx = () => {}, data, handleSublit = () => {} }) {
         }
     };
 
+    const handleClickChoooseBanner = () => {
+        const inputElement = refBanner.current;
+
+        if (inputElement) {
+            inputElement.click();
+        }
+    };
+
+    const handleChanegFileBanner = (e) => {
+        const file = e.target.files[0];
+
+        if (file) {
+            if (file.size >= 1500000) {
+                swtoast.fire({
+                    text: 'Vui lòng chọn file có dung lượng dưới 1.5MB',
+                });
+                return;
+            }
+
+            setNhaTuyendungState((prev) => ({
+                ...prev,
+                BannerFile: file,
+                BannerPreView: URL.createObjectURL(file),
+                isUploaded: true,
+            }));
+        }
+    };
+
+    const handleChooseAgainBanner = () => {
+        const check = confirm('Bạn chắc chắn với hành động của mình!');
+
+        if (check) {
+            URL.revokeObjectURL(nhaTuyendungState.BannerPreView);
+
+            const inputElement = refBanner.current;
+            if (inputElement) {
+                inputElement.value = null;
+            }
+
+            setNhaTuyendungState((prev) => ({
+                ...prev,
+                BannerFile: null,
+                BannerPreView: '',
+                isUploaded: false,
+            }));
+        }
+    };
+
+    // ES6+
+    const handleBuildData = async () => {
+        const {
+            logoCty,
+            tenCty,
+            banner,
+            soDienThoai,
+            diaChi,
+            khuVuc,
+            gioiThieu,
+            maSoThue,
+            quiMo,
+            website,
+            linhVucNgheNghiep,
+            anhCongTy,
+
+            isUploaded,
+            BannerFile,
+            BannerPreView,
+        } = nhaTuyendungState;
+
+        const check = useValidate([tenCty, soDienThoai, diaChi, maSoThue]);
+
+        if (!check) return {};
+
+        const dataBuild = {
+            logoCty,
+            tenCty,
+            banner,
+            soDienThoai,
+            diaChi,
+            khuVuc,
+            gioiThieu,
+            maSoThue,
+            quiMo,
+            website,
+            linhVucNgheNghiep,
+            anhCongTy,
+        };
+
+        if (isUploaded && BannerFile && BannerPreView) {
+            setIsLoading(true);
+
+            const ResUploadBanne = await UploadImage({
+                file: BannerFile,
+                upload_preset: REACT_APP_UPLOAD_PRESET,
+            });
+
+            setIsLoading(false);
+
+            if (ResUploadBanne) {
+                setNhaTuyendungState((prev) => ({
+                    ...prev,
+                    banner: ResUploadBanne.data.url,
+                }));
+            }
+            dataBuild.banner = ResUploadBanne.data.url;
+        }
+
+        handleSubmit(dataBuild);
+
+        return;
+    };
+
     return (
         <>
+            {isLoading && <Loading />}
+            <div className="col-12 mt-3">
+                <div className="preview-banner">
+                    <div className={nhaTuyendungState.BannerPreView ? 'not-overlay' : 'overlay-preview'}></div>
+                    <img
+                        className={nhaTuyendungState.BannerPreView ? 'preview-image' : 'not-image'}
+                        src={
+                            nhaTuyendungState.BannerPreView
+                                ? nhaTuyendungState.BannerPreView
+                                : 'https://internetviettel.vn/wp-content/uploads/2017/05/1-2.jpg'
+                        }
+                    />
+                    {nhaTuyendungState.BannerPreView ? (
+                        <span onClick={handleChooseAgainBanner} className="click-choose-image">
+                            Chọn lại ảnh
+                        </span>
+                    ) : (
+                        <span onClick={handleClickChoooseBanner} className="click-choose-image">
+                            + image
+                        </span>
+                    )}
+                </div>
+                <input
+                    accept="image/apng, image/avif, image/gif, image/jpeg, image/png, image/svg+xml, image/webp"
+                    ref={refBanner}
+                    hidden
+                    id="banner"
+                    type="file"
+                    onChange={handleChanegFileBanner}
+                />
+            </div>
             <div className="row" onKeyDown={(e) => handleOnKeyDown(e)}>
                 <div className="col-6 mt-3">
                     <label htmlFor="fullName">Họ và tên :</label>
                     <input
                         onChange={handleChange}
                         id="fullName"
-                        name="hoVaTen"
+                        value={nhaTuyendungState.tenCty}
+                        name="tenCty"
                         type="text"
                         placeholder="Nguyen Van A"
-                        value={ungVienState.hoVaTen}
                     />
                 </div>
                 <div className="col-6 mt-3">
@@ -199,9 +265,9 @@ function NhaTuyenDungProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                         disabled
                         id="email"
                         type="email"
-                        placeholder="khachhangtruycapweb@gmail.com"
-                        onChange={handleChange}
-                        value={ungVienState.email}
+                        placeholder={
+                            nhaTuyendungState.email ? nhaTuyendungState.email : 'khachhangtruycapweb@gmail.com'
+                        }
                     />
                 </div>
                 <div className="col-6 mt-3">
@@ -210,9 +276,9 @@ function NhaTuyenDungProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                         onChange={handleChange}
                         id="address"
                         type="text"
+                        value={nhaTuyendungState.diaChi}
                         name="diaChi"
                         placeholder="Eg: Hà Nội"
-                        value={ungVienState.diaChi}
                     />
                 </div>
                 <div className="col-6 mt-3">
@@ -223,46 +289,43 @@ function NhaTuyenDungProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                         type="number"
                         name="soDienThoai"
                         placeholder="012345678"
-                        value={ungVienState.soDienThoai}
+                        value={nhaTuyendungState.soDienThoai}
                     />
                 </div>
                 <div className="col-6 mt-3">
-                    <label htmlFor="birthDay">Ngày sinh : </label>
+                    <label htmlFor="phone">Mã số thuế : </label>
                     <input
-                        id="birthDay"
                         onChange={handleChange}
-                        type="text"
-                        name="sinhNhat"
+                        id="phone"
+                        type="number"
+                        value={nhaTuyendungState.maSoThue}
+                        name="maSoThue"
                         placeholder="012345678"
-                        value={convertTime(ungVienState.sinhNhat)}
                     />
                 </div>
                 <div className="col-6 mt-3">
-                    <label htmlFor="gender">Giới tính : </label>
-                    <select name="gioiTinh" onChange={handleChange} id="" value={ungVienState.gioiTinh}>
-                        <option value="true">Nam</option>
-                        <option value="false">Nữ</option>
-                    </select>
-                </div>
-                <div className="col-6 mt-3">
-                    <label htmlFor="viTriMongMuon">Vị trí mong muốn : </label>
+                    <label htmlFor="phone">website : </label>
                     <input
-                        name="viTriMongMuon"
-                        id="viTriMongMuon"
                         onChange={handleChange}
+                        id="phone"
                         type="text"
-                        placeholder="Intern Front End"
-                        value={ungVienState.viTriMongMuon}
+                        value={nhaTuyendungState.website}
+                        name="website"
+                        placeholder="https://your-website.com"
                     />
                 </div>
                 <div className="col-6 mt-3">
-                    <label>Cấp bậc ứng tuyển : </label>
-                    <select value={ungVienState.capBacUngTuyen} name="capBacUngTuyen" onChange={handleChange}>
-                        {ungVienState.CapbacRender &&
-                            ungVienState.CapbacRender.length > 0 &&
-                            ungVienState.CapbacRender.map((item) => {
+                    <label>Lĩnh vực nghề nghiệp : </label>
+                    <select
+                        value={nhaTuyendungState.linhVucNgheNghiep}
+                        name="linhVucNgheNghiep"
+                        onChange={handleChange}
+                    >
+                        {nhaTuyendungState.LinhVucNgheNghiepRender &&
+                            nhaTuyendungState.LinhVucNgheNghiepRender.length > 0 &&
+                            nhaTuyendungState.LinhVucNgheNghiepRender.map((item) => {
                                 return (
-                                    <option key={item.id} value={item.id}>
+                                    <option key={item.id} value={item.ten}>
                                         {item.ten}
                                     </option>
                                 );
@@ -270,25 +333,11 @@ function NhaTuyenDungProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                     </select>
                 </div>
                 <div className="col-6 mt-3">
-                    <label>Kinh nghiệm làm việc : </label>
-                    <select value={ungVienState.kinhNghiemLamViec} name="kinhNghiemLamViec" onChange={handleChange}>
-                        {ungVienState.kinhNghiemLamViecRender &&
-                            ungVienState.kinhNghiemLamViecRender.length > 0 &&
-                            ungVienState.kinhNghiemLamViecRender.map((item) => {
-                                return (
-                                    <option key={item.id} value={item.id}>
-                                        {item.ten}
-                                    </option>
-                                );
-                            })}
-                    </select>
-                </div>
-                <div className="col-6 mt-3">
-                    <label>Học vấn : </label>
-                    <select value={ungVienState.hocVan} name="hocVan" onChange={handleChange}>
-                        {HocVan &&
-                            HocVan.length > 0 &&
-                            HocVan.map((item) => {
+                    <label>Khu vực : </label>
+                    <select onChange={handleChange} value={nhaTuyendungState.khuVuc} name="khuVuc">
+                        {VungDuLieu &&
+                            VungDuLieu.length > 0 &&
+                            VungDuLieu.map((item) => {
                                 const id = uuidv4();
 
                                 return (
@@ -300,91 +349,33 @@ function NhaTuyenDungProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                     </select>
                 </div>
                 <div className="col-6 mt-3">
-                    <label htmlFor="price">Mức lương mong muốn : </label>
-                    <select value={ungVienState.mucLuong} name="mucLuong" onChange={handleChange}>
-                        {MucLuong &&
-                            MucLuong.length > 0 &&
-                            MucLuong.map((item) => {
-                                const id = uuidv4();
-
+                    <label>Quy mô : </label>
+                    <select onChange={handleChange} value={nhaTuyendungState.quiMo} name="quiMo">
+                        {nhaTuyendungState.QuyMoRende &&
+                            nhaTuyendungState.QuyMoRende.length > 0 &&
+                            nhaTuyendungState.QuyMoRende.map((item) => {
                                 return (
-                                    <option key={id} value={item.value}>
-                                        {item.label}
-                                    </option>
-                                );
-                            })}
-                    </select>
-                </div>
-                <div className="col-6 mt-3">
-                    <label>Lĩnh vực muốn làm việc : </label>
-                    <select value={ungVienState.linhVucLamVec} name="linhVucLamVec" onChange={handleChange}>
-                        {ungVienState.nghanhNgheRender &&
-                            ungVienState.nghanhNgheRender.length > 0 &&
-                            ungVienState.nghanhNgheRender.map((item) => {
-                                return (
-                                    <option key={item.id} value={item.id}>
+                                    <option key={item.id} value={item.ten}>
                                         {item.ten}
                                     </option>
                                 );
                             })}
                     </select>
                 </div>
-                <div className="col-6 mt-3">
-                    <label>Địa điểm làm việc : </label>
-                    <select onChange={handleChange} value={ungVienState.diaDiemLamViec} name="diaDiemLamViec">
-                        {provinces &&
-                            provinces.length > 0 &&
-                            provinces.map((item) => {
-                                const id = uuidv4();
 
-                                return (
-                                    <option key={id} value={item}>
-                                        {item}
-                                    </option>
-                                );
-                            })}
-                    </select>
-                </div>
-                <div className="col-6 mt-3">
-                    <label>Tình trạng hiện tại : </label>
-                    <select onChange={handleChange} name="docThan" value={ungVienState.docThan}>
-                        {TinhTrang &&
-                            TinhTrang.length > 0 &&
-                            TinhTrang.map((item) => {
-                                const id = uuidv4();
-
-                                return (
-                                    <option key={id} value={item.value}>
-                                        {item.label}
-                                    </option>
-                                );
-                            })}
-                    </select>
-                </div>
                 <div className="col-12 mt-3">
-                    <label htmlFor="muctie-nghe-nghiep">Mục tiêu nghề nghiệp : </label>
+                    <label htmlFor="muctie-nghe-nghiep">Giới thiệu : </label>
                     <textarea
-                        value={ungVienState.mucTieuNgheNghiep}
-                        name="mucTieuNgheNghiep"
+                        value={nhaTuyendungState.gioiThieu}
+                        name="gioiThieu"
                         onChange={handleChange}
                         id="muctie-nghe-nghiep"
                         type="text"
-                        placeholder="Mục tiêu nghề nghiệp của bạn...."
-                    />
-                </div>
-                <div className="col-12 mt-3">
-                    <label htmlFor="desc">Giới thiệu ngắn về bản thân : </label>
-                    <textarea
-                        value={ungVienState.des}
-                        name="des"
-                        onChange={handleChange}
-                        id="desc"
-                        type="text"
-                        placeholder="Giới thiệu ngắn...."
+                        placeholder="Giới thiệu về doanh nghiệp của bạn..."
                     />
                 </div>
                 <div className="col-12 mt-4">
-                    <button ref={ref} onClick={() => handleSublit(handleBuildData())} className="btn btn-primary">
+                    <button ref={ref} onClick={() => handleBuildData()} className="btn btn-primary">
                         Lưu thông tin
                     </button>
                 </div>

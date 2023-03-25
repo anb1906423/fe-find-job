@@ -31,3 +31,11 @@ export const getAllNganhNghe = () => {
 export const getAllViTriMongMuon = () => {
     return axios.get('/cap-bac');
 };
+
+export const getAllQuiMo = () => {
+    return axios.get('/qui-mo');
+};
+
+export const getAllLinhVucKinhDoanh = () => {
+    return axios.get('/linh-vuc-kinh-doanh');
+};

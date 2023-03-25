@@ -1,7 +1,5 @@
-import { swtoast } from "../../../mixins/swal.mixin";
+import { swtoast } from '../../../mixins/swal.mixin';
 const useValidate = (arrayClone) => {
-    console.log('check : ', arrayClone);
-
     let isValid = true;
 
     for (let i = 0; i < arrayClone.length; i++) {
@@ -12,8 +10,8 @@ const useValidate = (arrayClone) => {
         if (arrayClone[i] === '' || arrayClone[i].length === 0) {
             isValid = false;
             swtoast.fire({
-                text: "Vui lòng cung cấp đầy đủ thông tin!"
-            })
+                text: 'Vui lòng cung cấp đầy đủ thông tin!',
+            });
             break;
         }
     }
