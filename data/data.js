@@ -308,7 +308,7 @@ export const TinhTrang = [
         value: true,
     },
     {
-        label: 'Không Độc Thân Hoặc Không Muón Tiếp Lộ',
+        label: 'Không Độc Thân Hoặc Không Muốn Tiếc Lộ',
         value: false,
     },
 ];

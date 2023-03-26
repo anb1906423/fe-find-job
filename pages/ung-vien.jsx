@@ -28,6 +28,8 @@ const TrangUngVien = () => {
         fetch();
     }, []);
 
+    console.log(danhSachUngVien);
+
     return (
         <>
             <Head>
