@@ -39,3 +39,11 @@ export const getAllQuiMo = () => {
 export const getAllLinhVucKinhDoanh = () => {
     return axios.get('/linh-vuc-kinh-doanh');
 };
+
+export const getAllBangCap = () => {
+    return axios.get('/bang-cap');
+};
+
+export const getAllMucLuong = () => {
+    return axios.get('/muc-luong');
+};

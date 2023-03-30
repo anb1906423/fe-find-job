@@ -4,18 +4,15 @@ import { v4 as uuidv4 } from 'uuid';
 import _ from 'lodash';
 import { useState, memo, useEffect } from 'react';
 
-import {
-    Capbac,
-    HocVan,
-    KinhNghiem,
-    MucLuong,
-    TinhTrang,
-    ViTriMongMuon,
-    majors,
-    provinces,
-} from '../../../../../data/data';
+import { TinhTrang, provinces } from '../../../../../data/data';
 import useValidate from '../../../../../app/hook/useValidate';
-import { getAllKinhghiem, getAllNganhNghe, getAllViTriMongMuon } from '../../../../../services/siteServices';
+import {
+    getAllBangCap,
+    getAllKinhghiem,
+    getAllNganhNghe,
+    getAllViTriMongMuon,
+    getAllMucLuong,
+} from '../../../../../services/siteServices';
 import convertTime from '../../../../../app/@func/convertTime/convertTime';
 
 function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
@@ -79,18 +76,22 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
     useEffect(() => {
         const fetch = async () => {
             try {
-                const [ResKinhNghiem, ResNghanhNghe, ResCapbac] = await Promise.all([
+                const [ResKinhNghiem, ResNghanhNghe, ResCapbac, ResBangCap, ResMucLuong] = await Promise.all([
                     getAllKinhghiem(),
                     getAllNganhNghe(),
                     getAllViTriMongMuon(),
+                    getAllBangCap(),
+                    getAllMucLuong(),
                 ]);
 
-                if (ResKinhNghiem && ResNghanhNghe) {
+                if (ResKinhNghiem && ResNghanhNghe && ResBangCap && ResMucLuong) {
                     setUngVienSate((prev) => ({
                         ...prev,
                         kinhNghiemLamViecRender: ResKinhNghiem.data,
                         nghanhNgheRender: ResNghanhNghe.data,
                         CapbacRender: ResCapbac.data,
+                        HocVanRender: ResBangCap.data,
+                        MucLuongRender: ResMucLuong.data,
                     }));
                 }
             } catch (error) {
@@ -268,14 +269,14 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                 <div className="col-6 mt-3">
                     <label>Học vấn : </label>
                     <select value={ungVienState.hocVan} name="hocVan" onChange={handleChange}>
-                        {HocVan &&
-                            HocVan.length > 0 &&
-                            HocVan.map((item) => {
+                        {ungVienState.HocVanRender &&
+                            ungVienState.HocVanRender.length > 0 &&
+                            ungVienState.HocVanRender.map((item) => {
                                 const id = uuidv4();
 
                                 return (
-                                    <option key={id} value={item.value}>
-                                        {item.label}
+                                    <option key={id} value={item.ten}>
+                                        {item.ten}
                                     </option>
                                 );
                             })}
@@ -284,14 +285,14 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                 <div className="col-6 mt-3">
                     <label htmlFor="price">Mức lương mong muốn : </label>
                     <select value={ungVienState.mucLuong} name="mucLuong" onChange={handleChange}>
-                        {MucLuong &&
-                            MucLuong.length > 0 &&
-                            MucLuong.map((item) => {
+                        {ungVienState.MucLuongRender &&
+                            ungVienState.MucLuongRender.length > 0 &&
+                            ungVienState.MucLuongRender.map((item) => {
                                 const id = uuidv4();
 
                                 return (
-                                    <option key={id} value={item.value}>
-                                        {item.label}
+                                    <option key={id} value={item.ten}>
+                                        {item.ten}
                                     </option>
                                 );
                             })}

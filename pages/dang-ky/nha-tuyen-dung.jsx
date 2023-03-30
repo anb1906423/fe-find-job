@@ -83,15 +83,26 @@ const DangKyNhaTuyenDung = () => {
 
         setIsLoading(true);
 
-        const ResImg = await UploadImage({
-            file: logoCty,
-            upload_preset: REACT_APP_UPLOAD_PRESET,
-        });
+        let ResImg;
 
+        if (logoCty) {
+            ResImg = await UploadImage({
+                file: logoCty,
+                upload_preset: REACT_APP_UPLOAD_PRESET,
+            });
+        }
         try {
             const response = await axios.post(
                 LOGIN_URL,
-                JSON.stringify({ logoCty: ResImg.data.url, tenCty, email, matKhau, soDienThoai, diaChi, maSoThue }),
+                JSON.stringify({
+                    logoCty: logoCty ? ResImg.data.url : '',
+                    tenCty,
+                    email,
+                    matKhau,
+                    soDienThoai,
+                    diaChi,
+                    maSoThue,
+                }),
                 {
                     headers: {
                         'Content-Type': 'application/json',
