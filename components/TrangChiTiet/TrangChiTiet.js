@@ -52,6 +52,8 @@ function TrangChiTiet(props) {
         }
     }, [params.query.id, data]);
 
+    console.log('check data : ', data);
+
     return (
         <>
             <div className={cx('trang-chi-tiet-wp')}>
@@ -177,25 +179,14 @@ function TrangChiTiet(props) {
                                                 <i className="bi bi-check-circle-fill"></i>
                                                 <span>Giới thiệu bản thân</span>
                                             </div>
-                                            <p>
-                                                Với kinh nghiệm nhiều năm làm việc từ làm các starup đến các công ty,
-                                                tập đoàn lớn trong và ngoài nước. Với kinh nghiệm kinh doanh và quản lý
-                                                có thể đáp ứng các yêu cầu mà quý công ty mong muốn.
-                                            </p>
+                                            <p>{data.gioiThieu ? data.gioiThieu : 'Đang cập nhật'}</p>
                                         </div>
                                         <div className={cx('muc-tieu-nghe-nghiep')}>
                                             <div className={cx('top-title')}>
                                                 <i className="bi bi-check-circle-fill"></i>
                                                 <span>Mục tiêu nghề nghiệp</span>
                                             </div>
-                                            <p>
-                                                Luôn muốn là chuyên gia trong lĩnh vực mình làm việc mà bản thân mình
-                                                làm việc. Mong tạo ra giá trị cho bản thân ở công việc, muốn phát triển
-                                                công ty cùng công ty họp tác lâu dài. Sẽ làm tốt nhất, hoành thành công
-                                                việc nhanh nhất và hiệu quả nhất. Tìm công việc lương cao, chế độ tốt
-                                                Công việc ổn định và lâu dài Môi trường & văn hóa công ty tốt Có thể học
-                                                hỏi thêm kinh nghiệm, nâng cao trình độ
-                                            </p>
+                                            <p>{data.mucTieuNgheNghiep ? data.mucTieuNgheNghiep : 'Đang cập nhật'}</p>
                                         </div>
                                     </div>
                                     <div className={cx('next-body')}>
@@ -213,18 +204,18 @@ function TrangChiTiet(props) {
                                         <div className="mb-3">
                                             <ul>
                                                 <li>
-                                                    <strong>Cử Nhân Quản Trị Kinh Doanh</strong>
+                                                    <strong>{data.hocVan ? data.hocVan : 'Đang cập nhật'}</strong>
                                                 </li>
-                                                <li>
+                                                {/* <li>
                                                     <span className={cx('fw-500', 'me-1')}>Đơn vị đào tạo:</span> Đại
                                                     học Công Nghệ TP HCM - HUTECH
                                                 </li>
                                                 <li>
                                                     <span className={cx('fw-500', 'me-1')}>Xếp loại:</span> Khá
-                                                </li>
+                                                </li> */}
                                             </ul>
                                         </div>
-                                        <div className="mb-3">
+                                        {/* <div className="mb-3">
                                             <ul>
                                                 <li>
                                                     <strong>Cử Nhân Quản Trị Kinh Doanh</strong>
@@ -237,9 +228,9 @@ function TrangChiTiet(props) {
                                                     <span className={cx('fw-500-title', 'me-1')}>Xếp loại:</span> Khá
                                                 </li>
                                             </ul>
-                                        </div>
+                                        </div> */}
                                     </div>
-                                    <div className={cx('next-body')}>
+                                    {/* <div className={cx('next-body')}>
                                         <div className={cx('next-body-left')}>
                                             <span className={cx('next-body-left-icon')}>
                                                 <i className="bi bi-person-workspace"></i>
@@ -291,7 +282,7 @@ function TrangChiTiet(props) {
                                                 </li>
                                             </ul>
                                         </div>
-                                    </div>
+                                    </div> */}
                                     <div className={cx('next-body')}>
                                         <div className={cx('next-body-left')}>
                                             <span className={cx('next-body-left-icon')}>

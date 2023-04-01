@@ -2,6 +2,7 @@
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 @import 'tippy.js/dist/tippy.css';
 @import 'react-awesome-lightbox/build/style.css';
+@import 'react-markdown-editor-lite/lib/index.css';
 
 @import './Header.scss';
 @import './SelectItem.scss';
@@ -10,8 +11,8 @@
 @import './UngVien.scss';
 
 * {
-    margin: 0;
-    padding: 0;
+    margin    : 0;
+    padding   : 0;
     box-sizing: border-box;
 }
 
@@ -20,10 +21,10 @@ html {
 }
 
 :root {
-    --height-header: 68px;
-    --height-sub-header: 56px;
-    --main-color: #f37021;
-    --sub-color: #fbe9e7;
+    --height-header         : 68px;
+    --height-sub-header     : 56px;
+    --main-color            : #f37021;
+    --sub-color             : #fbe9e7;
     --height-input-on-search: 40px;
 }
 

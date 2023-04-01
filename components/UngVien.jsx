@@ -34,18 +34,12 @@ const UngVien = ({ dulieu }) => {
                                                 </div>
                                                 <div className="thong-tin-khac">
                                                     <div>
-                                                        <Tippy
-                                                            content={
-                                                                item.viTriMongMuon ? item.viTriMongMuon : 'Đang cập nhật'
-                                                            }
-                                                        >
+                                                        <Tippy content={item.capBac ? item.capBac : 'Đang cập nhật'}>
                                                             <h6 className="vi-tri-mong-muon">
                                                                 <i className="bi bi-link-45deg"></i>
 
                                                                 <span className="mx-1">
-                                                                    {item.viTriMongMuon
-                                                                        ? item.viTriMongMuon
-                                                                        : 'Đang cập nhật'}
+                                                                    {item.capBac ? item.capBac : 'Đang cập nhật'}
                                                                 </span>
                                                             </h6>
                                                         </Tippy>
@@ -101,7 +95,6 @@ const UngVien = ({ dulieu }) => {
                                     </Col>
                                 );
                             }
-
                         })
                     ) : (
                         <div className="d-flex justify-content-center align-items-center">
