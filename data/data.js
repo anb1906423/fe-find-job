@@ -397,3 +397,26 @@ export const TrinhDoTiengAnh = [
         value: 'Không muốn tiếp lộ',
     },
 ];
+
+export const GioiTinhYeuCau = [
+    {
+        label: '---- Chọn giới tính yêu cầu ----',
+        value: '',
+    },
+    {
+        label: 'Nam',
+        value: 'Nam',
+    },
+    {
+        label: 'Nữ',
+        value: 'Nữ',
+    },
+    {
+        label: 'Khác',
+        value: 'Khác',
+    },
+    {
+        label: 'Không yêu cầu giới tính',
+        value: 'Không yêu cầu giới tính',
+    },
+];

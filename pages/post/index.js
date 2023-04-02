@@ -12,7 +12,9 @@ export default function Post() {
 
     useEffect(() => {
         if (role !== 0) {
-            Router.push('/');
+            Router.push('/404-not-found');
+        } else {
+            document.title = 'Đăng bài tuyển dụng';
         }
     }, [role]);
 

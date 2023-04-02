@@ -47,3 +47,7 @@ export const getAllBangCap = () => {
 export const getAllMucLuong = () => {
     return axios.get('/muc-luong');
 };
+
+export const getAllLoaiHopDong = () => {
+    return axios.get('/loai-hop-dong');
+};
