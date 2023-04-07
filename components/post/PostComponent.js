@@ -516,8 +516,9 @@ export default function PostComponent() {
                                 name="bangCap"
                                 className="form-control"
                                 value={dataPost.bangCap}
+                                disabled
                             >
-                                <option value={null}>-- Bằng cấp ứng tuyển --</option>
+                                <option value={null}>-- Bằng cấp ứng tuyển (Đang cập nhật) --</option>
                                 {dataPost.BangCapRender &&
                                     dataPost.BangCapRender.length > 0 &&
                                     dataPost.BangCapRender.map((item) => {
