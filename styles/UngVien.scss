@@ -17,7 +17,7 @@
             display: flex;
             border: 1px solid #ccc;
             margin-bottom: 10px;
-            padding: 20px;
+            padding: 12px;
             border-radius: 10px;
 
             &:hover {
@@ -51,7 +51,7 @@
         }
 
         .thong-tin-khac-ve-ung-vien {
-            margin-top: 10px;
+            margin-top: 4px;
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
@@ -59,10 +59,12 @@
             h6 {
                 width: 50%;
                 padding: 3px 0;
+                margin-bottom: 2px;
             }
 
             .kinh-nghiem {
                 width: 100%;
+                margin: 0;
             }
         }
 

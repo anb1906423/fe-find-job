@@ -9,10 +9,10 @@ const FooterChuk = () => {
     return (
         <div className={cx('footer-wrapper-sell')}>
             <>
-                <img loading="lazy" src="./img/blur1.png" alt="Hinh anh blur" className={cx('blur-footer', 'blur-1')} />
+                {/* <img loading="lazy" src="./img/blur1.png" alt="Hinh anh blur" className={cx('blur-footer', 'blur-1')} />
                 <img loading="lazy" src="./img/blur2.png" alt="Hinh anh blur" className={cx('blur-footer', 'blur-2')} />
                 <img loading="lazy" src="./img/blur3.png" alt="Hinh anh blur" className={cx('blur-footer', 'blur-3')} />
-                <img loading="lazy" src="./img/blur4.png" alt="Hinh anh blur" className={cx('blur-footer', 'blur-4')} />
+                <img loading="lazy" src="./img/blur4.png" alt="Hinh anh blur" className={cx('blur-footer', 'blur-4')} /> */}
                 <div className={cx('overlay')}></div>
             </>
             <div className={cx('content')}>
@@ -22,8 +22,8 @@ const FooterChuk = () => {
                             <div className={cx('header-footer')}>
                                 <img src="./img/logo.png" alt="Ảnh logo" className={cx('img-logo')} />
                                 <div>
-                                    <span>Tìm kiếm công việc</span>
-                                    <span>với mọi người</span>
+                                    <span>Your career we care!</span>
+                                    {/* <span>với mọi người</span> */}
                                 </div>
                             </div>
                         </div>

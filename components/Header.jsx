@@ -8,11 +8,14 @@ import Tippy from '@tippyjs/react';
 import SelectItem from './SelectItem';
 import Swal from 'sweetalert2';
 import { swalert } from '../mixins/swal.mixin';
-import { Menu, provinces } from '../data/data';
+import { Menu } from '../data/data';
 import LazyImg from '../app/components/LazyImg';
 import Button from '../app/components/Button';
 import TippyRender from '../app/components/TippyRender/TippyRender';
 import * as actions from '../store/actions';
+import { useRouter } from 'next/router';
+import axios from 'axios';
+import { backendAPI } from '../config'
 
 const menu = [
     {
@@ -30,6 +33,23 @@ const menu = [
 ];
 
 const Header = () => {
+    const [diaDiemLamViec, setDiaDiemLamViec] = useState([])
+    const [nganhNghe, setNganhNghe] = useState([])
+
+    useEffect(() => {
+        const getDiaDiemLamViec = async () => {
+            const result = await axios.get(backendAPI + '/dia-diem-lam-viec')
+            setDiaDiemLamViec([{ ten: "-- Tất cả địa điểm --" }, ...result.data])
+        }
+        const getNganhNghe = async () => {
+            const result = await axios.get(backendAPI + '/nganh-nghe')
+            setNganhNghe([{ ten: "-- Tất cả ngành nghề --" }, ...result.data])
+        }
+
+        getDiaDiemLamViec()
+        getNganhNghe()
+    }, [])
+
     const taiKhoan = [
         {
             title: 'Đăng ký',
@@ -97,6 +117,7 @@ const Header = () => {
     const Login = useSelector((state) => state.user.isLoggedIn);
     const dispatch = useDispatch();
     const role = useSelector((state) => state.user.role);
+    const router = useRouter();
 
     const [isLogin, setIsLogin] = useState(Login);
 
@@ -118,10 +139,11 @@ const Header = () => {
                 showCloseButton: true,
                 showCancelButton: true,
             })
-            .then(async (result) => {
+            .then((result) => {
                 if (result.isConfirmed) {
-                    window.location.assign('/');
+                    // window.location.assign('/');
                     dispatch(actions.userLogOut());
+                    router.push('/')
                 }
             });
     };
@@ -203,11 +225,10 @@ const Header = () => {
             <div className="sub-header d-flex align-items-center justify-content-end">
                 <form action="" className="filter-job d-flex align-items-center justify-content-around">
                     <div className="div-on-form input-search-box">
-                        <label htmlFor=""></label>
-                        <input placeholder="-- Tất cả ngành nghề --" type="text" />
+                        <SelectItem list={nganhNghe}/>
                     </div>
                     <div className="div-on-form">
-                        <SelectItem list={provinces} />
+                        <SelectItem list={diaDiemLamViec} />
                     </div>
                     <div className="div-on-form">
                         <button className="tim-kiem d-flex align-items-center">

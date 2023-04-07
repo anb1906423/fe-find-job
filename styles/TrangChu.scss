@@ -1,6 +1,10 @@
-.trang-chu .carousel-group {
-    max-width: 88vw;
-    margin: 20px auto;
+.trang-chu {
+    max-width: 1200px;
+    margin: 0 auto;
+    .carousel-group {
+        // max-width: 88vw;
+        margin: 20px auto;
+    }
 }
 
 .trang-chu .carousel-group .carousel-inner {

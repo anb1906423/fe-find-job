@@ -29,24 +29,24 @@ const userReducer = (state = initialState, action) => {
                 role: null,
                 accessToken: '',
             };
-        // case actionTypes.UPDATE_USER_SUCCESS:
-        //     return {
-        //         ...state,
-        //         userInfo: action.data,
-        //     };
-        // case actionTypes.USER_LOGIN_FAIL:
-        //     return {
-        //         ...state,
-        //         isLoggedIn: false,
-        //         userInfo: null,
-        //     };
-        // case actionTypes.PROCESS_LOGOUT:
-        //     return {
-        //         ...state,
-        //         isLoggedIn: false,
-        //         userInfo: null,
-        //         token: null,
-        //     };
+        case actionTypes.UPDATE_USER_SUCCESS:
+            return {
+                ...state,
+                userInfo: action.data,
+            };
+        case actionTypes.USER_LOGIN_FAIL:
+            return {
+                ...state,
+                isLoggedIn: false,
+                userInfo: null,
+            };
+        case actionTypes.PROCESS_LOGOUT:
+            return {
+                ...state,
+                isLoggedIn: false,
+                userInfo: null,
+                token: null,
+            };
 
         default:
             return state;
