@@ -1,8 +1,27 @@
 .cong-viec-component {
-    border: 1px solid #ccc;
-    padding: 10px;
+    border-top: 1px solid #ccc;
+    padding   : 10px;
+
     img {
         max-width: 100%;
-        height: auto;
+        height   : auto;
+    }
+
+    svg {
+        margin-top  : 4px;
+        margin-right: 8px;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    .info-box {
+        padding-top: 12px;
+        a {
+            text-decoration: none;
+            color: #000000;
+        }
+
     }
 }

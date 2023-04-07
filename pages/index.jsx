@@ -15,17 +15,6 @@ const index = () => {
             try {
                 const res = await axios.get(backendAPI + '/cong-viec')
                 setJobs(res.data)
-
-                const updatedJobs = [];
-                for (const job of jobs) {
-                    console.log(job);
-                    const config = {
-                        headers: { 'email': job.nhaTuyenDungEmail }
-                    }
-                    const nhaTuyenDung = await axios.get(backendAPI + "/nha-tuyen-dung/email", config);
-                    const logo = nhaTuyenDung?.logoCty;
-                    updatedJobs.push({ ...job, logo });
-                }
             } catch (error) {
                 console.log(error);
                 swtoast.error({
@@ -34,21 +23,21 @@ const index = () => {
             }
         }
 
-        // const getJobsWithLogo = async () => {
-        //         const updatedJobs = [];
-        //         for (const job of jobs) {
-        //             console.log(job);
-        //             const config = {
-        //                 headers: { 'email': job.nhaTuyenDungEmail }
-        //             }
-        //             const nhaTuyenDung = await axios.get(backendAPI + "/nha-tuyen-dung/email", config);
-        //             const logo = nhaTuyenDung?.logoCty;
-        //             updatedJobs.push({ ...job, logo });
-        //         }
-        //         setJobs(updatedJobs);
-        //     }
+        const getJobsWithLogo = async () => {
+            const updatedJobs = [];
+            for (const job of jobs) {
+                console.log(job);
+                const config = {
+                    headers: { 'email': job.nhaTuyenDungEmail }
+                }
+                const nhaTuyenDung = await axios.get(backendAPI + "/nha-tuyen-dung/email", config);
+                const logo = nhaTuyenDung?.logoCty;
+                updatedJobs.push({ ...job, logo });
+            }
+            setJobs(updatedJobs);
+        }
 
-        //     getJobsWithLogo();
+        getJobsWithLogo();
         handleGetJob()
     }, [])
 
@@ -63,16 +52,18 @@ const index = () => {
                 <div className="the-best-job-wp row gutter">
                     {
                         jobs && jobs.map((job, index) => {
-                            return (
-                                <CongViecComponent
-                                    key={index}
-                                    chucDanh={job.chucDanh}
-                                    logoCty={job.logoCty}
-                                    mucLuongMongMuon={job.mucLuong}
-                                    diaDiemLamViec={job.diaDiemLamViec}
-                                    created_at={job.created_at}
-                                />
-                            )
+                            if (job.state) {
+                                return (
+                                    <CongViecComponent
+                                        key={index}
+                                        chucDanh={job.chucDanh}
+                                        logoCty={job.logoCty}
+                                        mucLuongMongMuon={job.mucLuong}
+                                        diaDiemLamViec={job.diaDiemLamViec}
+                                        created_at={job.created_at}
+                                    />
+                                )
+                            }
                         })
                     }
                 </div>
