@@ -96,6 +96,7 @@ const Header = () => {
 
     const Login = useSelector((state) => state.user.isLoggedIn);
     const dispatch = useDispatch();
+    const role = useSelector((state) => state.user.role);
 
     const [isLogin, setIsLogin] = useState(Login);
 
@@ -111,18 +112,18 @@ const Header = () => {
     const handleLogOut = () => {
         swalert
             .fire({
-                title: "Đăng xuất",
-                icon: "warning",
-                text: "Bạn chắc chắn muốn đăng xuất?",
+                title: 'Đăng xuất',
+                icon: 'warning',
+                text: 'Bạn chắc chắn muốn đăng xuất?',
                 showCloseButton: true,
                 showCancelButton: true,
             })
             .then(async (result) => {
                 if (result.isConfirmed) {
-                    window.location.assign('/')
+                    window.location.assign('/');
                     dispatch(actions.userLogOut());
                 }
-            })
+            });
     };
 
     return (
@@ -158,7 +159,26 @@ const Header = () => {
                         })
                     ) : (
                         <>
-                            <TippyRender items={isLogin && Menu} onChange={handleMenuChange}>
+                            <TippyRender
+                                items={
+                                    isLogin && role !== 0
+                                        ? Menu
+                                        : [
+                                              ...Menu,
+                                              {
+                                                  title: 'Tạo bài đăng tuyển dụng',
+                                                  icon: <i className="bi bi-file-earmark-pdf"></i>,
+                                                  to: '/post',
+                                              },
+                                              {
+                                                  title: 'Quản lí bài đăng',
+                                                  icon: <i className="bi bi-card-checklist"></i>,
+                                                  to: '/post/quan-li-bai-viet',
+                                              },
+                                          ]
+                                }
+                                onChange={handleMenuChange}
+                            >
                                 {isLogin && (
                                     <li className="mx-1">
                                         <LazyImg

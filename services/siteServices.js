@@ -51,3 +51,37 @@ export const getAllMucLuong = () => {
 export const getAllLoaiHopDong = () => {
     return axios.get('/loai-hop-dong');
 };
+
+// cong viec ( dang bai tuyen dung )
+
+export const createNewPost = (data) => {
+    return axios.post(`/cong-viec/create`, data);
+};
+
+export const HandleOnState = (cong_viec_id) => {
+    return axios.put(`/cong-viec/on`, {
+        cong_viec_id,
+    });
+};
+
+export const HandleOfState = (cong_viec_id) => {
+    return axios.put(`/cong-viec/off`, {
+        cong_viec_id,
+    });
+};
+
+export const GetAllPostNhaTuyenDung = (email) => {
+    return axios.get(`/cong-viec/bai-dang-cong-ty?emailcty=${email}`);
+};
+
+export const deletePostNhaTuyenDung = (id) => {
+    return axios.delete(`/cong-viec/delete/${id}`);
+};
+
+export const getPostData = (id) => {
+    return axios.get(`/cong-viec/${id}`);
+};
+
+export const updatePostNhaTuyenDung = (id, data) => {
+    return axios.put(`/cong-viec/update/${id}`, data);
+};

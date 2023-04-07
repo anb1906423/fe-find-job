@@ -2,27 +2,39 @@ import React, { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
-import { v4 as uuidv4 } from 'uuid';
 
 import styles from './post.module.scss';
 import Loading from '../../app/components/loading/loading';
 import { Row, Col, Container } from 'react-bootstrap';
 import {
+    createNewPost,
     getAllBangCap,
     getAllKinhghiem,
     getAllLinhVucKinhDoanh,
     getAllLoaiHopDong,
     getAllMucLuong,
     getAllViTriMongMuon,
+    getPostData,
+    updatePostNhaTuyenDung,
 } from '../../services/siteServices';
 import { GioiTinhYeuCau, provinces } from '../../data/data';
 import Link from 'next/link';
+import { swalert } from '../../mixins/swal.mixin';
+import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import convertTime from '../../app/@func/convertTime/convertTime';
 
 const cx = classNames.bind(styles);
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 export default function PostComponent() {
+    const userData = useSelector((state) => state.user);
+
+    const [isEdit, setIsEdit] = useState(false);
+
+    const params = useRouter();
+
     const [isLoading, setIsLoading] = useState(false);
     const [dataPost, setDataPost] = useState({
         titleLoading: 'Đang tải ảnh lên',
@@ -38,7 +50,7 @@ export default function PostComponent() {
         linhVucNgheNghiep: '',
         hanNopHoSo: '',
         soLuong: '',
-        moTa: '',
+        moTa: 'pendding',
         kinhNghiem: '',
         bangCap: '',
         yeuCauGioiTinh: '',
@@ -46,7 +58,7 @@ export default function PostComponent() {
         emailNopHoSo: '',
         hotline: '',
         diaChiNopTrucTiep: '',
-        // yeuCauTuyenDung: '',
+        yeuCauTuyenDung: '',
 
         KinhNghiemRender: [],
         BangCapRender: [],
@@ -55,6 +67,45 @@ export default function PostComponent() {
         MucLuongRender: [],
         LinhVucNgheNghiepRender: [],
     });
+
+    useEffect(() => {
+        if (params.query?.type === 'edit' && params.query?.id) {
+            setIsEdit(true);
+
+            const fetch = async () => {
+                const Res = await getPostData(params.query?.id);
+
+                if (Res) {
+                    setDataPost((prev) => {
+                        return {
+                            ...prev,
+                            contentHTML: Res?.data?.contentHTML,
+                            contentMarkDown: Res?.data?.contentMarkDown,
+                            chucDanh: Res?.data?.chucDanh,
+                            capBac: Res?.data?.capBac,
+                            loaiHopDong: Res?.data?.loaiHopDong,
+                            mucLuong: Res?.data?.mucLuong,
+                            diaDiemLamViec: Res?.data?.diaDiemLamViec,
+                            linhVucNgheNghiep: Res?.data?.linhVucNgheNghiep,
+                            hanNopHoSo: Res?.data?.hanNopHoSo,
+                            soLuong: Res?.data?.soLuong,
+                            moTa: Res?.data?.moTa,
+                            kinhNghiem: Res?.data?.kinhNghiem,
+                            bangCap: Res?.data?.bangCap,
+                            yeuCauGioiTinh: Res?.data?.yeuCauGioiTinh,
+                            yeuCauHoSo: Res?.data?.yeuCauHoSo,
+                            emailNopHoSo: Res?.data?.emailNopHoSo,
+                            hotline: Res?.data?.hotline,
+                            diaChiNopTrucTiep: Res?.data?.diaChiNopTrucTiep,
+                            yeuCauTuyenDung: Res?.data?.yeuCauTuyenDung,
+                        };
+                    });
+                }
+            };
+
+            fetch();
+        }
+    }, [params]);
 
     useEffect(() => {
         const Fetch = async () => {
@@ -110,8 +161,67 @@ export default function PostComponent() {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleResetState = () => {
+        setDataPost((prev) => {
+            return {
+                ...prev,
+                titleLoading: 'Đang tải dữ liệu',
+
+                isPublic: true,
+                contentHTML: '',
+                contentMarkDown: '',
+                chucDanh: '',
+                capBac: '',
+                loaiHopDong: '',
+                mucLuong: '',
+                diaDiemLamViec: '',
+                linhVucNgheNghiep: '',
+                hanNopHoSo: '',
+                soLuong: '',
+                kinhNghiem: '',
+                bangCap: '',
+                yeuCauGioiTinh: '',
+                yeuCauHoSo: '',
+                emailNopHoSo: '',
+                hotline: '',
+                diaChiNopTrucTiep: '',
+                yeuCauTuyenDung: '',
+            };
+        });
+    };
+
+    useEffect(() => {
+        if (!params.query?.type) {
+            handleResetState();
+            setIsEdit(false);
+        }
+    }, [params]);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const {
+            isPublic,
+            contentHTML,
+            contentMarkDown,
+            chucDanh,
+            capBac,
+            loaiHopDong,
+            mucLuong,
+            diaDiemLamViec,
+            linhVucNgheNghiep,
+            hanNopHoSo,
+            soLuong,
+            moTa,
+            kinhNghiem,
+            bangCap,
+            yeuCauGioiTinh,
+            yeuCauHoSo,
+            emailNopHoSo,
+            hotline,
+            diaChiNopTrucTiep,
+            yeuCauTuyenDung,
+        } = dataPost;
 
         const dataBuild = {
             state: isPublic,
@@ -133,10 +243,57 @@ export default function PostComponent() {
             emailNopHoSo: emailNopHoSo,
             hotline: hotline,
             diaChiNopTrucTiep: diaChiNopTrucTiep,
+            yeuCauTuyenDung: yeuCauTuyenDung,
+            emailCty: userData?.userInfo?.email,
         };
+
+        try {
+            console.log(isEdit);
+
+            setIsLoading(true);
+            setDataPost((prev) => {
+                return {
+                    ...prev,
+                    titleLoading: 'Đang tải dữ liệu của bạn lên server!',
+                };
+            });
+
+            isEdit ? await updatePostNhaTuyenDung(params.query?.id, dataBuild) : await createNewPost(dataBuild);
+
+            setIsLoading(false);
+
+            swalert
+                .fire({
+                    title: 'Chúc mừng',
+                    icon: 'success',
+                    text: isEdit ? 'Bạn đã sửa bài viết thành công!' : 'Bạn đã tạo bài viết thành công!',
+                    showCloseButton: true,
+                    showCancelButton: false,
+                })
+                .then(async (result) => {
+                    if (result.isConfirmed) {
+                        handleResetState();
+                    }
+                });
+        } catch (error) {
+            console.log(error);
+        }
     };
 
-    console.log(dataPost);
+    const handleBuildDate = (date) => {
+        let text = convertTime(date);
+
+        let arr = text
+            .split('/')
+            .reverse()
+            .map((num) => num.toString().padStart(2, '0'));
+
+        text = arr.join('-');
+
+        console.log(text);
+
+        return text;
+    };
 
     return (
         <div className={cx('wp')}>
@@ -145,18 +302,16 @@ export default function PostComponent() {
                 <Container>
                     <Row className="my-4">
                         <Col sm={4} className="mt-2 mb-2">
-                            <label className="my-2">Chế độ bài viết</label>
-                            <select
-                                className="form-control"
-                                value={dataPost.isPublic}
+                            <label className="my-2">Chức danh</label>
+                            <input
                                 onChange={handleChangeState}
-                                name="isPublic"
+                                name="chucDanh"
+                                className="form-control"
+                                placeholder="Nhân Viên Văn Phòng Hành Chính"
+                                type="text"
+                                value={dataPost.chucDanh}
                                 required
-                            >
-                                <option value={null}>-- chọn chế độ --</option>
-                                <option value={true}>-- Công khai --</option>
-                                <option value={false}>-- Không công khai --</option>
-                            </select>
+                            />
                         </Col>
                         <Col sm={4} className="mt-2 mb-2">
                             <label className="my-2">Cấp bậc ứng tuyển</label>
@@ -259,7 +414,8 @@ export default function PostComponent() {
                                 name="hanNopHoSo"
                                 className="form-control"
                                 type="date"
-                                value={dataPost.hanNopHoSo}
+                                value={isEdit ? handleBuildDate(dataPost.hanNopHoSo) : dataPost.hanNopHoSo}
+                                // value={'2023-4-5'}
                                 required
                             />
                         </Col>
@@ -284,6 +440,17 @@ export default function PostComponent() {
                                 type="text"
                                 value={dataPost.yeuCauHoSo}
                                 placeholder="Nộp hồ sơ photo (Sơ yếu lý lịch, CMND/CCCD) tại quầy lễ tân hoặc ứng tuyển online"
+                            />
+                        </Col>
+                        <Col sm={4} className="mt-2 mb-2">
+                            <label className="my-2">Yêu cầu nhà tuyển dụng</label>
+                            <input
+                                onChange={handleChangeState}
+                                name="yeuCauTuyenDung"
+                                className="form-control"
+                                type="text"
+                                value={dataPost.yeuCauTuyenDung}
+                                placeholder="Bạn hãy viết yêu cầu của bạn..."
                             />
                         </Col>
                         <Col sm={4} className="mt-2 mb-2">
@@ -385,10 +552,8 @@ export default function PostComponent() {
                     </Col> */}
                         <Col sm={12} className={cx('mark-down', 'mt-2')}>
                             <label className="my-2">
-                                {' '}
                                 <strong> * Chúng tôi khuyến cáo bạn nên nhập đủ các trường mà chúng tôi đề xuất</strong>
                             </label>
-                            <label className="my-2"> * Yêu cầu nhà tuyển dụng</label>
                             <label className="my-2"> * Chế độ phúc lợi</label>
                             <label className="my-2"> * Mô tả công việc</label>
                             <label className="my-2"> * Những mô tả khác nếu bạn muốn thêm vào</label>
@@ -404,6 +569,7 @@ export default function PostComponent() {
                                 renderHTML={(text) => mdParser.render(text)}
                                 onChange={HandleEditorStateChange}
                                 onImageUpload={handleOnUploadImage}
+                                value={isEdit ? dataPost.contentMarkDown : dataPost.contentMarkDown}
                             />
                         </Col>
                         <Col sm={12}>
