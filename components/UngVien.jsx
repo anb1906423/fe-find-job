@@ -34,12 +34,12 @@ const UngVien = ({ dulieu }) => {
                                                 </div>
                                                 <div className="thong-tin-khac">
                                                     <div>
-                                                        <Tippy content={item.capBac ? item.capBac : 'Đang cập nhật'}>
+                                                        <Tippy content={item.viTriMongMuon ? item.viTriMongMuon : 'Đang cập nhật'}>
                                                             <h6 className="vi-tri-mong-muon">
                                                                 <i className="bi bi-link-45deg"></i>
 
                                                                 <span className="mx-1">
-                                                                    {item.capBac ? item.capBac : 'Đang cập nhật'}
+                                                                    {item.viTriMongMuon ? item.viTriMongMuon : 'Đang cập nhật'}
                                                                 </span>
                                                             </h6>
                                                         </Tippy>

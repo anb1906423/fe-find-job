@@ -25,6 +25,7 @@ const index = () => {
 
         const getJobsWithLogo = async () => {
             const updatedJobs = [];
+            console.log(jobs);
             for (const job of jobs) {
                 console.log(job);
                 const config = {
