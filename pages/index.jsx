@@ -7,42 +7,58 @@ import { backendAPI } from '../config'
 import { swalert, swtoast } from '../mixins/swal.mixin'
 
 const index = () => {
-    const [jobs, setJobs] = useState([])
-    const [nhaTuyenDung, setNhaTuyenDung] = useState([])
+    const [jobs, setJobs] = useState([]);
+    const [jobsToShow, setJobsToShow] = useState(4);
 
     useEffect(() => {
-        const handleGetJob = async () => {
+        const fetchJobs = async () => {
             try {
-                const res = await axios.get(backendAPI + '/cong-viec')
-                setJobs(res.data)
+                const jobResponse = await axios.get(backendAPI + '/cong-viec');
+                const companyResponse = await axios.get(backendAPI + '/nha-tuyen-dung');
+
+                // Kiểm tra dữ liệu và gộp thông tin công việc và nhà tuyển dụng dựa trên emailCty
+                const jobsWithCompanyInfo = jobResponse.data.map(job => {
+                    const company = companyResponse.data.find(company => company.email === job.emailCty);
+                    return company ? {
+                        ...job,
+                        logoCty: company.logoCty,
+                        tenCty: company.tenCty,
+                    } : job;
+                });
+
+                setJobs(jobsWithCompanyInfo);
             } catch (error) {
                 console.log(error);
                 swtoast.error({
-                    text: error
-                })
+                    text: error,
+                });
             }
+        };
+
+        fetchJobs();
+    }, []);
+
+    const handleShowMore = () => {
+        setJobsToShow(prevState => prevState + 4);
+    };
+
+    const displayedJobs = jobs.slice(0, jobsToShow).map((job, index) => {
+        if (job.state) {
+            return (
+                <CongViecComponent
+                    key={index}
+                    chucDanh={job.chucDanh}
+                    logoCty={job.logoCty}
+                    mucLuongMongMuon={job.mucLuong}
+                    diaDiemLamViec={job.diaDiemLamViec}
+                    created_at={job.created_at}
+                    tenCty={job.tenCty}
+                />
+            )
         }
+    }
+    );
 
-        const getJobsWithLogo = async () => {
-            const updatedJobs = [];
-            console.log(jobs);
-            for (const job of jobs) {
-                console.log(job);
-                const config = {
-                    headers: { 'email': job.nhaTuyenDungEmail }
-                }
-                const nhaTuyenDung = await axios.get(backendAPI + "/nha-tuyen-dung/email", config);
-                const logo = nhaTuyenDung?.logoCty;
-                updatedJobs.push({ ...job, logo });
-            }
-            setJobs(updatedJobs);
-        }
-
-        getJobsWithLogo();
-        handleGetJob()
-    }, [])
-
-    console.log(jobs, nhaTuyenDung);
     return (
         <div className="trang-chu">
             <div className="carousel-group">
@@ -50,24 +66,12 @@ const index = () => {
             </div>
             <div className="chua-noi-dung">
                 <Heading tieuDe="Việc làm tốt nhất" />
-                <div className="the-best-job-wp row gutter">
-                    {
-                        jobs && jobs.map((job, index) => {
-                            if (job.state) {
-                                return (
-                                    <CongViecComponent
-                                        key={index}
-                                        chucDanh={job.chucDanh}
-                                        logoCty={job.logoCty}
-                                        mucLuongMongMuon={job.mucLuong}
-                                        diaDiemLamViec={job.diaDiemLamViec}
-                                        created_at={job.created_at}
-                                    />
-                                )
-                            }
-                        })
-                    }
-                </div>
+                <div className="the-best-job-wp row gutter">{displayedJobs}</div>
+                {jobsToShow < jobs.length && (
+                    <div className="xem-them">
+                        <button onClick={handleShowMore}>Xem thêm</button>
+                    </div>
+                )}
             </div>
         </div>
     );

@@ -20,7 +20,7 @@ const CongViecComponent = (props) => {
   return (
     <div className='cong-viec-component col-6 gx-3'>
       <div className="row">
-        <div className="col-3 image-box">
+        <div className="col-3 image-box d-flex justify-content-center align-items-center">
           <Link href="#">
             <img src={props.logoCty || "https://www.ruhr24jobs.de/static/og-image.jpg"} alt="Logo công ty" />
           </Link>
@@ -35,7 +35,7 @@ const CongViecComponent = (props) => {
           </div>
           <div>
             <Link href="#">
-              <p>{props.tenCty}</p>
+              <p className='ten-cong-ty'>{props.tenCty}</p>
             </Link>
           </div>
           <div className="d-flex row">
