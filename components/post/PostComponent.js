@@ -322,7 +322,7 @@ export default function PostComponent() {
                                 value={dataPost.capBac}
                                 required
                             >
-                                <option value={null}>-- Cấp bậc bạn muốn ứng tuyển --</option>
+                                <option value={null}>-- Cấp bậc bạn cần tuyển dụng --</option>
                                 {dataPost.CapBacRender &&
                                     dataPost.CapBacRender.length > 0 &&
                                     dataPost.CapBacRender.map((item) => (
@@ -450,7 +450,7 @@ export default function PostComponent() {
                                 className="form-control"
                                 type="text"
                                 value={dataPost.yeuCauTuyenDung}
-                                placeholder="Bạn hãy viết yêu cầu của bạn..."
+                                placeholder="Yêu cầu về ứng viên của bạn"
                             />
                         </Col>
                         <Col sm={4} className="mt-2 mb-2">
@@ -485,7 +485,7 @@ export default function PostComponent() {
                                 className="form-control"
                                 type="text"
                                 value={dataPost.diaChiNopTrucTiep}
-                                placeholder="ngõ x phường minh khai hà nội"
+                                placeholder="Địa chỉ nộp hồ sơ"
                                 required
                             />
                         </Col>
@@ -497,7 +497,7 @@ export default function PostComponent() {
                                 className="form-control"
                                 value={dataPost.kinhNghiem}
                             >
-                                <option value={null}>-- Kinh nghiệm ứng tuyển --</option>
+                                <option value={null}>-- Kinh nghiệm --</option>
                                 {dataPost.KinhNghiemRender &&
                                     dataPost.KinhNghiemRender.length > 0 &&
                                     dataPost.KinhNghiemRender.map((item) => {
@@ -516,9 +516,8 @@ export default function PostComponent() {
                                 name="bangCap"
                                 className="form-control"
                                 value={dataPost.bangCap}
-                                disabled
                             >
-                                <option value={null}>-- Bằng cấp ứng tuyển (Đang cập nhật) --</option>
+                                <option value={null}>-- Yêu cầu bằng cấp --</option>
                                 {dataPost.BangCapRender &&
                                     dataPost.BangCapRender.length > 0 &&
                                     dataPost.BangCapRender.map((item) => {
@@ -531,7 +530,7 @@ export default function PostComponent() {
                             </select>
                         </Col>
                         <Col sm={4} className="mt-2 mb-2">
-                            <label className="my-2">Giới tính yêu cầu</label>
+                            <label className="my-2">Yêu cầu giới tính</label>
                             <select
                                 onChange={handleChangeState}
                                 name="yeuCauGioiTinh"

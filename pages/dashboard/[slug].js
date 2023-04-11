@@ -6,7 +6,7 @@ function index(props) {
     return (
         <>
             <Head>
-                <title>Chào mừng bạn đến với quản trị viên website</title>
+                <title>Dashboard</title>
             </Head>
             <div>
                 <Dashboard />

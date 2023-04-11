@@ -15,7 +15,7 @@ import {
 } from '../../../../../services/siteServices';
 import convertTime from '../../../../../app/@func/convertTime/convertTime';
 
-function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
+function UngVienProfile({ cx = () => { }, data, handleSublit = () => { } }) {
     const ref = useRef(null);
 
     const [ungVienState, setUngVienSate] = useState({
@@ -85,6 +85,11 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                 ]);
 
                 if (ResKinhNghiem && ResNghanhNghe && ResBangCap && ResMucLuong) {
+                    ResKinhNghiem.data.unshift({ ten: "Chọn kinh nghiệm làm việc" });
+                    ResBangCap.data.unshift({ ten: "Chọn trình độ học vấn" });
+                    ResCapbac.data.unshift({ ten: "Chọn cấp bậc ứng tuyển" });
+                    ResMucLuong.data.unshift({ ten: "Chọn mức lương mong muốn" });
+                    ResNghanhNghe.data.unshift({ ten: "Chọn lĩnh vực làm việc" });
                     setUngVienSate((prev) => ({
                         ...prev,
                         kinhNghiemLamViecRender: ResKinhNghiem.data,
@@ -257,9 +262,9 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                     <select value={ungVienState.kinhNghiemLamViec} name="kinhNghiemLamViec" onChange={handleChange}>
                         {ungVienState.kinhNghiemLamViecRender &&
                             ungVienState.kinhNghiemLamViecRender.length > 0 &&
-                            ungVienState.kinhNghiemLamViecRender.map((item) => {
+                            ungVienState.kinhNghiemLamViecRender.map((item, index) => {
                                 return (
-                                    <option key={item.id} value={item.ten}>
+                                    <option key={index} value={item.ten}>
                                         {item.ten}
                                     </option>
                                 );
@@ -352,7 +357,7 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                         onChange={handleChange}
                         id="muctie-nghe-nghiep"
                         type="text"
-                        placeholder="Mục tiêu nghề nghiệp của bạn...."
+                        placeholder="Mục tiêu nghề nghiệp của bạn"
                     />
                 </div>
                 <div className="col-12 mt-3">
@@ -363,7 +368,7 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                         onChange={handleChange}
                         id="desc"
                         type="text"
-                        placeholder="Giới thiệu ngắn...."
+                        placeholder="Giới thiệu về bản thân, kỹ năng mềm, trình độ tin học, ..."
                     />
                 </div>
                 <div className="col-12 mt-4">

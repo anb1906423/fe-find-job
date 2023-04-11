@@ -70,6 +70,8 @@ function NhaTuyenDungProfile({ cx = () => {}, data, handleSubmit = () => {} }) {
                 const [ResQuiMo, ResLinhVucNgheNghiep] = await Promise.all([getAllQuiMo(), getAllLinhVucKinhDoanh()]);
 
                 if (ResQuiMo) {
+                    ResQuiMo.data.unshift({ ten: "Chọn qui mô công ty" });
+                    ResLinhVucNgheNghiep.data.unshift({ ten: "Chọn lĩnh vực nghề nghiệp" });
                     setNhaTuyendungState((prev) => ({
                         ...prev,
                         QuyMoRende: ResQuiMo.data,
