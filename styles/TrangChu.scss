@@ -1,7 +1,8 @@
 .trang-chu {
     // max-width: 1200px;
-    margin: 0 auto;
+    margin   : 0 auto;
     max-width: 88vw;
+
     .carousel-group {
         margin: 20px auto;
     }
@@ -13,4 +14,19 @@
 
 .trang-chu .carousel-group img {
     border-radius: 8px;
+}
+
+.xem-them {
+    button {
+        padding      : 4px 6px 4px 0;
+        border-radius: 50px;
+        color        : var(--main-color);
+        border       : none;
+        background-color: #fff;
+
+        svg {
+            margin : 4px;
+            padding: 2px;
+        }
+    }
 }

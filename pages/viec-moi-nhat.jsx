@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import Carousel from '../components/Carousel';
-import Heading from '../components/Heading';
-import CongViecComponent from '../components/CongViecComponent';
+import React, { useState, useEffect } from 'react'
+import Heading from '../components/Heading'
+import CongViecComponent from '../components/CongViecComponent'
+import { swtoast } from '../mixins/swal.mixin'
 import axios from 'axios'
 import { backendAPI } from '../config'
-import { swalert, swtoast } from '../mixins/swal.mixin'
 import { DoubleRightOutlined } from "@ant-design/icons"
 
-const index = () => {
+const LatestJob = () => {
     const [jobs, setJobs] = useState([]);
     const [jobsToShow, setJobsToShow] = useState(4);
 
@@ -28,6 +27,7 @@ const index = () => {
                 });
 
                 setJobs(jobsWithCompanyInfo);
+
             } catch (error) {
                 console.log(error);
                 swtoast.error({
@@ -43,7 +43,7 @@ const index = () => {
         setJobsToShow(prevState => prevState + 4);
     };
 
-    const displayedJobs = jobs.slice(0, jobsToShow).map((job, index) => {
+    const displayedJobs = Array.from(jobs).reverse().slice(0, jobsToShow).map((job, index) => {
         if (job.state) {
             return (
                 <CongViecComponent
@@ -54,31 +54,34 @@ const index = () => {
                     diaDiemLamViec={job.diaDiemLamViec}
                     created_at={job.created_at}
                     tenCty={job.tenCty}
-                    col={6}
+                    col={12}
                 />
             )
         }
     });
 
     return (
-        <div className="trang-chu">
-            <div className="carousel-group">
-                <Carousel />
-            </div>
-            <div className="chua-noi-dung">
-                <Heading tieuDe="Việc làm tốt nhất" />
-                <div className="the-best-job-wp row gutter">{displayedJobs}</div>
+        <div className='latest-job-page'>
+            <Heading tieuDe="Việc làm mới nhất" />
+            <div className='cont'>
+                <div className="the-best-job-wp row gutter">
+                    <div className="col-9">
+                        {displayedJobs}
+                    </div>
+                    <div className="col-3">
+                        Lọc công việc
+                    </div>
+                </div>
                 {jobsToShow < jobs.length && (
                     <div className="xem-them">
-                        <button className='d-flex justify-content-between align-items-center' onClick={handleShowMore}>
-                            {/* Xem thêm */}
+                        <button onClick={handleShowMore}>
                             <DoubleRightOutlined />
                         </button>
                     </div>
                 )}
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default index;
+export default LatestJob

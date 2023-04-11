@@ -18,7 +18,7 @@ function tinhThoiGianDaQua(startDate, endDate) {
 const CongViecComponent = (props) => {
   const endDate = new Date();
   return (
-    <div className='cong-viec-component col-6 gx-3'>
+    <div className={`col-${props.col} cong-viec-component gx-3`}>
       <div className="row">
         <div className="col-3 image-box d-flex justify-content-center align-items-center">
           <Link href="#">
