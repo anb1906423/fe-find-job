@@ -7,8 +7,11 @@ import { Col, Row } from 'react-bootstrap';
 import LazyImg from '../app/components/LazyImg/LazyImg';
 import convertTime from '../app/@func/convertTime/convertTime';
 import Link from 'next/link';
+import _ from 'lodash';
 
-const UngVien = ({ dulieu }) => {
+const UngVien = ({ dulieu, metaData, currentPage, handleLoadMoreUngVien }) => {
+    console.log(metaData);
+
     return (
         <div className="ung-vien">
             <div className="container">
@@ -34,12 +37,20 @@ const UngVien = ({ dulieu }) => {
                                                 </div>
                                                 <div className="thong-tin-khac">
                                                     <div>
-                                                        <Tippy content={item.viTriMongMuon ? item.viTriMongMuon : 'Đang cập nhật'}>
+                                                        <Tippy
+                                                            content={
+                                                                item.viTriMongMuon
+                                                                    ? item.viTriMongMuon
+                                                                    : 'Đang cập nhật'
+                                                            }
+                                                        >
                                                             <h6 className="vi-tri-mong-muon">
                                                                 <i className="bi bi-link-45deg"></i>
 
                                                                 <span className="mx-1">
-                                                                    {item.viTriMongMuon ? item.viTriMongMuon : 'Đang cập nhật'}
+                                                                    {item.viTriMongMuon
+                                                                        ? item.viTriMongMuon
+                                                                        : 'Đang cập nhật'}
                                                                 </span>
                                                             </h6>
                                                         </Tippy>
@@ -99,6 +110,13 @@ const UngVien = ({ dulieu }) => {
                     ) : (
                         <div className="d-flex justify-content-center align-items-center">
                             <p>Hiện tại không có dữ liệu ứng viên nào</p>
+                        </div>
+                    )}
+                    {!_.isEmpty(metaData) && metaData.totalPages !== currentPage && (
+                        <div className="col-12 my-4">
+                            <button onClick={handleLoadMoreUngVien} className="btn btn-primary mx-auto d-block">
+                                Xem thêm ứng viên
+                            </button>
                         </div>
                     )}
                 </Row>
