@@ -24,11 +24,11 @@ const menu = [
     },
     {
         title: 'Việc mới nhất',
-        href: 'viec-moi-nhat',
+        href: '/viec-moi-nhat',
     },
     {
         title: 'Liên hệ',
-        href: 'lien-he',
+        href: '/lien-he',
     },
 ];
 
