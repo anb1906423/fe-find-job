@@ -15,7 +15,7 @@ import TippyRender from '../app/components/TippyRender/TippyRender';
 import * as actions from '../store/actions';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { backendAPI } from '../config'
+import { backendAPI } from '../config';
 
 const menu = [
     {
@@ -33,22 +33,22 @@ const menu = [
 ];
 
 const Header = () => {
-    const [diaDiemLamViec, setDiaDiemLamViec] = useState([])
-    const [nganhNghe, setNganhNghe] = useState([])
+    const [diaDiemLamViec, setDiaDiemLamViec] = useState([]);
+    const [nganhNghe, setNganhNghe] = useState([]);
 
     useEffect(() => {
         const getDiaDiemLamViec = async () => {
-            const result = await axios.get(backendAPI + '/dia-diem-lam-viec')
-            setDiaDiemLamViec([{ ten: "-- Tất cả địa điểm --" }, ...result.data])
-        }
+            const result = await axios.get(backendAPI + '/dia-diem-lam-viec');
+            setDiaDiemLamViec([{ ten: '-- Tất cả địa điểm --' }, ...result.data]);
+        };
         const getNganhNghe = async () => {
-            const result = await axios.get(backendAPI + '/nganh-nghe')
-            setNganhNghe([{ ten: "-- Tất cả ngành nghề --" }, ...result.data])
-        }
+            const result = await axios.get(backendAPI + '/nganh-nghe');
+            setNganhNghe([{ ten: '-- Tất cả ngành nghề --' }, ...result.data]);
+        };
 
-        getDiaDiemLamViec()
-        getNganhNghe()
-    }, [])
+        getDiaDiemLamViec();
+        getNganhNghe();
+    }, []);
 
     const taiKhoan = [
         {
@@ -143,7 +143,7 @@ const Header = () => {
                 if (result.isConfirmed) {
                     // window.location.assign('/');
                     dispatch(actions.userLogOut());
-                    router.push('/')
+                    router.push('/');
                 }
             });
     };
@@ -225,7 +225,7 @@ const Header = () => {
             <div className="sub-header d-flex align-items-center justify-content-end">
                 <form action="" className="filter-job d-flex align-items-center justify-content-around">
                     <div className="div-on-form input-search-box">
-                        <SelectItem list={nganhNghe}/>
+                        <SelectItem list={nganhNghe} />
                     </div>
                     <div className="div-on-form">
                         <SelectItem list={diaDiemLamViec} />
