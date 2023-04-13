@@ -22,7 +22,7 @@ const CongViecComponent = (props) => {
       <div className="row">
         <div className="col-3 image-box d-flex justify-content-center align-items-center">
           <Link href="#">
-            <img src={props.logoCty || "https://www.ruhr24jobs.de/static/og-image.jpg"} alt="Logo công ty" />
+            <img src={props.logoCty || "https://thumbs.dreamstime.com/b/vintage-rusty-metal-sign-white-background-hiring-hiring-98774212.jpg"} alt="Logo công ty" />
           </Link>
         </div>
         <div className="col-9 info-box">

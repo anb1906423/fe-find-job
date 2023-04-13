@@ -11,11 +11,13 @@ import {
     getAllBangCap,
     getAllKinhghiem,
     getAllLinhVucKinhDoanh,
+    getAllNganhNghe,
     getAllLoaiHopDong,
     getAllMucLuong,
     getAllViTriMongMuon,
     getPostData,
     updatePostNhaTuyenDung,
+    getAllDiaDiemLamViec
 } from '../../services/siteServices';
 import { GioiTinhYeuCau, provinces } from '../../data/data';
 import Link from 'next/link';
@@ -109,14 +111,15 @@ export default function PostComponent() {
 
     useEffect(() => {
         const Fetch = async () => {
-            const [ResKinhNghiem, ResBangCap, ResCapBac, ResHopDong, ResMucLuong, ResLinhVucLamViec] =
+            const [ResKinhNghiem, ResBangCap, ResCapBac, ResHopDong, ResMucLuong, ResLinhVucLamViec, ResDiaDiemLamViec] =
                 await Promise.all([
                     getAllKinhghiem(),
                     getAllBangCap(),
                     getAllViTriMongMuon(),
                     getAllLoaiHopDong(),
                     getAllMucLuong(),
-                    getAllLinhVucKinhDoanh(),
+                    getAllNganhNghe(),
+                    getAllDiaDiemLamViec()
                 ]);
 
             setDataPost((prev) => {
@@ -389,7 +392,7 @@ export default function PostComponent() {
                             </select>
                         </Col>
                         <Col sm={4} className="mt-2 mb-2">
-                            <label className="my-2">Lĩnh vực nghề nghiệp</label>
+                            <label className="my-2">Ngành nghề</label>
                             <select
                                 onChange={handleChangeState}
                                 name="linhVucNgheNghiep"
@@ -397,7 +400,7 @@ export default function PostComponent() {
                                 value={dataPost.linhVucNgheNghiep}
                                 required
                             >
-                                <option value={null}>-- Lĩnh vực nghề nghiệp --</option>
+                                <option value={null}>-- Chọn ngành nghề --</option>
                                 {dataPost.LinhVucNgheNghiepRender &&
                                     dataPost.LinhVucNgheNghiepRender.length > 0 &&
                                     dataPost.LinhVucNgheNghiepRender.map((item) => (

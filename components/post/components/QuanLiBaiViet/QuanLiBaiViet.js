@@ -47,7 +47,7 @@ export default function QuanLiBaiViet() {
 
     return (
         <div className="container my-4">
-            <h3 className="text-center py-4 title">Quản lí bài đăng tuyển dụng của bạn</h3>
+            <h3 className="text-center py-4 title text-uppercase">Quản lí tin</h3>
             <table className="table">
                 <thead className="table-dark">
                     <tr>

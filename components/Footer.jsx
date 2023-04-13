@@ -20,7 +20,7 @@ const FooterChuk = () => {
                     <div className={cx('d-flex', 'my-2')}>
                         <div>
                             <div className={cx('header-footer')}>
-                                <img src="./img/logo.png" alt="Ảnh logo" className={cx('img-logo')} />
+                                <img src="../img/logo.png" alt="Ảnh logo" className={cx('img-logo')} />
                                 <div>
                                     <span>Your career we care!</span>
                                     {/* <span>với mọi người</span> */}

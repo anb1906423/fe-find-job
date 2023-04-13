@@ -43,22 +43,22 @@ const index = () => {
         setJobsToShow(prevState => prevState + 4);
     };
 
-    const displayedJobs = jobs.slice(0, jobsToShow).map((job, index) => {
-        if (job.state) {
-            return (
-                <CongViecComponent
-                    key={index}
-                    chucDanh={job.chucDanh}
-                    logoCty={job.logoCty}
-                    mucLuongMongMuon={job.mucLuong}
-                    diaDiemLamViec={job.diaDiemLamViec}
-                    created_at={job.created_at}
-                    tenCty={job.tenCty}
-                    col={6}
-                />
-            )
-        }
+    const filteredJobs = jobs.filter(job => job.state);
+    const displayedJobs = filteredJobs.slice(0, jobsToShow).map((job, index) => {
+        return (
+            <CongViecComponent
+                key={index}
+                chucDanh={job.chucDanh}
+                logoCty={job.logoCty}
+                mucLuongMongMuon={job.mucLuong}
+                diaDiemLamViec={job.diaDiemLamViec}
+                created_at={job.created_at}
+                tenCty={job.tenCty}
+                col={6}
+            />
+        )
     });
+
 
     return (
         <div className="trang-chu">

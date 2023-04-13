@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import Heading from '../components/Heading'
-import CongViecComponent from '../components/CongViecComponent'
-import { swtoast } from '../mixins/swal.mixin'
+import CongViecComponent from '../../components/CongViecComponent'
 import axios from 'axios'
-import { backendAPI } from '../config'
+import { backendAPI } from '../../config'
 import { DoubleRightOutlined } from "@ant-design/icons"
+import { useRouter } from 'next/router';
 
-const LatestJob = () => {
+const SearchResult = () => {
+    const router = useRouter();
+    const nganhNghe = router.query.nganhnghe;
+    const diaDiemLamViec = router.query.diadiem;
     const [jobs, setJobs] = useState([]);
     const [jobsToShow, setJobsToShow] = useState(4);
+
+    console.log(jobs);
 
     useEffect(() => {
         const fetchJobs = async () => {
@@ -21,7 +25,7 @@ const LatestJob = () => {
                     const company = companyResponse.data.find(company => company.email === job.emailCty);
                     return company ? {
                         ...job,
-                        linhVucNgheNghiep: company.linhVucNgheNghiep,
+                        // linhVucNgheNghiep: company.linhVucNgheNghiep,
                         logoCty: company.logoCty,
                         tenCty: company.tenCty,
                     } : job;
@@ -44,36 +48,44 @@ const LatestJob = () => {
         setJobsToShow(prevState => prevState + 4);
     };
 
-    const displayedJobs = Array.from(jobs).reverse().slice(0, jobsToShow).map((job, index) => {
-        if (job.state) {
-            return (
-                <CongViecComponent
-                    key={index}
-                    chucDanh={job.chucDanh}
-                    logoCty={job.logoCty}
-                    mucLuongMongMuon={job.mucLuong}
-                    diaDiemLamViec={job.diaDiemLamViec}
-                    created_at={job.created_at}
-                    tenCty={job.tenCty}
-                    col={12}
-                />
-            )
-        }
-    });
+    var filteredJobs
+    if (diaDiemLamViec == '' || diaDiemLamViec == '-- Tất cả địa điểm --') {
+        filteredJobs = jobs.filter(job => job.state && job.linhVucNgheNghiep == nganhNghe);
+    } else if (nganhNghe == '' || nganhNghe == "-- Tất cả ngành nghề --") {
+        filteredJobs = jobs.filter(job => job.state && job.diaDiemLamViec == diaDiemLamViec);
+    } else filteredJobs = jobs.filter(job => job.state && (job.diaDiemLamViec == diaDiemLamViec && job.linhVucNgheNghiep == nganhNghe));
+
+    const displayedJobs = Array.from(filteredJobs).slice(0, jobsToShow).map((job, index) => {
+        return (
+            <CongViecComponent
+                key={index}
+                chucDanh={job.chucDanh}
+                logoCty={job.logoCty}
+                mucLuongMongMuon={job.mucLuong}
+                diaDiemLamViec={job.diaDiemLamViec}
+                created_at={job.created_at}
+                tenCty={job.tenCty}
+                col={12}
+            />
+        )
+    }
+    );
 
     return (
-        <div className='latest-job-page'>
-            <Heading tieuDe="Việc làm mới nhất" />
+        <div className='all-jobs-page'>
             <div className='cont'>
                 <div className="the-best-job-wp row gutter">
                     <div className="col-9">
-                        {displayedJobs}
+                        {
+                            displayedJobs.length != 0 ? displayedJobs : <p className="fw-bold" style={{ margin: "32px 0 22px" }}>Không có kết quả tìm kiếm phù hợp</p>
+                        }
+                        {/* {displayedJobs || 'Không có kết quả tìm kiếm phù hợp'} */}
                     </div>
                     <div className="col-3">
                         Lọc công việc
                     </div>
                 </div>
-                {jobsToShow < jobs.length && (
+                {jobsToShow < filteredJobs.length && (
                     <div className="xem-them">
                         <button onClick={handleShowMore}>
                             <DoubleRightOutlined />
@@ -85,4 +97,4 @@ const LatestJob = () => {
     )
 }
 
-export default LatestJob
+export default SearchResult
