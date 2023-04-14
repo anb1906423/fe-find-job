@@ -68,7 +68,7 @@ const index = () => {
             <div className="chua-noi-dung">
                 <Heading tieuDe="Việc làm tốt nhất" />
                 <div className="the-best-job-wp row gutter">{displayedJobs}</div>
-                {jobsToShow < jobs.length && (
+                {jobsToShow < filteredJobs.length && (
                     <div className="xem-them">
                         <button className='d-flex justify-content-between align-items-center' onClick={handleShowMore}>
                             {/* Xem thêm */}

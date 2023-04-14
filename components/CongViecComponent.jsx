@@ -16,6 +16,8 @@ function tinhThoiGianDaQua(startDate, endDate) {
 }
 
 const CongViecComponent = (props) => {
+  const { capBac, loaiHopDong, kinhNghiem, bangCap } = props
+  
   const endDate = new Date();
   return (
     <div className={`col-${props.col} cong-viec-component gx-3`}>
