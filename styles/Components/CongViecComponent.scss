@@ -3,9 +3,12 @@
     padding   : 10px;
     min-height: 114px;
 
-    img {
-        max-width: 100%;
-        height   : auto;
+    .image-box {
+        img {
+            max-width : 100%;
+            height    : auto;
+            max-height: 114px;
+        }
     }
 
     svg {
@@ -19,10 +22,12 @@
 
     .info-box {
         padding-top: 12px;
+
         a {
             text-decoration: none;
-            color: #000000;
+            color          : #000000;
         }
+
         .chuc-danh {
             margin-bottom: 3px;
         }

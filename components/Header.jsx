@@ -16,6 +16,7 @@ import * as actions from '../store/actions';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { backendAPI } from '../config';
+import queryString from 'query-string';
 
 const menu = [
     {
@@ -121,12 +122,30 @@ const Header = () => {
 
     const [isLogin, setIsLogin] = useState(Login);
 
+    const [chonNganhNghe, setChonNganhNghe] = useState('')
+    const [chonDiaDiemLamViec, setChonDiaDiemLamViec] = useState('')
+
     useEffect(() => {
         setIsLogin(Login);
     }, [Login]);
 
     function handleMenuChange(menuItem) {
         console.log(menuItem);
+    }
+
+    const xuLyThayDoiNganhNghe = (value) => {
+        setChonNganhNghe(value)
+    }
+
+    const xuLyThayDoiDiaDiemLamViec = (value) => {
+        setChonDiaDiemLamViec(value)
+    }
+
+    const xuLyTimKiem = () => {
+        if ((chonNganhNghe == ''  || chonNganhNghe == '-- Tất cả ngành nghề --') && (chonDiaDiemLamViec == '' || chonDiaDiemLamViec == '-- Tất cả địa điểm --')) {
+            router.push('/viec-moi-nhat')
+        } else
+            router.push(`/search?nganhnghe=${chonNganhNghe}&diadiem=${chonDiaDiemLamViec}`);
     }
 
     // xử lí logout
@@ -186,18 +205,18 @@ const Header = () => {
                                     isLogin && role !== 0
                                         ? Menu
                                         : [
-                                              ...Menu,
-                                              {
-                                                  title: 'Tạo bài đăng tuyển dụng',
-                                                  icon: <i className="bi bi-file-earmark-pdf"></i>,
-                                                  to: '/post',
-                                              },
-                                              {
-                                                  title: 'Quản lí bài đăng',
-                                                  icon: <i className="bi bi-card-checklist"></i>,
-                                                  to: '/post/quan-li-bai-viet',
-                                              },
-                                          ]
+                                            ...Menu,
+                                            {
+                                                title: 'Tạo tin tuyển dụng',
+                                                icon: <i className="bi bi-file-earmark-pdf"></i>,
+                                                to: '/post',
+                                            },
+                                            {
+                                                title: 'Quản lí tin',
+                                                icon: <i className="bi bi-card-checklist"></i>,
+                                                to: '/post/quan-li-bai-viet',
+                                            },
+                                        ]
                                 }
                                 onChange={handleMenuChange}
                             >
@@ -223,19 +242,19 @@ const Header = () => {
                 </ul>
             </div>
             <div className="sub-header d-flex align-items-center justify-content-end">
-                <form action="" className="filter-job d-flex align-items-center justify-content-around">
+                <div className="filter-job d-flex align-items-center justify-content-around">
                     <div className="div-on-form input-search-box">
-                        <SelectItem list={nganhNghe} />
+                        <SelectItem onSelectedChange={xuLyThayDoiNganhNghe} list={nganhNghe} />
                     </div>
                     <div className="div-on-form">
-                        <SelectItem list={diaDiemLamViec} />
+                        <SelectItem onSelectedChange={xuLyThayDoiDiaDiemLamViec} list={diaDiemLamViec} />
                     </div>
                     <div className="div-on-form">
-                        <button className="tim-kiem d-flex align-items-center">
+                        <button onClick={() => xuLyTimKiem()} className="tim-kiem d-flex align-items-center">
                             <FaSearch />
                         </button>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     );

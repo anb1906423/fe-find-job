@@ -47,13 +47,13 @@ export default function QuanLiBaiViet() {
 
     return (
         <div className="container my-4">
-            <h3 className="text-center py-4 title">Quản lí bài đăng tuyển dụng của bạn</h3>
+            <h3 className="text-center py-4 title text-uppercase">Quản lí tin</h3>
             <table className="table">
                 <thead className="table-dark">
                     <tr>
                         <th scope="col">STT</th>
                         <th className="text-center" scope="col">
-                            ID Bài VViết
+                            Chức danh
                         </th>
                         <th className="text-center" scope="col">
                             Thời gian tạo bài viết
@@ -68,7 +68,7 @@ export default function QuanLiBaiViet() {
                         data.map((item, index) => (
                             <tr key={item.id}>
                                 <th scope="row">{index + 1}</th>
-                                <td className="text-center">{item?.id}</td>
+                                <td className="text-center">{item?.chucDanh}</td>
                                 <td className="text-center">{convertTime(item?.created_at)}</td>
                                 <td>
                                     <select

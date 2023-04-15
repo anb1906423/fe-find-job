@@ -52,6 +52,10 @@ export const getAllLoaiHopDong = () => {
     return axios.get('/loai-hop-dong');
 };
 
+export const getAllDiaDiemLamViec = () => {
+    return axios.get('/dia-diem-lam-viec');
+}
+
 // cong viec ( dang bai tuyen dung )
 
 export const createNewPost = (data) => {

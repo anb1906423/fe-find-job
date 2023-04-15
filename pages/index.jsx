@@ -23,7 +23,10 @@ const index = () => {
                     return company ? {
                         ...job,
                         logoCty: company.logoCty,
+                        soDienThoai: company.soDienThoai,
                         tenCty: company.tenCty,
+                        diaChi: company.diaChi,
+                        website: company.website
                     } : job;
                 });
 
@@ -43,22 +46,19 @@ const index = () => {
         setJobsToShow(prevState => prevState + 4);
     };
 
-    const displayedJobs = jobs.slice(0, jobsToShow).map((job, index) => {
-        if (job.state) {
-            return (
-                <CongViecComponent
-                    key={index}
-                    chucDanh={job.chucDanh}
-                    logoCty={job.logoCty}
-                    mucLuongMongMuon={job.mucLuong}
-                    diaDiemLamViec={job.diaDiemLamViec}
-                    created_at={job.created_at}
-                    tenCty={job.tenCty}
-                    col={6}
-                />
-            )
-        }
+    const filteredJobs = jobs.filter(job => job.state);
+    const displayedJobs = filteredJobs.slice(0, jobsToShow).map((job, index) => {
+        return (
+            <CongViecComponent
+                key={index}
+                mucLuongMongMuon={job.mucLuong}
+                created_at={job.created_at}
+                {...job}
+                col={6}
+            />
+        )
     });
+
 
     return (
         <div className="trang-chu">
@@ -68,7 +68,7 @@ const index = () => {
             <div className="chua-noi-dung">
                 <Heading tieuDe="Việc làm tốt nhất" />
                 <div className="the-best-job-wp row gutter">{displayedJobs}</div>
-                {jobsToShow < jobs.length && (
+                {jobsToShow < filteredJobs.length && (
                     <div className="xem-them">
                         <button className='d-flex justify-content-between align-items-center' onClick={handleShowMore}>
                             {/* Xem thêm */}

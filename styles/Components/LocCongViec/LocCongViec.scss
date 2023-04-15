@@ -1,0 +1,15 @@
+.ant-menu-submenu {
+    margin-bottom: 2px;
+    .ant-menu-submenu-title {
+        background-color: var(--sub-color);
+        .ant-menu-title-content {
+            font-weight: 700;
+        }
+    }
+
+    .ant-menu-sub {
+        div {
+            padding: 4px 32px;
+        }
+    }
+}

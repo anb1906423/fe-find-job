@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import Heading from '../components/Heading'
-import CongViecComponent from '../components/CongViecComponent'
-import { swtoast } from '../mixins/swal.mixin'
+import CongViecComponent from '../../components/CongViecComponent'
 import axios from 'axios'
-import { backendAPI } from '../config'
+import { backendAPI } from '../../config'
 import { DoubleRightOutlined } from "@ant-design/icons"
-import LocCongViec from '../components/LocCongViec/LocCongViec'
+import { useRouter } from 'next/router';
+import LocCongViec from '../../components/LocCongViec/LocCongViec'
 
 import {
     getAllMucLuong,
@@ -13,9 +12,12 @@ import {
     getAllLoaiHopDong,
     getAllKinhghiem,
     getAllBangCap
-} from '../services/siteServices'
+} from '../../services/siteServices'
 
-const LatestJob = () => {
+const SearchResult = () => {
+    const router = useRouter();
+    const nganhNghe = router.query.nganhnghe;
+    const diaDiemLamViec = router.query.diadiem;
     const [jobs, setJobs] = useState([]);
     const [jobsToShow, setJobsToShow] = useState(4);
 
@@ -174,15 +176,40 @@ const LatestJob = () => {
         setJobsToShow(prevState => prevState + 4);
     };
 
-    const filteredJobs = jobs.filter(job => job.state
-        && (locTheoMucLuongChecked.length === 0 || locTheoMucLuongChecked.some(item => item.element === job.mucLuong))
-        && (locTheoCapBacChecked.length === 0 || locTheoCapBacChecked.some(item => item.element === job.capBac))
-        && (locTheoLoaiHopDongChecked.length === 0 || locTheoLoaiHopDongChecked.some(item => item.element === job.loaiHopDong))
-        && (locTheoKinhNghiemChecked.length === 0 || locTheoKinhNghiemChecked.some(item => item.element === job.kinhNghiem))
-        && (locTheoTrinhDoChecked.length === 0 || locTheoTrinhDoChecked.some(item => item.element === job.bangCap))
-    );
-
-    const displayedJobs = Array.from(filteredJobs).reverse().slice(0, jobsToShow).map((job, index) => {
+    var filteredJobs
+    if (diaDiemLamViec == '' || diaDiemLamViec == '-- Tất cả địa điểm --') {
+        filteredJobs = jobs.filter(job =>
+            job.state
+            && job.linhVucNgheNghiep == nganhNghe
+            && (locTheoMucLuongChecked.length === 0 || locTheoMucLuongChecked.some(item => item.element === job.mucLuong))
+            && (locTheoCapBacChecked.length === 0 || locTheoCapBacChecked.some(item => item.element === job.capBac))
+            && (locTheoLoaiHopDongChecked.length === 0 || locTheoLoaiHopDongChecked.some(item => item.element === job.loaiHopDong))
+            && (locTheoKinhNghiemChecked.length === 0 || locTheoKinhNghiemChecked.some(item => item.element === job.kinhNghiem))
+            && (locTheoTrinhDoChecked.length === 0 || locTheoTrinhDoChecked.some(item => item.element === job.bangCap))
+        );
+    } else if (nganhNghe == '' || nganhNghe == "-- Tất cả ngành nghề --") {
+        filteredJobs = jobs.filter(job =>
+            job.state
+            && job.diaDiemLamViec == diaDiemLamViec
+            && (locTheoMucLuongChecked.length === 0 || locTheoMucLuongChecked.some(item => item.element === job.mucLuong))
+            && (locTheoCapBacChecked.length === 0 || locTheoCapBacChecked.some(item => item.element === job.capBac))
+            && (locTheoLoaiHopDongChecked.length === 0 || locTheoLoaiHopDongChecked.some(item => item.element === job.loaiHopDong))
+            && (locTheoKinhNghiemChecked.length === 0 || locTheoKinhNghiemChecked.some(item => item.element === job.kinhNghiem))
+            && (locTheoTrinhDoChecked.length === 0 || locTheoTrinhDoChecked.some(item => item.element === job.bangCap))
+        );
+    } else {
+        filteredJobs = jobs.filter(job =>
+            job.state
+            && (job.diaDiemLamViec == diaDiemLamViec && job.linhVucNgheNghiep == nganhNghe)
+            && (locTheoMucLuongChecked.length === 0 || locTheoMucLuongChecked.some(item => item.element === job.mucLuong))
+            && (locTheoCapBacChecked.length === 0 || locTheoCapBacChecked.some(item => item.element === job.capBac))
+            && (locTheoLoaiHopDongChecked.length === 0 || locTheoLoaiHopDongChecked.some(item => item.element === job.loaiHopDong))
+            && (locTheoKinhNghiemChecked.length === 0 || locTheoKinhNghiemChecked.some(item => item.element === job.kinhNghiem))
+            && (locTheoTrinhDoChecked.length === 0 || locTheoTrinhDoChecked.some(item => item.element === job.bangCap))
+        );
+    }
+    
+    const displayedJobs = Array.from(filteredJobs).slice(0, jobsToShow).map((job, index) => {
         return (
             <CongViecComponent
                 key={index}
@@ -192,24 +219,21 @@ const LatestJob = () => {
                 diaDiemLamViec={job.diaDiemLamViec}
                 created_at={job.created_at}
                 tenCty={job.tenCty}
-                capBac={job.capBac}
-                loaiHopDong={job.loaiHopDong}
-                kinhNghiem={job.kinhNghiem}
-                bangCap={job.bangCap}
                 col={12}
             />
         )
-    });
+    }
+    );
 
     return (
-        <div className='latest-job-page'>
-            <Heading tieuDe="Việc làm mới nhất" />
+        <div className='search-jobs-page' style={{ marginTop: "10px" }}>
             <div className='cont'>
                 <div className="the-best-job-wp row gutter">
                     <div className="col-9">
                         {
                             displayedJobs.length != 0 ? displayedJobs : <p className="fw-bold" style={{ margin: "32px 0 22px" }}>Không có kết quả tìm kiếm phù hợp</p>
                         }
+                        {/* {displayedJobs || 'Không có kết quả tìm kiếm phù hợp'} */}
                     </div>
                     <div className="col-3">
                         <LocCongViec
@@ -255,4 +279,4 @@ const LatestJob = () => {
     )
 }
 
-export default LatestJob
+export default SearchResult
