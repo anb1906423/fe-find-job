@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { DollarCircleOutlined, ClockCircleOutlined } from '@ant-design/icons'
 import { FaMapMarkerAlt } from 'react-icons/fa'
 import Link from 'next/link';
+import ChiTietCongViec from '../pages/cong-viec/[id]';
+import { useHistory } from "react-router-dom";
+import { useRouter } from 'next/router'
 
 function tinhThoiGianDaQua(startDate, endDate) {
   const diffInMs = new Date(endDate) - new Date(startDate);
@@ -16,27 +19,50 @@ function tinhThoiGianDaQua(startDate, endDate) {
 }
 
 const CongViecComponent = (props) => {
+  const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false)
+
+  const showModal = () => {
+    setIsOpen(true);
+    // router.push(`/cong-viec/${props.id}`);
+  };
+
+  const hiddenModal = () => {
+    setIsOpen(false);
+  }
+
   const { capBac, loaiHopDong, kinhNghiem, bangCap } = props
-  
+
   const endDate = new Date();
+
   return (
     <div className={`col-${props.col} cong-viec-component gx-3`}>
+      <ChiTietCongViec
+        setIsOpen={setIsOpen}
+        isOpen={isOpen}
+        {...props}
+      />
+
       <div className="row">
         <div className="col-3 image-box d-flex justify-content-center align-items-center">
-          <Link href="#">
+          {/* <Link href={`/cong-viec/${props.id}`}> */}
+          <div onClick={() => showModal()}>
             <img src={props.logoCty || "https://thumbs.dreamstime.com/b/vintage-rusty-metal-sign-white-background-hiring-hiring-98774212.jpg"} alt="Logo công ty" />
-          </Link>
+          </div>
+          {/* </Link> */}
         </div>
         <div className="col-9 info-box">
           <div>
-            <Link href="#">
+            {/* <Link href={`/cong-viec/${props.id}`}> */}
+            <div onClick={() => showModal()}>
               <h6 className="text-uppercase chuc-danh">
                 {props.chucDanh}
               </h6>
-            </Link>
+            </div>
+            {/* </Link> */}
           </div>
           <div>
-            <Link href="#">
+            <Link href={`/cong-viec/${props.id}`}>
               <p className='ten-cong-ty'>{props.tenCty}</p>
             </Link>
           </div>

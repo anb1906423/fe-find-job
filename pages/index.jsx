@@ -23,7 +23,10 @@ const index = () => {
                     return company ? {
                         ...job,
                         logoCty: company.logoCty,
+                        soDienThoai: company.soDienThoai,
                         tenCty: company.tenCty,
+                        diaChi: company.diaChi,
+                        website: company.website
                     } : job;
                 });
 
@@ -48,12 +51,9 @@ const index = () => {
         return (
             <CongViecComponent
                 key={index}
-                chucDanh={job.chucDanh}
-                logoCty={job.logoCty}
                 mucLuongMongMuon={job.mucLuong}
-                diaDiemLamViec={job.diaDiemLamViec}
                 created_at={job.created_at}
-                tenCty={job.tenCty}
+                {...job}
                 col={6}
             />
         )
