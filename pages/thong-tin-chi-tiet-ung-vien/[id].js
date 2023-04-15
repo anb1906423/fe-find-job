@@ -36,6 +36,7 @@ export async function getStaticProps(context) {
     return {
         // Passed to the page component as props
         props: { dataUngVien: Res?.data },
+        revalidate: 86400,
     };
 }
 
