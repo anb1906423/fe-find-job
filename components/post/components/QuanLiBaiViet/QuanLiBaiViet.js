@@ -53,7 +53,7 @@ export default function QuanLiBaiViet() {
                     <tr>
                         <th scope="col">STT</th>
                         <th className="text-center" scope="col">
-                            ID Bài VViết
+                            Chức danh
                         </th>
                         <th className="text-center" scope="col">
                             Thời gian tạo bài viết
@@ -68,7 +68,7 @@ export default function QuanLiBaiViet() {
                         data.map((item, index) => (
                             <tr key={item.id}>
                                 <th scope="row">{index + 1}</th>
-                                <td className="text-center">{item?.id}</td>
+                                <td className="text-center">{item?.chucDanh}</td>
                                 <td className="text-center">{convertTime(item?.created_at)}</td>
                                 <td>
                                     <select
