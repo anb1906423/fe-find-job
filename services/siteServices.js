@@ -12,8 +12,8 @@ export const UploadImage = (data) => {
     });
 };
 
-export const UngVienLienDeXuat = () => {
-    return axios.get('/ung-vien');
+export const UngVienLienDeXuat = (page, limit) => {
+    return axios.get(`/ung-vien?page=${page}&limit=${limit}`);
 };
 
 export const LayThongTinUngVien = (id) => {

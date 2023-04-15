@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import { Col, Row } from 'react-bootstrap';
 import Router, { useRouter } from 'next/router';
-import Lightbox from 'react-awesome-lightbox';
+import { Image } from 'antd';
 
 import styles from './trangChiTiet.module.scss';
 import LazyImg from '../../app/components/LazyImg/LazyImg';
@@ -16,48 +16,26 @@ import RenderArray from '../../app/@func/RenderArray';
 
 const cx = classNames.bind(styles);
 
-function TrangChiTiet(props) {
-    const [data, setData] = useState({});
-    const [isOpenLightBox, setIsOpenLightBox] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
-
+function TrangChiTiet({ data }) {
     const params = useRouter();
 
     const handleClick = useCallback(
         (id) => {
             Router.push(`/thong-tin-chi-tiet-ung-vien/${id}`);
         },
-        [params.query.id],
+        [data],
     );
-
-    useEffect(() => {
-        const fetch = async () => {
-            setIsOpen(true);
-
-            const Res = await LayThongTinUngVien(params.query.id);
-
-            setIsOpen(false);
-
-            const { data } = Res;
-
-            setData(data);
-        };
-
-        fetch();
-    }, [params.query.id]);
 
     useEffect(() => {
         if (!_.isEmpty(data)) {
             document.title = `Thông tin ứng viên ${data.hoVaTen}`;
         }
-    }, [params.query.id, data]);
-
-    console.log('check data : ', data);
+    }, [data]);
 
     return (
         <>
             <div className={cx('trang-chi-tiet-wp')}>
-                {isOpen && <LoadingPending />}
+                {params.isFallback ? <LoadingPending /> : <></>}
                 <div className="container">
                     <Row>
                         <Col lg={9}>
@@ -66,9 +44,13 @@ function TrangChiTiet(props) {
                                     <div className={cx('banner-color')}></div>
                                     <div className={cx('info-first')}>
                                         <div className={cx('avatar')}>
-                                            <LazyImg
-                                                onClick={() => setIsOpenLightBox(true)}
-                                                link={
+                                            <Image
+                                                src={
+                                                    data.avatar
+                                                        ? data.avatar
+                                                        : 'https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_960_720.png'
+                                                }
+                                                fallback={
                                                     data.avatar
                                                         ? data.avatar
                                                         : 'https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_960_720.png'
@@ -331,20 +313,6 @@ function TrangChiTiet(props) {
                     </Row>
                 </div>
             </div>
-            {isOpenLightBox && (
-                <Lightbox
-                    onClose={() => setIsOpenLightBox(false)}
-                    images={[
-                        {
-                            url: data.avatar
-                                ? data.avatar
-                                : 'https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_960_720.png',
-                            title: `Hình ảnh của ứng viên ${data.hoVaTen}`,
-                        },
-                    ]}
-                ></Lightbox>
-            )}
-            s
         </>
     );
 }

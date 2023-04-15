@@ -1,7 +1,6 @@
 // import css của thư viện
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 @import 'tippy.js/dist/tippy.css';
-@import 'react-awesome-lightbox/build/style.css';
 @import 'react-markdown-editor-lite/lib/index.css';
 
 @import './Header.scss';
@@ -39,5 +38,5 @@ html {
 
 .cont {
     max-width: 88vw;
-    margin: 0 auto;
+    margin   : 0 auto;
 }

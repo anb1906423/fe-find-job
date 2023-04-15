@@ -11,10 +11,12 @@ import { memo } from 'react';
 function Dexuatungvien({ params, cx = () => {}, handleClick = () => {} }) {
     const [data, setData] = useState([]);
 
+    console.log(params.query.id);
+
     useEffect(() => {
         const fetch = async () => {
             try {
-                const Res = await UngVienLienDeXuat();
+                const Res = await UngVienLienDeXuat(1, 100);
 
                 // ES6
                 const { data } = Res;
@@ -27,12 +29,12 @@ function Dexuatungvien({ params, cx = () => {}, handleClick = () => {} }) {
                 
                 */
 
-                if (!params || !params.query || !params.query.id) return;
+                if (!params || !params.query || !params.query.id || data.length <= 0) return;
 
                 const idViewer = params.query.id;
 
                 // chỉ lấy những ứng viên có id khác với ứng viên đang được xem thông tin<3
-                const dataBuild = data.filter((item) => item.id !== idViewer);
+                const dataBuild = data.data.filter((item) => item.id !== idViewer);
 
                 setData(dataBuild.reverse());
             } catch (error) {
@@ -41,7 +43,7 @@ function Dexuatungvien({ params, cx = () => {}, handleClick = () => {} }) {
         };
 
         fetch();
-    }, []);
+    }, [params]);
 
     /* 
     
