@@ -122,8 +122,8 @@ const Header = () => {
 
     const [isLogin, setIsLogin] = useState(Login);
 
-    const [chonNganhNghe, setChonNganhNghe] = useState('')
-    const [chonDiaDiemLamViec, setChonDiaDiemLamViec] = useState('')
+    const [chonNganhNghe, setChonNganhNghe] = useState('');
+    const [chonDiaDiemLamViec, setChonDiaDiemLamViec] = useState('');
 
     useEffect(() => {
         setIsLogin(Login);
@@ -134,19 +134,21 @@ const Header = () => {
     }
 
     const xuLyThayDoiNganhNghe = (value) => {
-        setChonNganhNghe(value)
-    }
+        setChonNganhNghe(value);
+    };
 
     const xuLyThayDoiDiaDiemLamViec = (value) => {
-        setChonDiaDiemLamViec(value)
-    }
+        setChonDiaDiemLamViec(value);
+    };
 
     const xuLyTimKiem = () => {
-        if ((chonNganhNghe == ''  || chonNganhNghe == '-- Tất cả ngành nghề --') && (chonDiaDiemLamViec == '' || chonDiaDiemLamViec == '-- Tất cả địa điểm --')) {
-            router.push('/viec-moi-nhat')
-        } else
-            router.push(`/search?nganhnghe=${chonNganhNghe}&diadiem=${chonDiaDiemLamViec}`);
-    }
+        if (
+            (chonNganhNghe == '' || chonNganhNghe == '-- Tất cả ngành nghề --') &&
+            (chonDiaDiemLamViec == '' || chonDiaDiemLamViec == '-- Tất cả địa điểm --')
+        ) {
+            router.push('/viec-moi-nhat');
+        } else router.push(`/search?nganhnghe=${chonNganhNghe}&diadiem=${chonDiaDiemLamViec}`);
+    };
 
     // xử lí logout
     const handleLogOut = () => {
@@ -203,20 +205,27 @@ const Header = () => {
                             <TippyRender
                                 items={
                                     isLogin && role !== 0
-                                        ? Menu
+                                        ? [
+                                              ...Menu,
+                                              {
+                                                  title: 'Những việc làm đã ứng tuyển',
+                                                  icon: <i className="bi bi-card-checklist"></i>,
+                                                  to: '/manage-apply/view-all-apply?isView=true',
+                                              },
+                                          ]
                                         : [
-                                            ...Menu,
-                                            {
-                                                title: 'Tạo tin tuyển dụng',
-                                                icon: <i className="bi bi-file-earmark-pdf"></i>,
-                                                to: '/post',
-                                            },
-                                            {
-                                                title: 'Quản lí tin',
-                                                icon: <i className="bi bi-card-checklist"></i>,
-                                                to: '/post/quan-li-bai-viet',
-                                            },
-                                        ]
+                                              ...Menu,
+                                              {
+                                                  title: 'Tạo tin tuyển dụng',
+                                                  icon: <i className="bi bi-file-earmark-pdf"></i>,
+                                                  to: '/post',
+                                              },
+                                              {
+                                                  title: 'Quản lí tin',
+                                                  icon: <i className="bi bi-card-checklist"></i>,
+                                                  to: '/post/quan-li-bai-viet',
+                                              },
+                                          ]
                                 }
                                 onChange={handleMenuChange}
                             >

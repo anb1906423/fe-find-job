@@ -2,6 +2,10 @@ export const Params = Object.freeze({
     danhSachNhaTuyenDung: 'danh-sach-nha-tuyen-dung',
     danhSachTaiKhoanNhaTuyenDung: 'danh-sach-tai-khoan-nha-tuyen-dung',
     taikhoancuatoi: 'tai-khoan-cua-toi',
+    manageApplySlug: {
+        ungVienApply: 'view-all-apply',
+        nhaTuyenDungDashBoard: 'view-all-dashboard',
+    },
 });
 
 export const StatusCode = Object.freeze({
