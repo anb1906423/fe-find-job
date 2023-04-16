@@ -6,5 +6,13 @@ import UngTuyenUngVien from '../../components/UngTuyenComponent/components/UngVi
 export default function ManageApply() {
     const router = useRouter();
 
-    return <div>{router?.query.slug === Params.manageApplySlug.ungVienApply && <UngTuyenUngVien />}</div>;
+    return (
+        <div
+            style={{
+                minHeight: '60vh',
+            }}
+        >
+            {router?.query.slug === Params.manageApplySlug.ungVienApply && <UngTuyenUngVien />}
+        </div>
+    );
 }

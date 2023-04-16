@@ -79,6 +79,8 @@ const ChiTietCongViec = (props) => {
         }
     };
 
+    console.log(props);
+
     const handleSubmitHoSo = async () => {
         if (!_.isEmpty(userInfo)) {
             const idUser = userInfo?.id;
@@ -101,6 +103,7 @@ const ChiTietCongViec = (props) => {
                             diaChi: data.diaChi || 'Đang cập nhật',
                             soDienThoai: data.soDienThoai || 'Đang cập nhật',
                             markDown: contentHTML || '',
+                            tenCongty: props.tenCty,
                         };
 
                         setIsLoading(true);
@@ -350,7 +353,11 @@ const ChiTietCongViec = (props) => {
                                         <div className="to-apply">
                                             <strong className="content-item">
                                                 Cách 2: Nộp hồ sơ qua email
-                                                <button className="apply-btn" style={{ marginLeft: '16px' }}>
+                                                <button
+                                                    className="apply-btn"
+                                                    style={{ marginLeft: '16px' }}
+                                                    onClick={() => handleShowModelUngTuyen()}
+                                                >
                                                     Nộp hồ sơ
                                                 </button>
                                             </strong>

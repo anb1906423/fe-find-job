@@ -77,33 +77,37 @@ export default function PostComponent() {
             setIsEdit(true);
 
             const fetch = async () => {
-                const Res = await getPostData(params.query?.id);
+                try {
+                    const Res = await getPostData(params.query?.id);
 
-                if (Res) {
-                    setDataPost((prev) => {
-                        return {
-                            ...prev,
-                            contentHTML: Res?.data?.contentHTML,
-                            contentMarkDown: Res?.data?.contentMarkDown,
-                            chucDanh: Res?.data?.chucDanh,
-                            capBac: Res?.data?.capBac,
-                            loaiHopDong: Res?.data?.loaiHopDong,
-                            mucLuong: Res?.data?.mucLuong,
-                            diaDiemLamViec: Res?.data?.diaDiemLamViec,
-                            linhVucNgheNghiep: Res?.data?.linhVucNgheNghiep,
-                            hanNopHoSo: Res?.data?.hanNopHoSo,
-                            soLuong: Res?.data?.soLuong,
-                            moTa: Res?.data?.moTa,
-                            kinhNghiem: Res?.data?.kinhNghiem,
-                            bangCap: Res?.data?.bangCap,
-                            yeuCauGioiTinh: Res?.data?.yeuCauGioiTinh,
-                            yeuCauHoSo: Res?.data?.yeuCauHoSo,
-                            emailNopHoSo: Res?.data?.emailNopHoSo,
-                            hotline: Res?.data?.hotline,
-                            diaChiNopTrucTiep: Res?.data?.diaChiNopTrucTiep,
-                            yeuCauTuyenDung: Res?.data?.yeuCauTuyenDung,
-                        };
-                    });
+                    if (Res) {
+                        setDataPost((prev) => {
+                            return {
+                                ...prev,
+                                contentHTML: Res?.data?.contentHTML,
+                                contentMarkDown: Res?.data?.contentMarkDown,
+                                chucDanh: Res?.data?.chucDanh,
+                                capBac: Res?.data?.capBac,
+                                loaiHopDong: Res?.data?.loaiHopDong,
+                                mucLuong: Res?.data?.mucLuong,
+                                diaDiemLamViec: Res?.data?.diaDiemLamViec,
+                                linhVucNgheNghiep: Res?.data?.linhVucNgheNghiep,
+                                hanNopHoSo: Res?.data?.hanNopHoSo,
+                                soLuong: Res?.data?.soLuong,
+                                moTa: Res?.data?.moTa,
+                                kinhNghiem: Res?.data?.kinhNghiem,
+                                bangCap: Res?.data?.bangCap,
+                                yeuCauGioiTinh: Res?.data?.yeuCauGioiTinh,
+                                yeuCauHoSo: Res?.data?.yeuCauHoSo,
+                                emailNopHoSo: Res?.data?.emailNopHoSo,
+                                hotline: Res?.data?.hotline,
+                                diaChiNopTrucTiep: Res?.data?.diaChiNopTrucTiep,
+                                yeuCauTuyenDung: Res?.data?.yeuCauTuyenDung,
+                            };
+                        });
+                    }
+                } catch (error) {
+                    console.log(error);
                 }
             };
 
@@ -262,8 +266,6 @@ export default function PostComponent() {
         };
 
         try {
-            console.log(isEdit);
-
             setIsLoading(true);
             setDataPost((prev) => {
                 return {
