@@ -10,7 +10,8 @@ import Link from 'next/link';
 import _ from 'lodash';
 
 const UngVien = ({ dulieu, metaData, currentPage, handleLoadMoreUngVien }) => {
-    console.log(metaData);
+    console.log(dulieu);
+    console.log(!_.isEmpty(metaData), metaData.totalPages, currentPage);
 
     return (
         <div className="ung-vien">
@@ -19,6 +20,7 @@ const UngVien = ({ dulieu, metaData, currentPage, handleLoadMoreUngVien }) => {
                     {dulieu && dulieu.length > 0 ? (
                         dulieu.map((item) => {
                             const id = uuidv4();
+
                             if (item.state) {
                                 return (
                                     <Col sm={6} key={id}>
