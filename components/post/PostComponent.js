@@ -77,33 +77,37 @@ export default function PostComponent() {
             setIsEdit(true);
 
             const fetch = async () => {
-                const Res = await getPostData(params.query?.id);
+                try {
+                    const Res = await getPostData(params.query?.id);
 
-                if (Res) {
-                    setDataPost((prev) => {
-                        return {
-                            ...prev,
-                            contentHTML: Res?.data?.contentHTML,
-                            contentMarkDown: Res?.data?.contentMarkDown,
-                            chucDanh: Res?.data?.chucDanh,
-                            capBac: Res?.data?.capBac,
-                            loaiHopDong: Res?.data?.loaiHopDong,
-                            mucLuong: Res?.data?.mucLuong,
-                            diaDiemLamViec: Res?.data?.diaDiemLamViec,
-                            linhVucNgheNghiep: Res?.data?.linhVucNgheNghiep,
-                            hanNopHoSo: Res?.data?.hanNopHoSo,
-                            soLuong: Res?.data?.soLuong,
-                            moTa: Res?.data?.moTa,
-                            kinhNghiem: Res?.data?.kinhNghiem,
-                            bangCap: Res?.data?.bangCap,
-                            yeuCauGioiTinh: Res?.data?.yeuCauGioiTinh,
-                            yeuCauHoSo: Res?.data?.yeuCauHoSo,
-                            emailNopHoSo: Res?.data?.emailNopHoSo,
-                            hotline: Res?.data?.hotline,
-                            diaChiNopTrucTiep: Res?.data?.diaChiNopTrucTiep,
-                            yeuCauTuyenDung: Res?.data?.yeuCauTuyenDung,
-                        };
-                    });
+                    if (Res) {
+                        setDataPost((prev) => {
+                            return {
+                                ...prev,
+                                contentHTML: Res?.data?.contentHTML,
+                                contentMarkDown: Res?.data?.contentMarkDown,
+                                chucDanh: Res?.data?.chucDanh,
+                                capBac: Res?.data?.capBac,
+                                loaiHopDong: Res?.data?.loaiHopDong,
+                                mucLuong: Res?.data?.mucLuong,
+                                diaDiemLamViec: Res?.data?.diaDiemLamViec,
+                                linhVucNgheNghiep: Res?.data?.linhVucNgheNghiep,
+                                hanNopHoSo: Res?.data?.hanNopHoSo,
+                                soLuong: Res?.data?.soLuong,
+                                moTa: Res?.data?.moTa,
+                                kinhNghiem: Res?.data?.kinhNghiem,
+                                bangCap: Res?.data?.bangCap,
+                                yeuCauGioiTinh: Res?.data?.yeuCauGioiTinh,
+                                yeuCauHoSo: Res?.data?.yeuCauHoSo,
+                                emailNopHoSo: Res?.data?.emailNopHoSo,
+                                hotline: Res?.data?.hotline,
+                                diaChiNopTrucTiep: Res?.data?.diaChiNopTrucTiep,
+                                yeuCauTuyenDung: Res?.data?.yeuCauTuyenDung,
+                            };
+                        });
+                    }
+                } catch (error) {
+                    console.log(error);
                 }
             };
 
@@ -113,16 +117,23 @@ export default function PostComponent() {
 
     useEffect(() => {
         const Fetch = async () => {
-            const [ResKinhNghiem, ResBangCap, ResCapBac, ResHopDong, ResMucLuong, ResLinhVucLamViec, ResDiaDiemLamViec] =
-                await Promise.all([
-                    getAllKinhghiem(),
-                    getAllBangCap(),
-                    getAllViTriMongMuon(),
-                    getAllLoaiHopDong(),
-                    getAllMucLuong(),
-                    getAllNganhNghe(),
-                    getAllDiaDiemLamViec()
-                ]);
+            const [
+                ResKinhNghiem,
+                ResBangCap,
+                ResCapBac,
+                ResHopDong,
+                ResMucLuong,
+                ResLinhVucLamViec,
+                ResDiaDiemLamViec,
+            ] = await Promise.all([
+                getAllKinhghiem(),
+                getAllBangCap(),
+                getAllViTriMongMuon(),
+                getAllLoaiHopDong(),
+                getAllMucLuong(),
+                getAllNganhNghe(),
+                getAllDiaDiemLamViec(),
+            ]);
 
             setDataPost((prev) => {
                 return {
@@ -133,7 +144,7 @@ export default function PostComponent() {
                     HopDongRender: ResHopDong.data,
                     MucLuongRender: ResMucLuong.data,
                     LinhVucNgheNghiepRender: ResLinhVucLamViec.data,
-                    DiaDiemLamViecRender: ResDiaDiemLamViec.data
+                    DiaDiemLamViecRender: ResDiaDiemLamViec.data,
                 };
             });
         };
@@ -192,7 +203,7 @@ export default function PostComponent() {
                 hotline: '',
                 diaChiNopTrucTiep: '',
                 yeuCauTuyenDung: '',
-                moTa: ""
+                moTa: '',
             };
         });
     };
@@ -255,8 +266,6 @@ export default function PostComponent() {
         };
 
         try {
-            console.log(isEdit);
-
             setIsLoading(true);
             setDataPost((prev) => {
                 return {
@@ -307,7 +316,7 @@ export default function PostComponent() {
             {isLoading && <Loading title={dataPost.titleLoading} />}
             <form onSubmit={handleSubmit}>
                 <Container>
-                    <h6 className='text-center text-uppercase heading-in-create-job-page mt-3'>Thông tin công việc</h6>
+                    <h6 className="text-center text-uppercase heading-in-create-job-page mt-3">Thông tin công việc</h6>
                     <Row className="my-1">
                         <Col sm={8}>
                             <Row>
@@ -477,7 +486,7 @@ export default function PostComponent() {
                                     required
                                     maxLength={200}
                                     style={{
-                                        height: 232
+                                        height: 232,
                                     }}
                                 />
                             </Col>
@@ -486,10 +495,11 @@ export default function PostComponent() {
                         <label className="my-2">Yêu cầu nhà tuyển dụng</label>
                         <textarea className="form-control" placeholder="" type="text" value="" onChange="" />
                     </Col> */}
-
                     </Row>
                     <Row>
-                        <h6 className='text-center text-uppercase heading-in-create-job-page mt-3'>Thông tin liên hệ</h6>
+                        <h6 className="text-center text-uppercase heading-in-create-job-page mt-3">
+                            Thông tin liên hệ
+                        </h6>
                         <Col sm={4} className="mt-1 mb-2">
                             <label className="my-2">Email Nộp hồ sơ</label>
                             <input
@@ -528,7 +538,9 @@ export default function PostComponent() {
                         </Col>
                     </Row>
                     <Row className="">
-                        <h6 className='text-center text-uppercase heading-in-create-job-page mt-3'>Thông tin yêu cầu</h6>
+                        <h6 className="text-center text-uppercase heading-in-create-job-page mt-3">
+                            Thông tin yêu cầu
+                        </h6>
                         <Col sm={8}>
                             <Row>
                                 <Col sm={6} className="mt-2 mb-2">
@@ -602,7 +614,7 @@ export default function PostComponent() {
                         </Col>
                     </Row>
                     <Row>
-                        <h6 className='text-center text-uppercase heading-in-create-job-page mt-3'>Chế độ phúc lợi</h6>
+                        <h6 className="text-center text-uppercase heading-in-create-job-page mt-3">Chế độ phúc lợi</h6>
                         <Col sm={12} className={cx('mark-down', 'mt-2')}>
                             <label className="my-2">
                                 <strong> * Chúng tôi khuyến cáo bạn nên nhập đủ các trường mà chúng tôi đề xuất</strong>

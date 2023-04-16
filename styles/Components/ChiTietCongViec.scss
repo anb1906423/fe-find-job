@@ -1,4 +1,24 @@
 .ant-modal-wrap {
+
+    .custom-line {
+        font-size: 14px;
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-size: 17px;
+        }
+
+        img {
+            width     : 90%;
+            display   : block;
+            object-fit: cover;
+            margin    : 0 auto;
+        }
+
+    }
+
     .ant-modal-content {
         .job-detail-header {
             height        : 156px;
