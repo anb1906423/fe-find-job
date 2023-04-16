@@ -469,7 +469,7 @@ export default function PostComponent() {
                                 <label className="my-2">Mô tả công việc</label>
                                 <TextArea
                                     onChange={handleChangeState}
-                                    name="des"
+                                    name="moTa"
                                     className="form-control"
                                     type="text"
                                     value={dataPost.moTa}
