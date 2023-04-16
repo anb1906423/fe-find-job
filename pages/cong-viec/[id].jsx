@@ -311,90 +311,90 @@ const ChiTietCongViec = (props) => {
                                         <HeadingInDetailJob title="Yêu cầu hồ sơ" />
                                         <div className="re-line job-des">{props.yeuCauHoSo}</div>
                                     </div>
-                                    <div className="job-contact-info-wrap box-content">
-                                        <HeadingInDetailJob title="Thông tin liên hệ" />
-                                        <div className="job-des">
-                                            <div className="d-flex align-items-center content-item">
-                                                <FaMapMarkerAlt />
-                                                <p>
-                                                    <strong>Địa chỉ: </strong>
-                                                    {props.diaChi}
-                                                </p>
+                                </div>
+                                <div className='job-contact-info-wrap box-content'>
+                                    <HeadingInDetailJob title="Thông tin liên hệ" />
+                                    <div className='job-des'>
+                                        <div className='d-flex align-items-center content-item'>
+                                            <FaMapMarkerAlt />
+                                            <p><strong>Địa chỉ: </strong>{props.diaChi}</p>
+                                        </div>
+                                        <div className='d-flex align-items-center content-item'>
+                                            <FaPhoneAlt />
+                                            <p>
+                                                <strong>Số điện thoại:&nbsp; </strong>
+                                                <a href={`tel:${props.soDienThoai}`}>
+                                                    {props.soDienThoai}
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='job-contact-info-wrap box-content'>
+                                    <HeadingInDetailJob title="Cách nộp hồ sơ" />
+                                    <div className='job-des'>
+                                        <div className='to-apply'>
+                                            <strong className='content-item'>Cách 1: Nộp trực tiếp tại văn phòng</strong>
+                                            <div className='d-flex align-items-center content-item'>
+                                                <p>Địa chỉ nộp: {props.diaChiNopTrucTiep}</p>
                                             </div>
-                                            <div className="d-flex align-items-center content-item">
-                                                <FaPhoneAlt />
-                                                <p>
-                                                    <strong>Số điện thoại:&nbsp; </strong>
-                                                    <a href={`tel:${props.soDienThoai}`}>{props.soDienThoai}</a>
-                                                </p>
+                                        </div>
+                                        <div className='to-apply'>
+                                            <strong className='content-item'>Cách 2: Nộp hồ sơ qua email
+                                                <button className="apply-btn" style={{ marginLeft: "16px" }}>
+                                                    Nộp hồ sơ
+                                                </button>
+                                            </strong>
+                                            <div className='d-flex align-items-center content-item'>
+                                                <p>Bấm vào nút "NỘP HỒ SƠ" để gửi hồ sơ đến nhà tuyển dụng</p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="job-contact-info-wrap box-content">
-                                        <HeadingInDetailJob title="Cách nộp hồ sơ" />
-                                        <div className="job-des">
-                                            <div className="to-apply">
-                                                <strong className="content-item">
-                                                    Cách 1: Nộp trực tiếp tại văn phòng
-                                                </strong>
-                                                <div className="d-flex align-items-center content-item">
-                                                    <p>Địa chỉ nộp: {props.diaChi}</p>
-                                                </div>
-                                            </div>
-                                            <div className="to-apply">
-                                                <strong className="content-item">
-                                                    Cách 2: Nộp hồ sơ qua email
-                                                    <button
-                                                        className="apply-btn"
-                                                        onClick={() => handleShowModelUngTuyen()}
-                                                        style={{ marginLeft: '16px' }}
-                                                    >
-                                                        Nộp hồ sơ
-                                                    </button>
-                                                </strong>
-                                                <div className="d-flex align-items-center content-item">
-                                                    <p>Bấm vào nút "NỘP HỒ SƠ" để gửi hồ sơ đến nhà tuyển dụng</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <p>
-                                            * Hạn nộp:{' '}
-                                            <strong className="text-danger">{convertTime(props.hanNopHoSo)}</strong>
-                                        </p>
-                                    </div>
+                                </div>
+                                <div>
+                                    <p>
+                                        * Hạn nộp: <strong className="text-danger">
+                                            {convertTime(props.hanNopHoSo)}
+                                        </strong>
+                                    </p>
                                 </div>
                             </div>
-                            <div className="col-4 right-body">
-                                <div className="right-body-item">
-                                    <h6 className="heading text-uppercase text-center">thông tin công ty</h6>
-                                    <div className="d-flex align-items-center content-item">
-                                        <FaMapMarkerAlt />
-                                        <p>{props.diaChi}</p>
-                                    </div>
-                                    <div className="d-flex align-items-center content-item">
-                                        <FaPhoneAlt />
-                                        <p>
-                                            <a href={`tel:${props.soDienThoai}`}>{props.soDienThoai}</a>
-                                        </p>
-                                    </div>
-                                    <div className="d-flex align-items-center content-item">
-                                        <FaChrome />
-                                        <a target="_blank" href={props.website}>
-                                            <p>{props.website}</p>
-                                        </a>
-                                    </div>
-                                    <div className="d-flex align-items-center content-item">
-                                        <FaEdit />
-                                        <a href="">
-                                            <p>Xem chi tiết công ty</p>
-                                        </a>
-                                    </div>
+                        </div>
+                        <div className="col-4 right-body">
+                            <div className='right-body-item'>
+                                <h6 className="heading text-uppercase text-center">
+                                    thông tin công ty
+                                </h6>
+                                <div className='d-flex align-items-center content-item'>
+                                    <FaMapMarkerAlt />
+                                    <p>{props.diaChi}</p>
                                 </div>
-                                <div className="right-body-item">
-                                    <h6 className="heading text-uppercase text-center">Việc làm cùng công ty</h6>
+                                <div className='d-flex align-items-center content-item'>
+                                    <FaPhoneAlt />
+                                    <p>
+                                        <a href={`tel:${props.soDienThoai}`}>
+                                            {props.soDienThoai}
+                                        </a>
+                                    </p>
                                 </div>
+                                <div className='d-flex align-items-center content-item'>
+                                    <FaChrome />
+                                    <a target="_blank" href={props.website}>
+                                        <p>{props.website}</p>
+                                    </a>
+                                </div>
+                                <div className='d-flex align-items-center content-item'>
+                                    <FaEdit />
+                                    <a href="">
+                                        <p>Xem chi tiết công ty</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div className='right-body-item'>
+                                <h6 className="heading text-uppercase text-center">
+                                    Việc làm cùng công ty
+                                </h6>
+                                
                             </div>
                         </div>
                     </div>

@@ -155,7 +155,10 @@ const SearchResult = () => {
                         ...job,
                         // linhVucNgheNghiep: company.linhVucNgheNghiep,
                         logoCty: company.logoCty,
+                        soDienThoai: company.soDienThoai,
                         tenCty: company.tenCty,
+                        diaChi: company.diaChi,
+                        website: company.website
                     } : job;
                 });
 
@@ -213,12 +216,9 @@ const SearchResult = () => {
         return (
             <CongViecComponent
                 key={index}
-                chucDanh={job.chucDanh}
-                logoCty={job.logoCty}
                 mucLuongMongMuon={job.mucLuong}
-                diaDiemLamViec={job.diaDiemLamViec}
                 created_at={job.created_at}
-                tenCty={job.tenCty}
+                {...job}
                 col={12}
             />
         )
