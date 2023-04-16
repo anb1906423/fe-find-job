@@ -46,7 +46,7 @@ const CongViecComponent = (props) => {
       <div className="row">
         <div className="col-3 image-box d-flex justify-content-center align-items-center">
           {/* <Link href={`/cong-viec/${props.id}`}> */}
-          <div onClick={() => showModal()}>
+          <div onClick={() => showModal()} className='pointer'>
             <img src={props.logoCty || "https://thumbs.dreamstime.com/b/vintage-rusty-metal-sign-white-background-hiring-hiring-98774212.jpg"} alt="Logo công ty" />
           </div>
           {/* </Link> */}
@@ -54,7 +54,7 @@ const CongViecComponent = (props) => {
         <div className="col-9 info-box">
           <div>
             {/* <Link href={`/cong-viec/${props.id}`}> */}
-            <div onClick={() => showModal()}>
+            <div onClick={() => showModal()} className='pointer'>
               <h6 className="text-uppercase chuc-danh">
                 {props.chucDanh}
               </h6>

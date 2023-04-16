@@ -164,7 +164,7 @@ const ChiTietCongViec = (props) => {
                                         <div className='to-apply'>
                                             <strong className='content-item'>Cách 1: Nộp trực tiếp tại văn phòng</strong>
                                             <div className='d-flex align-items-center content-item'>
-                                                <p>Địa chỉ nộp: {props.diaChi}</p>
+                                                <p>Địa chỉ nộp: {props.diaChiNopTrucTiep}</p>
                                             </div>
                                         </div>
                                         <div className='to-apply'>
