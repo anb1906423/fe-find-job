@@ -225,6 +225,11 @@ const Header = () => {
                                                   icon: <i className="bi bi-card-checklist"></i>,
                                                   to: '/post/quan-li-bai-viet',
                                               },
+                                              {
+                                                  title: 'Quản lí ứng viên ứng tuyển',
+                                                  icon: <i className="bi bi-file-earmark-person-fill"></i>,
+                                                  to: '/manage-apply/view-all-dashboard?isAll=true',
+                                              },
                                           ]
                                 }
                                 onChange={handleMenuChange}

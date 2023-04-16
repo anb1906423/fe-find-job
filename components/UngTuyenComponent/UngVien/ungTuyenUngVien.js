@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import useGetRoleUser from '../../../../app/hook/useGetRoleUser/useGetRoleUser';
-import { roleUser } from '../../../../util/constant';
+import useGetRoleUser from '../../../app/hook/useGetRoleUser/useGetRoleUser';
+import { roleUser } from '../../../util/constant';
 import { useRouter } from 'next/router';
-import { getDataLimitUngTuyen } from '../../../../services/ungTuyenServices';
-import convertTime from '../../../../app/@func/convertTime/convertTime';
+import { getDataLimitUngTuyen } from '../../../services/ungTuyenServices';
+import convertTime from '../../../app/@func/convertTime/convertTime';
 import _ from 'lodash';
 
 export default function UngTuyenUngVien() {
@@ -61,8 +61,7 @@ export default function UngTuyenUngVien() {
                     </tr>
                 </thead>
                 <tbody>
-                    {data &&
-                        data.length > 0 &&
+                    {data && data.length > 0 ? (
                         data.map((item, index) => (
                             <tr key={item._id}>
                                 <th scope="row">{index + 1}</th>
@@ -77,7 +76,14 @@ export default function UngTuyenUngVien() {
                                     {new Date(+item.time).toLocaleDateString('vi-VI')}
                                 </td>
                             </tr>
-                        ))}
+                        ))
+                    ) : (
+                        <tr>
+                            <th colSpan={5} scope="row">
+                                Bạn chưa ứng tuyển ở nơi nào
+                            </th>
+                        </tr>
+                    )}
                 </tbody>
             </table>
             {metaData.hasNextPage && (

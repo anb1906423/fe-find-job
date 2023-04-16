@@ -374,35 +374,35 @@ const ChiTietCongViec = (props) => {
                                     </p>
                                 </div>
                             </div>
-                        </div>
-                        <div className="col-4 right-body">
-                            <div className="right-body-item">
-                                <h6 className="heading text-uppercase text-center">thông tin công ty</h6>
-                                <div className="d-flex align-items-center content-item">
-                                    <FaMapMarkerAlt />
-                                    <p>{props.diaChi}</p>
+                            <div className="col-4 right-body">
+                                <div className="right-body-item">
+                                    <h6 className="heading text-uppercase text-center">thông tin công ty</h6>
+                                    <div className="d-flex align-items-center content-item">
+                                        <FaMapMarkerAlt />
+                                        <p>{props.diaChi}</p>
+                                    </div>
+                                    <div className="d-flex align-items-center content-item">
+                                        <FaPhoneAlt />
+                                        <p>
+                                            <a href={`tel:${props.soDienThoai}`}>{props.soDienThoai}</a>
+                                        </p>
+                                    </div>
+                                    <div className="d-flex align-items-center content-item">
+                                        <FaChrome />
+                                        <a target="_blank" href={props.website}>
+                                            <p>{props.website}</p>
+                                        </a>
+                                    </div>
+                                    <div className="d-flex align-items-center content-item">
+                                        <FaEdit />
+                                        <a href="">
+                                            <p>Xem chi tiết công ty</p>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div className="d-flex align-items-center content-item">
-                                    <FaPhoneAlt />
-                                    <p>
-                                        <a href={`tel:${props.soDienThoai}`}>{props.soDienThoai}</a>
-                                    </p>
+                                <div className="right-body-item">
+                                    <h6 className="heading text-uppercase text-center">Việc làm cùng công ty</h6>
                                 </div>
-                                <div className="d-flex align-items-center content-item">
-                                    <FaChrome />
-                                    <a target="_blank" href={props.website}>
-                                        <p>{props.website}</p>
-                                    </a>
-                                </div>
-                                <div className="d-flex align-items-center content-item">
-                                    <FaEdit />
-                                    <a href="">
-                                        <p>Xem chi tiết công ty</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div className="right-body-item">
-                                <h6 className="heading text-uppercase text-center">Việc làm cùng công ty</h6>
                             </div>
                         </div>
                     </div>
