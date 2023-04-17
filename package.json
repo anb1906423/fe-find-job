@@ -45,7 +45,7 @@
     "yarn": "^1.22.19"
   },
   "devDependencies": {
-    "react-select": "^5.7.0",
+    "react-select": "^5.7.2",
     "sass": "^1.57.1"
   }
 }

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Carousel from '../components/Carousel';
 import Heading from '../components/Heading';
 import CongViecComponent from '../components/CongViecComponent';
-import axios from 'axios'
-import { backendAPI } from '../config'
-import { swalert, swtoast } from '../mixins/swal.mixin'
-import { DoubleRightOutlined } from "@ant-design/icons"
+import axios from 'axios';
+import { backendAPI } from '../config';
+import { swalert, swtoast } from '../mixins/swal.mixin';
+import { DoubleRightOutlined } from '@ant-design/icons';
 
 const index = () => {
     const [jobs, setJobs] = useState([]);
@@ -18,16 +18,19 @@ const index = () => {
                 const companyResponse = await axios.get(backendAPI + '/nha-tuyen-dung');
 
                 // Kiểm tra dữ liệu và gộp thông tin công việc và nhà tuyển dụng dựa trên emailCty
-                const jobsWithCompanyInfo = jobResponse.data.map(job => {
-                    const company = companyResponse.data.find(company => company.email === job.emailCty);
-                    return company ? {
-                        ...job,
-                        logoCty: company.logoCty,
-                        soDienThoai: company.soDienThoai,
-                        tenCty: company.tenCty,
-                        diaChi: company.diaChi,
-                        website: company.website
-                    } : job;
+                const jobsWithCompanyInfo = jobResponse.data.map((job) => {
+                    const company = companyResponse.data.find((company) => company.email === job.emailCty);
+                    return company
+                        ? {
+                              ...job,
+                              logoCty: company.logoCty,
+                              soDienThoai: company.soDienThoai,
+                              tenCty: company.tenCty,
+                              diaChi: company.diaChi,
+                              website: company.website,
+                              idNhaTuyenDung: company.id,
+                          }
+                        : job;
                 });
 
                 setJobs(jobsWithCompanyInfo);
@@ -43,10 +46,10 @@ const index = () => {
     }, []);
 
     const handleShowMore = () => {
-        setJobsToShow(prevState => prevState + 4);
+        setJobsToShow((prevState) => prevState + 4);
     };
 
-    const filteredJobs = jobs.filter(job => job.state);
+    const filteredJobs = jobs.filter((job) => job.state);
     const displayedJobs = filteredJobs.slice(0, jobsToShow).map((job, index) => {
         return (
             <CongViecComponent
@@ -56,9 +59,8 @@ const index = () => {
                 {...job}
                 col={6}
             />
-        )
+        );
     });
-
 
     return (
         <div className="trang-chu">
@@ -70,7 +72,7 @@ const index = () => {
                 <div className="the-best-job-wp row gutter">{displayedJobs}</div>
                 {jobsToShow < filteredJobs.length && (
                     <div className="xem-them">
-                        <button className='d-flex justify-content-between align-items-center' onClick={handleShowMore}>
+                        <button className="d-flex justify-content-between align-items-center" onClick={handleShowMore}>
                             {/* Xem thêm */}
                             <DoubleRightOutlined />
                         </button>

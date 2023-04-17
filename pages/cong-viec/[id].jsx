@@ -79,8 +79,6 @@ const ChiTietCongViec = (props) => {
         }
     };
 
-    console.log(props);
-
     const handleSubmitHoSo = async () => {
         if (!_.isEmpty(userInfo)) {
             const idUser = userInfo?.id;
@@ -95,7 +93,8 @@ const ChiTietCongViec = (props) => {
 
                         const dataBuil = {
                             idUngVien: data.id,
-                            idNhaTuyenDung: props.id,
+                            idNhaTuyenDung: props.idNhaTuyenDung,
+                            idJobPost: props.id,
                             time: new Date().getTime(),
                             emailNhaTuyenDung: props.emailNopHoSo || data.emailCty,
                             emailUngVien: data.email || 'Đang cập nhật',
@@ -104,6 +103,7 @@ const ChiTietCongViec = (props) => {
                             soDienThoai: data.soDienThoai || 'Đang cập nhật',
                             markDown: contentHTML || '',
                             tenCongty: props.tenCty,
+                            tenJob: props.chucDanh,
                         };
 
                         setIsLoading(true);

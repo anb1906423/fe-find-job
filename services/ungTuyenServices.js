@@ -1,3 +1,4 @@
+import { data } from 'jquery';
 import axios from '../pages/api/axiosResData';
 
 export const sendDataUngTuyen = (data) => {
@@ -11,4 +12,16 @@ export const getDataLimitUngTuyen = ({ page = 1, limit = 10, data, typeQuery }) 
         }`,
         data,
     );
+};
+
+export const getInfoNhaTuyenDung = (id) => {
+    return axios.get(`/nha-tuyen-dung/${id}`);
+};
+
+export const deleteOrRestoreUngVien = (data) => {
+    return axios.post(`/api/v1/ung-tuyen/trash-ung-vien-ung-tuyen`, data);
+};
+
+export const changeCheckNew = (data) => {
+    return axios.post(`/api/v1/ung-tuyen/post-check-isNew`, data);
 };

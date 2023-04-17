@@ -16,7 +16,7 @@ import RenderArray from '../../app/@func/RenderArray';
 
 const cx = classNames.bind(styles);
 
-function TrangChiTiet({ data }) {
+function TrangChiTiet({ data, isDeXuat = true }) {
     const params = useRouter();
 
     const handleClick = useCallback(
@@ -38,7 +38,7 @@ function TrangChiTiet({ data }) {
                 {params.isFallback ? <LoadingPending /> : <></>}
                 <div className="container">
                     <Row>
-                        <Col lg={9}>
+                        <Col lg={!isDeXuat ? 12 : 9}>
                             {!_.isEmpty(data) && (
                                 <div className={cx('content-wp')}>
                                     <div className={cx('banner-color')}></div>
@@ -304,12 +304,14 @@ function TrangChiTiet({ data }) {
                                 </div>
                             )}
                         </Col>
-                        <Col lg={3} className={cx('de-xuat-ung-vien-wp')}>
-                            <div className={cx('title-suggest')}>
-                                <span>Ứng viên đề xuất</span>
-                            </div>
-                            <Dexuatungvien params={params} cx={cx} handleClick={handleClick} />
-                        </Col>
+                        {isDeXuat && (
+                            <Col lg={3} className={cx('de-xuat-ung-vien-wp')}>
+                                <div className={cx('title-suggest')}>
+                                    <span>Ứng viên đề xuất</span>
+                                </div>
+                                <Dexuatungvien params={params} cx={cx} handleClick={handleClick} />
+                            </Col>
+                        )}
                     </Row>
                 </div>
             </div>

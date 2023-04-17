@@ -23,3 +23,14 @@ export const roleUser = {
     NhaTuyenDung: 0,
     Admin: 1,
 };
+
+export const typeUngTuyen = {
+    delete: 'delete',
+    restore: 'restore',
+};
+
+export const manageUngTuyen = {
+    allUngVien: 1,
+    trashUngTuyen: 2,
+    showModal: true,
+};
