@@ -31,7 +31,7 @@ const index = () => {
                               idNhaTuyenDung: company.id,
                           }
                         : job;
-                });
+                    });
 
                 setJobs(jobsWithCompanyInfo);
             } catch (error) {
@@ -44,6 +44,7 @@ const index = () => {
 
         fetchJobs();
     }, []);
+
 
     const handleShowMore = () => {
         setJobsToShow((prevState) => prevState + 4);

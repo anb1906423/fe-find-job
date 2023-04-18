@@ -106,6 +106,8 @@ const ChiTietCongViec = (props) => {
                             tenJob: props.chucDanh,
                         };
 
+                        console.log(dataBuil);
+
                         setIsLoading(true);
 
                         const ResSubmit = await sendDataUngTuyen(dataBuil);
