@@ -196,6 +196,11 @@ export const Menu = [
         title: 'Xem cv cá nhân',
         icon: <i className="bi bi-filetype-css"></i>,
     },
+    {
+        title: 'Đổi mật khẩu',
+        icon: <i className="bi bi-compass"></i>,
+        to: '/wrong-change-pass',
+    },
 ];
 
 export const ViTriMongMuon = [

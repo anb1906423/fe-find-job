@@ -20,6 +20,14 @@ export const LayThongTinUngVien = (id) => {
     return axios.get(`/ung-vien/${id}`);
 };
 
+export const DoiMatKhauUngVien = (id, data) => {
+    return axios.put(`/ung-vien/doi-mat-khau/${id}`, data);
+};
+
+export const DoiMatKhauNhaTuyenDung = (id, data) => {
+    return axios.put(`/nha-tuyen-dung/doi-mat-khau/${id}`, data);
+};
+
 export const getAllKinhghiem = () => {
     return axios.get('/kinh-nghiem');
 };
@@ -54,7 +62,7 @@ export const getAllLoaiHopDong = () => {
 
 export const getAllDiaDiemLamViec = () => {
     return axios.get('/dia-diem-lam-viec');
-}
+};
 
 // cong viec ( dang bai tuyen dung )
 
