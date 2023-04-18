@@ -229,7 +229,7 @@ const ChiTietCongViec = (props) => {
                                     <p className="d-flex align-items-center col-6 mt-1">
                                         <ClockCircleOutlined />
                                         <p>
-                                            <strong>Hạn nộp hồ sơ: </strong>
+                                            <strong>Hạn nộp hồ so: </strong>
                                             {convertTime(props.hanNopHoSo)}
                                         </p>
                                     </p>
