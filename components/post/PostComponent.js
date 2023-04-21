@@ -484,7 +484,7 @@ export default function PostComponent() {
                                     value={dataPost.moTa}
                                     placeholder="Mô tả công việc"
                                     required
-                                    maxLength={200}
+                                    maxLength={2000}
                                     style={{
                                         height: 232,
                                     }}

@@ -27,13 +27,7 @@ const CongViecComponent = (props) => {
         // router.push(`/cong-viec/${props.id}`);
     };
 
-    const hiddenModal = () => {
-        setIsOpen(false);
-    };
-
     const { capBac, loaiHopDong, kinhNghiem, bangCap } = props;
-
-    console.log(props);
 
     const endDate = new Date();
 

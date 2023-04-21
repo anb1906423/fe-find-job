@@ -10,8 +10,10 @@ import { backendAPI } from '../../config';
 import { StatusCode } from '../../util/constant';
 import * as actions from '../../store/actions';
 import { swtoast } from "../../mixins/swal.mixin";
+import { useRouter } from 'next/router'
 
 const DangNhapNhaTuyenDung = () => {
+    const router = useRouter()
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -49,7 +51,7 @@ const DangNhapNhaTuyenDung = () => {
                 swtoast.success({
                     text: "Đăng nhập tài khoản thành công"
                 })
-                Router.push('/');
+                router.push('/');
             }
         } catch (error) {
             if (error && error.response && error.response.status === StatusCode.SaiTkOrMk) {

@@ -27,5 +27,5 @@ export default function MyApp({ Component, pageProps }) {
                 <Component {...pageProps} persistor={persistor} />
             </Layout>
         </Provider>
-    );
+    ); 
 }
