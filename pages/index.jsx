@@ -56,6 +56,7 @@ const index = () => {
             <CongViecComponent
                 key={index}
                 mucLuongMongMuon={job.mucLuong}
+                tenCongty={job.tenCty}
                 created_at={job.created_at}
                 {...job}
                 col={6}

@@ -39,7 +39,7 @@ const CongViecComponent = (props) => {
 
     return (
         <div className={`col-${props.col} cong-viec-component gx-3`}>
-            <ChiTietCongViec setIsOpen={setIsOpen} isOpen={isOpen} {...props} />
+            <ChiTietCongViec setIsOpen={setIsOpen} isOpen={isOpen} {...props} tenCty={props.tenCongty} />
 
             <div className="row">
                 <div className="col-3 image-box d-flex justify-content-center align-items-center">

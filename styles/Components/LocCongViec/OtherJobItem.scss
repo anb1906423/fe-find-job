@@ -1,0 +1,23 @@
+.other-jobs-box {
+    .other-jobs-item {
+        margin: 8px 0;
+        padding: 6px 0 8px;
+        border-bottom: 3px solid var(--main-color);
+        h6.chuc-danh {
+            margin-bottom: 2px;
+            font-size: 15px;
+        }
+
+        h6.ten-cong-ty {
+            color: #000;
+            font-weight: normal;
+            margin-top: 4px;
+            font-size: 14px;
+        }
+
+        p {
+            margin   : 0;
+            font-size: 12px;
+        }
+    }
+}

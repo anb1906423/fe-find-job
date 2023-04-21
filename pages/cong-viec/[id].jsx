@@ -24,6 +24,7 @@ import _ from 'lodash';
 import { LayThongTinUngVien } from '../../services/siteServices';
 import { sendDataUngTuyen } from '../../services/ungTuyenServices';
 import Loading from '../../app/components/loading/loading';
+import OtherJobsBox from '../../components/jobDetail/OtherJobsBox';
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
@@ -404,6 +405,13 @@ const ChiTietCongViec = (props) => {
                                 </div>
                                 <div className="right-body-item">
                                     <h6 className="heading text-uppercase text-center">Việc làm cùng công ty</h6>
+                                    <div>
+                                        <OtherJobsBox
+                                            emailCty={props.emailCty}
+                                            tenCty={props.tenCongty}
+                                            id={props.id}
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>
