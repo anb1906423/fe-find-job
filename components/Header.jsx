@@ -169,7 +169,7 @@ const Header = () => {
             .then((result) => {
                 if (result.isConfirmed) {
                     if (isLoginFireBase) {
-                        firebase.auth().signOut(provider);
+                        firebase.auth().signOut();
                         dispatch(actions.userLogOut());
                         router.push('/');
                     } else {

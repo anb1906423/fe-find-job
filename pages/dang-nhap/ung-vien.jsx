@@ -107,6 +107,7 @@ const DangNhapUngVien = () => {
                             Router.push('/dashboard/tai-khoan-cua-toi');
                         }
                     } catch (error) {
+                        firebase.auth().signOut();
                         if (error && error.response && error.response.status === StatusCode.SaiTkOrMk) {
                             swtoast.fire({
                                 text: error.response.data.message,
