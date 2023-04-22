@@ -36,9 +36,9 @@ const CongViecComponent = (props) => {
             <ChiTietCongViec setIsOpen={setIsOpen} isOpen={isOpen} {...props} tenCty={props.tenCongty} />
 
             <div className="row">
-                <div className="col-3 image-box d-flex justify-content-center align-items-center">
+                <div onClick={() => showModal()} className="col-3 image-box d-flex justify-content-center align-items-center">
                     {/* <Link href={`/cong-viec/${props.id}`}> */}
-                    <div onClick={() => showModal()} className="pointer">
+                    <div className="pointer">
                         <img
                             src={
                                 props.logoCty ||
