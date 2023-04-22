@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
 import { FaSearch, FaUserPlus } from 'react-icons/fa';
 import Tippy from '@tippyjs/react';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
 
 import SelectItem from './SelectItem';
 import Swal from 'sweetalert2';
@@ -17,6 +19,7 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import { backendAPI } from '../config';
 import queryString from 'query-string';
+import authFireBaseConfig from '../pages/dang-nhap/Firebase/auth';
 
 const menu = [
     {
@@ -116,9 +119,12 @@ const Header = () => {
     ];
 
     const Login = useSelector((state) => state.user.isLoggedIn);
+    const isLoginFireBase = useSelector((state) => state.user.isLoginFireBase);
     const dispatch = useDispatch();
     const role = useSelector((state) => state.user.role);
     const router = useRouter();
+
+    const provider = authFireBaseConfig();
 
     const [isLogin, setIsLogin] = useState(Login);
 
@@ -162,9 +168,14 @@ const Header = () => {
             })
             .then((result) => {
                 if (result.isConfirmed) {
-                    // window.location.assign('/');
-                    dispatch(actions.userLogOut());
-                    router.push('/');
+                    if (isLoginFireBase) {
+                        firebase.auth().signOut(provider);
+                        dispatch(actions.userLogOut());
+                        router.push('/');
+                    } else {
+                        dispatch(actions.userLogOut());
+                        router.push('/');
+                    }
                 }
             });
     };

@@ -18,6 +18,7 @@ const userReducer = (state = initialState, action) => {
                 userPersist: action.userInfo,
                 role: action.userInfo.role,
                 accessToken: action.userInfo.accessToken,
+                isLoginFireBase: action.userInfo.isLoginFireBase,
             };
 
         case actionTypes.USER_LOGOUT_SUCCESS:
