@@ -4,7 +4,6 @@ import classNames from 'classnames/bind';
 import Select from 'react-select';
 import { FaChrome, FaEdit, FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa';
 import { Col, Row } from 'react-bootstrap';
-import Link from 'next/link';
 
 import style from '../ungtuyen.module.scss';
 import { manageUngTuyen, roleUser, typeUngTuyen } from '../../../util/constant';
@@ -19,6 +18,7 @@ import Loading from '../../../app/components/loading/loading';
 import { Modal } from 'antd';
 import { LayThongTinUngVien } from '../../../services/siteServices';
 import TrangChiTiet from '../../TrangChiTiet/TrangChiTiet';
+import ExtendRender from './extendRender';
 
 const cx = classNames.bind(style);
 
@@ -275,37 +275,7 @@ export default function NhaTuyenDungUngTuyenManage() {
                 {isLoading && <Loading />}
                 <Row>
                     <Col md={9}>
-                        <div className={cx('congty')}>
-                            <div
-                                style={{
-                                    backgroundImage: `url(${
-                                        dataNTD?.banner
-                                            ? dataNTD?.banner
-                                            : 'https://lambanner.com/wp-content/uploads/2021/03/MNT-DESIGN-TOP-KICH-THUOC-BANNER-QUANG-CAO-GOOGLE-2021-1130x570.jpg'
-                                    })`,
-                                }}
-                                className={cx('banner')}
-                            ></div>
-                            <div
-                                className={cx('avatar')}
-                                style={{
-                                    backgroundImage: `url(${
-                                        dataNTD?.anhCongTy ? dataNTD?.anhCongTy : '../img/no-avatar.jpg'
-                                    })`,
-                                }}
-                            ></div>
-                            <p className={cx('navigate-ntd')}>
-                                <button className="btn btn-primary">
-                                    <Link href="/dashboard/tai-khoan-cua-toi">Sửa thông tin</Link>
-                                </button>
-                                <button className="btn btn-success">
-                                    <Link href="/post">Đăng tin tuyển dụng</Link>
-                                </button>
-                                <button className="btn btn-warning">
-                                    <Link href="/post/quan-li-bai-viet">Quản lí bài đăng</Link>
-                                </button>
-                            </p>
-                        </div>
+                        <ExtendRender dataNTD={dataNTD} />
                         <div className={cx('body-content')}>
                             <div className={cx('navication')}>
                                 <div className={cx('left-nav')}>

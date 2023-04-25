@@ -97,3 +97,11 @@ export const getPostData = (id) => {
 export const updatePostNhaTuyenDung = (id, data) => {
     return axios.put(`/cong-viec/update/${id}`, data);
 };
+
+export const GetPostNhaTuyenDungByType = (type = 'all', id) => {
+    if (type === 'all') {
+        return axios.get(`/nha-tuyen-dung`);
+    } else {
+        return axios.get(`/nha-tuyen-dung/${id}`);
+    }
+};
