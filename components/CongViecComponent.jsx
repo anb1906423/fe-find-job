@@ -58,7 +58,7 @@ const CongViecComponent = (props) => {
                         {/* </Link> */}
                     </div>
                     <div>
-                        <Link href={`/cong-viec/${props.id}`}>
+                        <Link href={`/chi-tiet/${props.idNhaTuyenDung}`}>
                             <p className="ten-cong-ty">{props.tenCty}</p>
                         </Link>
                     </div>

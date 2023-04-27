@@ -38,19 +38,27 @@ const FooterChuk = () => {
                                 <span>
                                     <i className="bi bi-telephone"></i>
                                 </span>
-                                <span className="mx-2">0869.224.814</span>
+                                <span className="mx-2">
+                                    <a href="tel:0948487660">
+                                        0948.487.660
+                                    </a>
+                                </span>
                             </div>
                             <div className="mb-2">
                                 <span>
                                     <i className="bi bi-envelope-check"></i>
                                 </span>
-                                <span className="mx-2">truongsonpt.80@gmail.com</span>
+                                <span className="mx-2">
+                                    <a href="mailto:dreamjobnotifi@gmail.com">
+                                        dreamjobnotifi@gmail.com
+                                    </a>
+                                </span>
                             </div>
                             <div className="mb-2">
                                 <span>
                                     <i className="bi bi-pin-map"></i>
                                 </span>
-                                <span className="mx-2">29b Định Công Thượng , Thành Phố Hà Nội</span>
+                                <span className="mx-2">112b, Hưng Lợi, Ninh Kiều, Cần Thơ</span>
                             </div>
                         </div>
                         <div className={cx('center-content')}>

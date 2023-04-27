@@ -398,7 +398,7 @@ const ChiTietCongViec = (props) => {
                                     </div>
                                     <div className="d-flex align-items-center content-item">
                                         <FaEdit />
-                                        <a href="">
+                                        <a href={`/chi-tiet/${props.idNhaTuyenDung}`}>
                                             <p>Xem chi tiết công ty</p>
                                         </a>
                                     </div>

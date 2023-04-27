@@ -14,6 +14,7 @@ const cx = classNames.bind(styles);
 
 function Dashboard() {
     const role = useSelector((state) => state.user.role);
+    const id = useSelector((state) => state.user.userInfo.id);
 
     return (
         <div className={cx('dash-board-wp')}>
@@ -44,7 +45,7 @@ function Dashboard() {
                                 <>
                                     <ActiveLink
                                         activeClassName={cx('active')}
-                                        href="/dashboard/danh-sach-tai-khoan-nha-tuyen-dung"
+                                        href={`/chi-tiet/${id}`}
                                     >
                                         <span>Thông Tin Công Ty</span>
                                     </ActiveLink>
