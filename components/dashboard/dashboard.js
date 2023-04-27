@@ -21,9 +21,58 @@ function Dashboard() {
                 <div className="row">
                     <div className={cx('col-3', 'left')}>
                         <div className={cx('wp-left')}>
+                            <ActiveLink activeClassName={cx('active')} href="/dashboard/tai-khoan-cua-toi">
+                                <span>Thông Tin Cá Nhân</span>
+                            </ActiveLink>
+                            {role === -1 && (
+                                <>
+                                    <ActiveLink
+                                        activeClassName={cx('active')}
+                                        href="/manage-apply/view-all-apply?isView=true"
+                                    >
+                                        <span>Việc Làm Đã Ứng Tuyển</span>
+                                    </ActiveLink>
+                                    <ActiveLink
+                                        activeClassName={cx('active')}
+                                        href="/wrong-change-pass"
+                                    >
+                                        <span>Đổi Mật Khẩu</span>
+                                    </ActiveLink>
+                                </>
+                            )}
                             {role === 0 && (
                                 <>
                                     <ActiveLink
+                                        activeClassName={cx('active')}
+                                        href="/dashboard/danh-sach-tai-khoan-nha-tuyen-dung"
+                                    >
+                                        <span>Thông Tin Công Ty</span>
+                                    </ActiveLink>
+                                    <ActiveLink
+                                        activeClassName={cx('active')}
+                                        href="/post"
+                                    >
+                                        <span>Đăng Tin Tuyển Dụng</span>
+                                    </ActiveLink>
+                                    <ActiveLink
+                                        activeClassName={cx('active')}
+                                        href="/post/quan-li-bai-viet"
+                                    >
+                                        <span>Quản Lý Tin</span>
+                                    </ActiveLink>
+                                    <ActiveLink
+                                        activeClassName={cx('active')}
+                                        href="/manage-apply/view-all-dashboard?isAll=true"
+                                    >
+                                        <span>Danh Sách Ứng Viên</span>
+                                    </ActiveLink>
+                                    <ActiveLink
+                                        activeClassName={cx('active')}
+                                        href="/wrong-change-pass"
+                                    >
+                                        <span>Đổi Mật Khẩu</span>
+                                    </ActiveLink>
+                                    {/* <ActiveLink
                                         activeClassName={cx('active')}
                                         href="/dashboard/danh-sach-nha-tuyen-dung"
                                     >
@@ -34,12 +83,9 @@ function Dashboard() {
                                         href="/dashboard/danh-sach-tai-khoan-nha-tuyen-dung"
                                     >
                                         <span>Danh Sách Tài Khoản Ứng Viên</span>
-                                    </ActiveLink>
+                                    </ActiveLink> */}
                                 </>
                             )}
-                            <ActiveLink activeClassName={cx('active')} href="/dashboard/tai-khoan-cua-toi">
-                                <span>Trang Cá Nhân</span>
-                            </ActiveLink>
                         </div>
                     </div>
                     <div className="col-9">

@@ -188,13 +188,9 @@ export const provinces = [
 
 export const Menu = [
     {
-        title: 'Xem trang cá nhân',
+        title: 'Trang cá nhân',
         icon: <i className="bi bi-person"></i>,
         to: '/dashboard/tai-khoan-cua-toi',
-    },
-    {
-        title: 'Xem cv cá nhân',
-        icon: <i className="bi bi-filetype-css"></i>,
     },
     {
         title: 'Đổi mật khẩu',
