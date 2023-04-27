@@ -45,7 +45,6 @@ const index = () => {
         fetchJobs();
     }, []);
 
-
     const handleShowMore = () => {
         setJobsToShow((prevState) => prevState + 4);
     };

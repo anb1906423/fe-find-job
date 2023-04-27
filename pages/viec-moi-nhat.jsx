@@ -156,7 +156,8 @@ const LatestJob = () => {
                         soDienThoai: company.soDienThoai,
                         tenCty: company.tenCty,
                         diaChi: company.diaChi,
-                        website: company.website
+                        website: company.website,
+                        idNhaTuyenDung: company.id,
                     } : job;
                 });
 

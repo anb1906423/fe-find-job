@@ -203,7 +203,7 @@ const DangNhapNhaTuyenDung = () => {
                 </div>
             ) : (
                 <div className="py-5">
-                    <p>Bạn đã đăng nhập !</p>
+                    <p>Bạn đã đăng nhập!</p>
                 </div>
             )}
         </div>

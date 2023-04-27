@@ -201,7 +201,7 @@ const DangNhapUngVien = () => {
             ) : (
                 <div>
                     <p className="text-center py-5">
-                        <span>Bạn đã đăng nhập thành công!</span>
+                        <span>Bạn đã đăng nhập!</span>
                     </p>
                 </div>
             )}
