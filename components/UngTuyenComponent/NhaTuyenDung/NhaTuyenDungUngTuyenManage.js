@@ -36,6 +36,7 @@ export default function NhaTuyenDungUngTuyenManage() {
     const [typeQuery, setTypeQuery] = useState('idNhaTuyenDung');
     const [idQuery, setIdQuery] = useState();
     const [isLoading, setIsLoading] = useState(false);
+    const [time_Appointment, setTimeAppointment] = useState('');
 
     // pagination
     const [metaData, setMetaData] = useState({});
@@ -143,6 +144,12 @@ export default function NhaTuyenDungUngTuyenManage() {
     }, [navSearch]);
 
     useEffect(() => {
+        setTimeAppointment('');
+        router.push(`/manage-apply/view-all-dashboard?isAll=true`);
+        setIsOpenModal(false);
+    }, []);
+
+    useEffect(() => {
         if (isOpenModal) {
             const dataID = router.query?.dataID;
             const idUngTuyen = router.query?.ungtuyen;
@@ -185,6 +192,52 @@ export default function NhaTuyenDungUngTuyenManage() {
             setDataModal({});
         }
     }, [isOpenModal, router]);
+
+    const handleAppointment = (type) => {
+        if (isOpenModal) {
+            const dataID = router.query?.dataID;
+            const idUngTuyen = router.query?.ungtuyen;
+
+            if (!time_Appointment && type !== 'cancel') {
+                alert('Bạn chưa chọn thời gian hẹn !');
+                return;
+            }
+
+            if (dataID && idUngTuyen) {
+                const FetchUserUngVien = async () => {
+                    try {
+                        setIsLoading(true);
+
+                        const ResCheckNew = await changeCheckNew({
+                            id: idUngTuyen,
+                            time_Appointment: type === 'cancel' ? '' : time_Appointment,
+                            type: type === 'cancel' ? 'cancel' : 'book',
+                        });
+
+                        setIsLoading(false);
+
+                        if (ResCheckNew && ResCheckNew.errCode === 0) {
+                            const builAgainData = data.map((item) => {
+                                if (item._id === ResCheckNew.data._id) {
+                                    return ResCheckNew.data;
+                                }
+
+                                return item;
+                            });
+
+                            setData(builAgainData);
+                        }
+                    } catch (error) {
+                        console.log(error);
+                    }
+                };
+
+                FetchUserUngVien();
+            }
+        } else {
+            setDataModal({});
+        }
+    };
 
     const handleNextPage = () => {
         if (metaData.nextPage) {
@@ -260,6 +313,8 @@ export default function NhaTuyenDungUngTuyenManage() {
         }
     };
 
+    console.log(data.find((item) => item.idUngVien === dataModal.id));
+
     return (
         <>
             <Modal
@@ -269,7 +324,32 @@ export default function NhaTuyenDungUngTuyenManage() {
                 width={'90vw'}
                 height={'100vh'}
             >
-                <TrangChiTiet data={dataModal} isDeXuat={false} />
+                <div>
+                    <div className={cx('time_appointment')}>
+                        <labe>Nếu bạn ưng ứng viên này hãy cho họ lịch phỏng vấn</labe>
+                        <input
+                            onChange={(e) => setTimeAppointment(e.target.value)}
+                            className="form-control"
+                            type="date"
+                            value={
+                                time_Appointment ||
+                                data.find((item) => item.idUngVien === dataModal.id)?.time_Appointment
+                            }
+                        />
+                        <div className="d-flex justify-content-end">
+                            <button
+                                onClick={() => handleAppointment('cancel')}
+                                className="btn btn-success p-2 my-3 mx-2"
+                            >
+                                Huỷ lịch hẹn
+                            </button>
+                            <button onClick={handleAppointment} className="btn btn-primary p-2 my-3 mx-2">
+                                Tạo thời gian hẹn
+                            </button>
+                        </div>
+                    </div>
+                    <TrangChiTiet data={dataModal} isDeXuat={false} />
+                </div>
             </Modal>
             <div className={cx('wp')}>
                 {isLoading && <Loading />}

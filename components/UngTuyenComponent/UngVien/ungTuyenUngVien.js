@@ -57,7 +57,8 @@ export default function UngTuyenUngVien() {
                         <th scope="col">Tên Công Ty</th>
                         <th scope="col">SDT</th>
                         <th scope="col">Trạng Thái</th>
-                        <th scope="col">Thời Gian</th>
+                        <th scope="col">Thời Gian UT</th>
+                        <th scope="col">Thời Gian Hẹn</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -74,6 +75,11 @@ export default function UngTuyenUngVien() {
                                     {new Date(+item.time).toLocaleTimeString('vi-VI')}
                                     {` ngày `}
                                     {new Date(+item.time).toLocaleDateString('vi-VI')}
+                                </td>
+                                <td>
+                                    {item.isConfirmedNTD && item.time_Appointment
+                                        ? item.time_Appointment
+                                        : 'NTD chưa hẹn lịch'}
                                 </td>
                             </tr>
                         ))
