@@ -10,6 +10,7 @@ import { manageUngTuyen, roleUser, typeUngTuyen } from '../../../util/constant';
 import useGetRoleUser from '../../../app/hook/useGetRoleUser/useGetRoleUser';
 import {
     changeCheckNew,
+    changeTimeAppointment,
     deleteOrRestoreUngVien,
     getDataLimitUngTuyen,
     getInfoNhaTuyenDung,
@@ -19,6 +20,7 @@ import { Modal } from 'antd';
 import { LayThongTinUngVien } from '../../../services/siteServices';
 import TrangChiTiet from '../../TrangChiTiet/TrangChiTiet';
 import ExtendRender from './extendRender';
+import { swtoast } from '../../../mixins/swal.mixin';
 
 const cx = classNames.bind(style);
 
@@ -313,7 +315,48 @@ export default function NhaTuyenDungUngTuyenManage() {
         }
     };
 
-    console.log(data.find((item) => item.idUngVien === dataModal.id));
+    const handleOKChangeTimeAppoinment = async (time, id) => {
+        const dataBuild = {
+            id: id,
+            time_Appointment: time,
+            isConfirmedNTD: true,
+            type: 'all',
+        };
+
+        try {
+            const Res = await changeTimeAppointment(dataBuild);
+
+            if (Res && Res.errCode === 0) {
+                swtoast.fire({
+                    text: 'Bạn đã hẹn lại thời gian phỏng vấn với ứng viên thành công vui lòng chờ nhà tuyển dụng xác nhận. Xin cảm ơn!',
+                });
+
+                const dataReplacements = data.map((item) => {
+                    if (item.id === Res?.data?.id) {
+                        return Res?.data;
+                    }
+
+                    return item;
+                });
+
+                setData(dataReplacements);
+
+                setIsOpenModal(false);
+            } else {
+                swtoast.fire({
+                    text: Res.msg,
+                });
+                setIsOpenModal(false);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    console.log(
+        'data.find((item) => item.idUngVien === dataModal.id) :',
+        data.find((item) => item.idUngVien === dataModal.id),
+    );
 
     return (
         <>
@@ -348,6 +391,30 @@ export default function NhaTuyenDungUngTuyenManage() {
                             </button>
                         </div>
                     </div>
+                    {!data.find((item) => item.idUngVien === dataModal.id)?.isConfirmedNTD &&
+                    data.find((item) => item.idUngVien === dataModal.id)?.time_again_Appointment ? (
+                        <div>
+                            <label>Ứng viên có sự thay đổi họ đã hẹn lại lịch phỏng vấn </label>{' '}
+                            <span> {data.find((item) => item.idUngVien === dataModal.id)?.time_again_Appointment}</span>{' '}
+                            <span>Lịch cũ mà bạn hẹn ở bên trên</span>
+                            <div className="d-flex justify-content-end">
+                                <button
+                                    onClick={() =>
+                                        handleOKChangeTimeAppoinment(
+                                            data.find((item) => item.idUngVien === dataModal.id)
+                                                ?.time_again_Appointment,
+                                            data.find((item) => item.idUngVien === dataModal.id)._id,
+                                        )
+                                    }
+                                    className="btn btn-success p-2 my-3 mx-2"
+                                >
+                                    đồng ý với lịch hẹn mới
+                                </button>
+                            </div>
+                        </div>
+                    ) : (
+                        ''
+                    )}
                     <TrangChiTiet data={dataModal} isDeXuat={false} />
                 </div>
             </Modal>

@@ -25,3 +25,7 @@ export const deleteOrRestoreUngVien = (data) => {
 export const changeCheckNew = (data) => {
     return axios.post(`/api/v1/ung-tuyen/post-check-isNew`, data);
 };
+
+export const changeTimeAppointment = (data) => {
+    return axios.post(`/api/v1/ung-tuyen/change-time-appointment`, data);
+};
