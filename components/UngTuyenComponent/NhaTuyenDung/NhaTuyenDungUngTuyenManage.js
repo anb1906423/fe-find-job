@@ -473,6 +473,7 @@ export default function NhaTuyenDungUngTuyenManage() {
                                                 <th scope="col">Tiêu đề</th>
                                                 <th scope="col">Email ứng viên</th>
                                                 <th scope="col">Thời gian</th>
+                                                <th scope="col">lịch hẹn PV</th>
                                                 <th scope="col" className="text-center">
                                                     Hành động
                                                 </th>
@@ -512,6 +513,7 @@ export default function NhaTuyenDungUngTuyenManage() {
                                                             {` ngày `}
                                                             {new Date(+item.time).toLocaleDateString('vi-VI')}
                                                         </td>
+                                                        <td>{item.time_Appointment}</td>
                                                         <td className="text-center">
                                                             <button
                                                                 onClick={() =>
