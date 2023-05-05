@@ -1,18 +1,18 @@
 import React from 'react';
-import dynamic from 'next/dynamic';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 import Header from './Header';
 import Footer from './Footer';
 
 const Layout = ({ children }) => {
     return (
-        <div>
-            <Header />
-            <div className='cont'>
-                {children}
+        <GoogleOAuthProvider clientId="755648065622-1ojcq32mdcsls91tp86q4h6kuod74g0c.apps.googleusercontent.com">
+            <div>
+                <Header />
+                <div className="cont">{children}</div>
+                <Footer />
             </div>
-            <Footer />
-        </div>
+        </GoogleOAuthProvider>
     );
 };
 
