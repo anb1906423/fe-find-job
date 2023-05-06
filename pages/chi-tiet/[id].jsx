@@ -1,19 +1,32 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
-import { FaChrome, FaEdit, FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa';
+import { FaChrome, FaEdit, FaMapMarkerAlt, FaPhoneAlt, FaMapMarkedAlt } from 'react-icons/fa';
 import { Col, Row } from 'react-bootstrap';
 
 import style from '../../components/UngTuyenComponent/ungtuyen.module.scss';
-import { manageUngTuyen, roleUser, typeUngTuyen } from '../../util/constant';
-import useGetRoleUser from '../../app/hook/useGetRoleUser/useGetRoleUser';
 
 import Loading from '../../app/components/loading/loading';
-import ExtendRender from '../../components/UngTuyenComponent/NhaTuyenDung/extendRender';
 import axios from 'axios';
 import { backendAPI } from '../../config';
+import {
+    TeamOutlined,
+    CreditCardFilled,
+    SlidersFilled,
+    ReconciliationFilled,
+    DollarCircleOutlined,
+    ClockCircleOutlined
+} from '@ant-design/icons';
 
 const cx = classNames.bind(style);
+
+function convertTime(timeString) {
+    const date = new Date(timeString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear().toString();
+    return `${day}-${month}-${year}`;
+}
 
 export default function NhaTuyenDungUngTuyenManage({ danhSachNTD, nhaTuyenDung }) {
 
@@ -27,14 +40,7 @@ export default function NhaTuyenDungUngTuyenManage({ danhSachNTD, nhaTuyenDung }
 
     // data of list ung tuyem
     const [isLoading, setIsLoading] = useState(false);
-
-    // pagination
-    const [metaData, setMetaData] = useState({});
-    const [currentPage, setCurrentPage] = useState(1);
-
-    // modal view
-    const [isOpenModal, setIsOpenModal] = useState(false);
-    const [dataModal, setDataModal] = useState({});
+    const [otherJobList, setOtherJobList] = useState([])
 
     useEffect(() => {
         danhSachNTD && danhSachNTD.map((item) => {
@@ -42,35 +48,109 @@ export default function NhaTuyenDungUngTuyenManage({ danhSachNTD, nhaTuyenDung }
                 setDataNTD(item)
             }
         })
+
     }, [idNTD])
 
-    console.log(nhaTuyenDung);
+    useEffect(() => {
+        const getOtherJobList = async () => {
+            try {
+                const response = await axios.get(backendAPI +
+                    `/cong-viec/bai-dang-cong-ty?emailcty=${dataNTD.email}`
+                );
+                setOtherJobList(response.data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        if (dataNTD.email) {
+            getOtherJobList();
+        }
+    }, [dataNTD.email]);
 
     return (
         <>
             <div className={cx('wp')}>
                 {isLoading && <Loading />}
                 <Row>
-                    <Col md={9}>
-                        <div className={cx('congty')}>
-                            <div
-                                style={{
-                                    backgroundImage: `url(${dataNTD?.banner
-                                        ? dataNTD?.banner
-                                        : 'https://lambanner.com/wp-content/uploads/2021/03/MNT-DESIGN-TOP-KICH-THUOC-BANNER-QUANG-CAO-GOOGLE-2021-1130x570.jpg'
-                                        })`,
-                                }}
-                                className={cx('banner')}
-                            ></div>
-                            <div
-                                className={cx('avatar')}
-                                style={{
-                                    backgroundImage: `url(${dataNTD?.anhCongTy ? dataNTD?.anhCongTy : '../img/no-avatar.jpg'})`,
-                                }}
-                            ></div>
-                        </div>
-                        <div className={cx('body-content')}>
-
+                    <Col md={9} style={{ borderRight: "1px solid #ccc" }}>
+                        <div className="left-section">
+                            <div className={cx('congty')}>
+                                <div
+                                    style={{
+                                        backgroundImage: `url(${dataNTD?.banner
+                                            ? dataNTD?.banner
+                                            : 'https://img.freepik.com/free-photo/flat-lay-office-desk-assortment-with-copy-space_23-2148707962.jpg'
+                                            })`,
+                                    }}
+                                    className={cx('banner')}
+                                ></div>
+                                <div
+                                    className={cx('avatar')}
+                                    style={{
+                                        backgroundImage: `url(${dataNTD?.anhCongTy ? dataNTD?.anhCongTy : '../img/no-avatar.jpg'})`,
+                                    }}
+                                >
+                                </div>
+                            </div>
+                            <div className={cx('body-content')}>
+                                <div
+                                    className={cx("company-name fw-bold")}
+                                >
+                                    <h5
+                                        style={{
+                                            fontSize: "24px",
+                                            marginBottom: "12px",
+                                            fontWeight: "bold",
+                                        }}
+                                    >
+                                        {dataNTD.tenCty}
+                                    </h5>
+                                </div>
+                                <div>
+                                    <h6>Việc làm đang tuyển dụng</h6>
+                                    <div>
+                                        {
+                                            otherJobList && otherJobList.map((item, index) => {
+                                                return (
+                                                    <div className='hiring-jobs' key={index}>
+                                                        <div className="row">
+                                                            <div className="col-12 info-box">
+                                                                <div>
+                                                                    <div className="">
+                                                                        <h6 className="text-uppercase chuc-danh">{item.chucDanh}</h6>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="d-flex row">
+                                                                    <p className="d-flex align-items-center col-4 mb-0">
+                                                                        <DollarCircleOutlined />
+                                                                        <span>{item.mucLuong}</span>
+                                                                    </p>
+                                                                    <p className="d-flex align-items-center col-4 mb-0">
+                                                                        <FaMapMarkerAlt />
+                                                                        <span>{item.diaDiemLamViec}</span>
+                                                                    </p>
+                                                                    <p className="d-flex align-items-center col-4 mb-0">
+                                                                        <ClockCircleOutlined />
+                                                                        <span>{convertTime(item.created_at)}</span>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                </div>
+                                <div style={{
+                                    whiteSpace: "pre-line",
+                                    marginTop: "32px"
+                                }} className="gioi-thieu-box">
+                                    <h6>Giới thiệu công ty</h6>
+                                    {dataNTD.gioiThieu}
+                                </div>
+                            </div>
                         </div>
                     </Col>
                     <Col md={3}>
@@ -91,8 +171,28 @@ export default function NhaTuyenDungUngTuyenManage({ danhSachNTD, nhaTuyenDung }
                             <div className="d-flex align-items-center content-item gap-3 mb-2">
                                 <FaChrome />
                                 <a className="text-decoration-none" target="_blank" href={dataNTD.website}>
-                                    <p className="p-0 m-0">{dataNTD.website}</p>
+                                    <p className="p-0 m-0">{dataNTD.website || 'Đang cập nhật'}</p>
                                 </a>
+                            </div>
+                            <div className="d-flex align-items-center content-item gap-3 mb-2">
+                                <FaMapMarkedAlt />
+                                <p className="p-0 m-0">{dataNTD.khuVuc || 'Đang cập nhật'}</p>
+                            </div>
+                            <div className="d-flex align-items-center content-item gap-3 mb-2">
+                                <TeamOutlined />
+                                <p className="p-0 m-0">{'Quy mô: ' + (dataNTD.quiMo || 'Đang cập nhật')}</p>
+                            </div>
+                            <div className="d-flex align-items-center content-item gap-3 mb-2">
+                                <CreditCardFilled />
+                                <p className="p-0 m-0">{'MST: ' + dataNTD.maSoThue}</p>
+                            </div>
+                            <div className="d-flex align-items-center content-item gap-3 mb-2">
+                                <SlidersFilled />
+                                <p className="p-0 m-0">{'Loại hình: ' + (dataNTD.loaiHinhDoanhNghiep || 'Đang cập nhật')}</p>
+                            </div>
+                            <div className="d-flex align-items-center content-item gap-3 mb-2">
+                                <ReconciliationFilled />
+                                <p className="p-0 m-0">{'Lĩnh vực: ' + (dataNTD.linhVucNgheNghiep || 'Đang cập nhật')}</p>
                             </div>
                         </div>
                     </Col>

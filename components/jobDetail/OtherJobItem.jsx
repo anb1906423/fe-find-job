@@ -24,7 +24,7 @@ const OtherJobItem = (props) => {
                         </div>
                     </div>
                     <div>
-                        <Link href={`/cong-viec/${props.id}`}>
+                        <Link href={`/chi-tiet/${props.idNhaTuyenDung}`}>
                             <h6 className="ten-cong-ty">{props.tenCty}</h6>
                         </Link>
                     </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 
 import styles from '../../styles/dashboard.module.scss';
@@ -14,7 +14,9 @@ const cx = classNames.bind(styles);
 
 function Dashboard() {
     const role = useSelector((state) => state.user.role);
-    const id = useSelector((state) => state.user.userInfo.id);
+
+    const userInfo = useSelector((state) => state.user.userInfo);
+    const id = userInfo ? userInfo.id : null;
 
     return (
         <div className={cx('dash-board-wp')}>

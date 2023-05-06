@@ -17,7 +17,7 @@ import {
 
 const LatestJob = () => {
     const [jobs, setJobs] = useState([]);
-    const [jobsToShow, setJobsToShow] = useState(4);
+    const [jobsToShow, setJobsToShow] = useState(12);
 
     const [locTheoMucLuong, setLocTheoMucLuong] = useState([]);
     const [locTheoCapBac, setLocTheoCapBac] = useState([]);
@@ -158,6 +158,7 @@ const LatestJob = () => {
                         diaChi: company.diaChi,
                         website: company.website,
                         idNhaTuyenDung: company.id,
+                        companyState: company.state,
                     } : job;
                 });
 
@@ -179,6 +180,7 @@ const LatestJob = () => {
     };
 
     const filteredJobs = jobs.filter(job => job.state
+        && job.companyState
         && (locTheoMucLuongChecked.length === 0 || locTheoMucLuongChecked.some(item => item.element === job.mucLuong))
         && (locTheoCapBacChecked.length === 0 || locTheoCapBacChecked.some(item => item.element === job.capBac))
         && (locTheoLoaiHopDongChecked.length === 0 || locTheoLoaiHopDongChecked.some(item => item.element === job.loaiHopDong))

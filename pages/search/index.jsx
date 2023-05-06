@@ -19,7 +19,7 @@ const SearchResult = () => {
     const nganhNghe = router.query.nganhnghe;
     const diaDiemLamViec = router.query.diadiem;
     const [jobs, setJobs] = useState([]);
-    const [jobsToShow, setJobsToShow] = useState(4);
+    const [jobsToShow, setJobsToShow] = useState(12);
 
     const [locTheoMucLuong, setLocTheoMucLuong] = useState([]);
     const [locTheoCapBac, setLocTheoCapBac] = useState([]);
@@ -160,6 +160,7 @@ const SearchResult = () => {
                         diaChi: company.diaChi,
                         website: company.website,
                         idNhaTuyenDung: company.id,
+                        companyState: company.state,
                     } : job;
                 });
 
@@ -184,6 +185,7 @@ const SearchResult = () => {
     if (diaDiemLamViec == '' || diaDiemLamViec == '-- Tất cả địa điểm --') {
         filteredJobs = jobs.filter(job =>
             job.state
+            && job.companyState
             && job.linhVucNgheNghiep == nganhNghe
             && (locTheoMucLuongChecked.length === 0 || locTheoMucLuongChecked.some(item => item.element === job.mucLuong))
             && (locTheoCapBacChecked.length === 0 || locTheoCapBacChecked.some(item => item.element === job.capBac))
@@ -194,6 +196,7 @@ const SearchResult = () => {
     } else if (nganhNghe == '' || nganhNghe == "-- Tất cả ngành nghề --") {
         filteredJobs = jobs.filter(job =>
             job.state
+            && job.companyState
             && job.diaDiemLamViec == diaDiemLamViec
             && (locTheoMucLuongChecked.length === 0 || locTheoMucLuongChecked.some(item => item.element === job.mucLuong))
             && (locTheoCapBacChecked.length === 0 || locTheoCapBacChecked.some(item => item.element === job.capBac))
@@ -204,6 +207,7 @@ const SearchResult = () => {
     } else {
         filteredJobs = jobs.filter(job =>
             job.state
+            && job.companyState
             && (job.diaDiemLamViec == diaDiemLamViec && job.linhVucNgheNghiep == nganhNghe)
             && (locTheoMucLuongChecked.length === 0 || locTheoMucLuongChecked.some(item => item.element === job.mucLuong))
             && (locTheoCapBacChecked.length === 0 || locTheoCapBacChecked.some(item => item.element === job.capBac))
@@ -212,7 +216,7 @@ const SearchResult = () => {
             && (locTheoTrinhDoChecked.length === 0 || locTheoTrinhDoChecked.some(item => item.element === job.bangCap))
         );
     }
-    
+
     const displayedJobs = Array.from(filteredJobs).slice(0, jobsToShow).map((job, index) => {
         return (
             <CongViecComponent

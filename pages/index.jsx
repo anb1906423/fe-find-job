@@ -22,16 +22,17 @@ const index = () => {
                     const company = companyResponse.data.find((company) => company.email === job.emailCty);
                     return company
                         ? {
-                              ...job,
-                              logoCty: company.logoCty,
-                              soDienThoai: company.soDienThoai,
-                              tenCty: company.tenCty,
-                              diaChi: company.diaChi,
-                              website: company.website,
-                              idNhaTuyenDung: company.id,
-                          }
+                            ...job,
+                            logoCty: company.logoCty,
+                            soDienThoai: company.soDienThoai,
+                            tenCty: company.tenCty,
+                            diaChi: company.diaChi,
+                            website: company.website,
+                            idNhaTuyenDung: company.id,
+                            companyState: company.state,
+                        }
                         : job;
-                    });
+                });
 
                 setJobs(jobsWithCompanyInfo);
             } catch (error) {
@@ -49,7 +50,7 @@ const index = () => {
         setJobsToShow((prevState) => prevState + 4);
     };
 
-    const filteredJobs = jobs.filter((job) => job.state);
+    const filteredJobs = jobs.filter((job) => job.state && job.companyState);
     const displayedJobs = filteredJobs.slice(0, jobsToShow).map((job, index) => {
         return (
             <CongViecComponent
