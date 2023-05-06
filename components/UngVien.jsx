@@ -6,6 +6,7 @@ import { Col, Row } from 'react-bootstrap';
 
 import LazyImg from '../app/components/LazyImg/LazyImg';
 import convertTime from '../app/@func/convertTime/convertTime';
+import { DoubleRightOutlined } from "@ant-design/icons"
 import Link from 'next/link';
 import _ from 'lodash';
 
@@ -115,9 +116,9 @@ const UngVien = ({ dulieu, metaData, currentPage, handleLoadMoreUngVien }) => {
                         </div>
                     )}
                     {!_.isEmpty(metaData) && metaData.totalPages !== currentPage && (
-                        <div className="col-12 my-4">
-                            <button onClick={handleLoadMoreUngVien} className="btn btn-primary mx-auto d-block">
-                                Xem thêm ứng viên
+                        <div className="col-12 xem-them">
+                            <button onClick={handleLoadMoreUngVien} className="d-block">
+                                <DoubleRightOutlined />
                             </button>
                         </div>
                     )}

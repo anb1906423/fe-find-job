@@ -188,83 +188,9 @@ function TrangChiTiet({ data, isDeXuat = true }) {
                                                 <li>
                                                     <strong>{data.hocVan ? data.hocVan : 'Đang cập nhật'}</strong>
                                                 </li>
-                                                {/* <li>
-                                                    <span className={cx('fw-500', 'me-1')}>Đơn vị đào tạo:</span> Đại
-                                                    học Công Nghệ TP HCM - HUTECH
-                                                </li>
-                                                <li>
-                                                    <span className={cx('fw-500', 'me-1')}>Xếp loại:</span> Khá
-                                                </li> */}
                                             </ul>
                                         </div>
-                                        {/* <div className="mb-3">
-                                            <ul>
-                                                <li>
-                                                    <strong>Cử Nhân Quản Trị Kinh Doanh</strong>
-                                                </li>
-                                                <li>
-                                                    <span className={cx('fw-500-title', 'me-1')}>Đơn vị đào tạo:</span>{' '}
-                                                    Đại học Công Nghệ TP HCM - HUTECH
-                                                </li>
-                                                <li>
-                                                    <span className={cx('fw-500-title', 'me-1')}>Xếp loại:</span> Khá
-                                                </li>
-                                            </ul>
-                                        </div> */}
                                     </div>
-                                    {/* <div className={cx('next-body')}>
-                                        <div className={cx('next-body-left')}>
-                                            <span className={cx('next-body-left-icon')}>
-                                                <i className="bi bi-person-workspace"></i>
-                                            </span>
-                                            <span>
-                                                <strong> Kinh nghiệm làm việc</strong>
-                                            </span>
-                                        </div>
-                                        <div className={cx('next-body-right')}></div>
-                                    </div>
-                                    <div className={cx('hoc-van')}>
-                                        <div className="mb-3">
-                                            <ul>
-                                                <li>
-                                                    <strong>Trưởng phòng kinh doanh - phát triển đối tác</strong>
-                                                </li>
-                                                <li>
-                                                    <span className={cx('fw-500-title', 'me-1')}>Công ty:</span> Đại học
-                                                    Công Nghệ TP HCM - HUTECH
-                                                </li>
-                                                <li>
-                                                    <span className={cx('fw-500-title', 'me-1')}>Mô tả:</span> Xây dựng,
-                                                    triển khai kế hoạch kinh doanh theo định hướng của BGĐ Tìm kiếm đối
-                                                    tác, cơ hội hợp tác B2B chào bán các sản phẩm dịch vụ của công ty.
-                                                    Đề xuất cho BGĐ các mô hình, định hướng kinh doanh hiệu quả cho các
-                                                    mảng sản phẩm dịch vụ của công ty Đào tạo hướng dẫn, xây dựng và
-                                                    phát triển lực lượng nhân sự bán hàng Kiểm soát tiến độ thực hiện
-                                                    KPI của phòng, của cá nhân
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div className="mb-3">
-                                            <ul>
-                                                <li>
-                                                    <strong>Trưởng phòng kinh doanh - phát triển đối tác</strong>
-                                                </li>
-                                                <li>
-                                                    <span className={cx('fw-600', 'me-1')}>Công ty:</span> Đại học Công
-                                                    Nghệ TP HCM - HUTECH
-                                                </li>
-                                                <li>
-                                                    <span className={cx('fw-500', 'me-1')}>Mô tả:</span> Xây dựng, triển
-                                                    khai kế hoạch kinh doanh theo định hướng của BGĐ Tìm kiếm đối tác,
-                                                    cơ hội hợp tác B2B chào bán các sản phẩm dịch vụ của công ty. Đề
-                                                    xuất cho BGĐ các mô hình, định hướng kinh doanh hiệu quả cho các
-                                                    mảng sản phẩm dịch vụ của công ty Đào tạo hướng dẫn, xây dựng và
-                                                    phát triển lực lượng nhân sự bán hàng Kiểm soát tiến độ thực hiện
-                                                    KPI của phòng, của cá nhân
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div> */}
                                     <div className={cx('next-body')}>
                                         <div className={cx('next-body-left')}>
                                             <span className={cx('next-body-left-icon')}>
