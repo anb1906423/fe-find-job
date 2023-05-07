@@ -18,6 +18,11 @@
     box-sizing: border-box;
 }
 
+@page {
+    size: A4 !important;
+    margin: 0 !important;
+  }
+
 html {
     font-family: Helvetica, Arial, sans-serif;
 }
