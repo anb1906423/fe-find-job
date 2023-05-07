@@ -6,6 +6,7 @@ import { FaSearch, FaUserPlus } from 'react-icons/fa';
 import Tippy from '@tippyjs/react';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
+import { googleLogout } from '@react-oauth/google';
 
 import SelectItem from './SelectItem';
 import Swal from 'sweetalert2';
@@ -171,6 +172,7 @@ const Header = () => {
                     if (isLoginFireBase) {
                         firebase.auth().signOut();
                         dispatch(actions.userLogOut());
+                        googleLogout();
                         router.push('/');
                     } else {
                         dispatch(actions.userLogOut());

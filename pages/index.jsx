@@ -8,6 +8,7 @@ import { swalert, swtoast } from '../mixins/swal.mixin';
 import { DoubleRightOutlined } from '@ant-design/icons';
 import { Row, Col } from 'react-bootstrap';
 import { Image } from 'antd';
+import { useGoogleOneTapLogin } from '@react-oauth/google';
 
 const index = () => {
     const [jobs, setJobs] = useState([]);
@@ -138,9 +139,7 @@ const index = () => {
                             }}
                             src="https://www.youtube.com/embed/y7tHZ3WeJAw?list=RDy7tHZ3WeJAw"
                             title="Ruth B. - Dandelions (Official Lyric Video)"
-                            frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen
                         ></iframe>
                     </Col>
                     <Col md={8}>

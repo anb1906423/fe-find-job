@@ -76,7 +76,7 @@ const DangNhapUngVien = () => {
                 const dataBuildFireBase = {
                     name: user?.displayName,
                     email: user?.email,
-                    logoCty: user.photoURL || '',
+                    avatar: user.photoURL || '',
                     matKhau: '12345678',
                     soDienThoai: user?.phoneNumber,
                     isLoginFireBase: true,

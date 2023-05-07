@@ -8,7 +8,7 @@ import Head from 'next/head';
 import { backendAPI } from '../config';
 import _ from 'lodash';
 
-const limit = 6;
+const limit = 10;
 
 const TrangUngVien = () => {
     const [danhSachUngVien, datDanhSachUngVien] = useState([]);
