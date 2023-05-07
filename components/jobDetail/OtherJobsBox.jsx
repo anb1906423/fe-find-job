@@ -32,6 +32,7 @@ const OtherJobsBox = (props) => {
                                 {...item}
                                 mucLuongMongMuon={item.mucLuong}
                                 tenCty={props.tenCty}
+                                idNhaTuyenDung={props.idNhaTuyenDung}
                                 key={index}
                             />
                         )

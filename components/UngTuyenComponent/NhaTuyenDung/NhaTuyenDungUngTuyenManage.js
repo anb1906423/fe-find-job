@@ -369,7 +369,7 @@ export default function NhaTuyenDungUngTuyenManage() {
             >
                 <div>
                     <div className={cx('time_appointment')}>
-                        <labe>Nếu bạn ưng ứng viên này hãy cho họ lịch phỏng vấn</labe>
+                        <labe>Đặt lịch phỏng vấn nếu bạn thấy ứng viên này phù hợp</labe>
                         <input
                             onChange={(e) => setTimeAppointment(e.target.value)}
                             className="form-control"
@@ -392,7 +392,7 @@ export default function NhaTuyenDungUngTuyenManage() {
                         </div>
                     </div>
                     {!data.find((item) => item.idUngVien === dataModal.id)?.isConfirmedNTD &&
-                    data.find((item) => item.idUngVien === dataModal.id)?.time_again_Appointment ? (
+                        data.find((item) => item.idUngVien === dataModal.id)?.time_again_Appointment ? (
                         <div>
                             <label>Ứng viên có sự thay đổi họ đã hẹn lại lịch phỏng vấn </label>{' '}
                             <span> {data.find((item) => item.idUngVien === dataModal.id)?.time_again_Appointment}</span>{' '}
@@ -504,6 +504,9 @@ export default function NhaTuyenDungUngTuyenManage() {
                                                                     manageUngTuyen.showModal,
                                                                 )
                                                             }
+                                                            style={{
+                                                                cursor: "pointer"
+                                                            }}
                                                         >
                                                             {item.emailUngVien}
                                                         </td>

@@ -44,7 +44,7 @@ const TrangUngVien = () => {
     return (
         <>
             <Head>
-                <title>Danh sách ưng viên</title>
+                <title>Danh sách ứng viên</title>
             </Head>
             <div className="trang-ung-vien">
                 <Heading tieuDe="Tất cả ứng viên" />

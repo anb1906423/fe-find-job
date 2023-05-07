@@ -31,8 +31,6 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
     const Res = await LayThongTinUngVien(context?.params?.id);
 
-    console.log('check REs: ', Res);
-
     return {
         // Passed to the page component as props
         props: { dataUngVien: Res?.data },

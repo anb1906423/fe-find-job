@@ -3,7 +3,7 @@
     margin : 0;
 }
 
-.time_appointment{
+.time_appointment {
     padding: 20px;
 
     label {
@@ -40,9 +40,9 @@
     .navigate-ntd {
         position: absolute;
         left    : 220px;
-        bottom  : -70px;
+        bottom  : -80px;
         display : flex;
-        gap     : 10px;
+        gap     : 14px;
         color   : #fff;
 
         a {
@@ -50,12 +50,12 @@
             color          : currentColor;
         }
     }
-
+    
 }
 
 .body-content {
     margin-top   : 100px;
-    border       : 1px solid #ccc;
+    // border       : 1px solid #ccc;
     border-radius: 6px;
     min-height   : 200px;
 
@@ -116,4 +116,5 @@
             font-size: 16px;
         }
     }
+
 }

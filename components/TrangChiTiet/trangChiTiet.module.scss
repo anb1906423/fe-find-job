@@ -317,3 +317,19 @@
     font-weight: bold;
     font-size: 14px;
 }
+
+
+.disabled{
+    color: #ccc;
+}
+
+.trinh-do-ht{
+    padding: 20px 0;
+    
+    &::before {
+        content: 'trinh do cua ban';
+        position: absolute;
+        top: -10px;
+        font-weight: 700;
+    }
+}

@@ -1,0 +1,17 @@
+.hiring-jobs {
+    padding      : 18px 0;
+    border-bottom: 1px solid var(--main-color);
+
+    h6.chuc-danh {
+        color: var(--main-color);
+    }
+
+    svg {
+        margin-right: 6px;
+        padding: 1px;
+    }
+
+    &:first-child {
+        padding-top: 4px;
+    }
+}

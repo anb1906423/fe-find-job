@@ -409,6 +409,7 @@ const ChiTietCongViec = (props) => {
                                         <OtherJobsBox
                                             emailCty={props.emailCty}
                                             tenCty={props.tenCongty}
+                                            idNhaTuyenDung={props.idNhaTuyenDung}
                                             id={props.id}
                                         />
                                     </div>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import { Col, Row } from 'react-bootstrap';
 import Router, { useRouter } from 'next/router';
-import { Image } from 'antd';
+import { Image, Radio } from 'antd';
 
 import styles from './trangChiTiet.module.scss';
 import LazyImg from '../../app/components/LazyImg/LazyImg';
@@ -17,6 +17,7 @@ import RenderArray from '../../app/@func/RenderArray';
 const cx = classNames.bind(styles);
 
 function TrangChiTiet({ data, isDeXuat = true }) {
+    console.log('check data : ', data);
     const params = useRouter();
 
     const handleClick = useCallback(
@@ -188,83 +189,9 @@ function TrangChiTiet({ data, isDeXuat = true }) {
                                                 <li>
                                                     <strong>{data.hocVan ? data.hocVan : 'Đang cập nhật'}</strong>
                                                 </li>
-                                                {/* <li>
-                                                    <span className={cx('fw-500', 'me-1')}>Đơn vị đào tạo:</span> Đại
-                                                    học Công Nghệ TP HCM - HUTECH
-                                                </li>
-                                                <li>
-                                                    <span className={cx('fw-500', 'me-1')}>Xếp loại:</span> Khá
-                                                </li> */}
                                             </ul>
                                         </div>
-                                        {/* <div className="mb-3">
-                                            <ul>
-                                                <li>
-                                                    <strong>Cử Nhân Quản Trị Kinh Doanh</strong>
-                                                </li>
-                                                <li>
-                                                    <span className={cx('fw-500-title', 'me-1')}>Đơn vị đào tạo:</span>{' '}
-                                                    Đại học Công Nghệ TP HCM - HUTECH
-                                                </li>
-                                                <li>
-                                                    <span className={cx('fw-500-title', 'me-1')}>Xếp loại:</span> Khá
-                                                </li>
-                                            </ul>
-                                        </div> */}
                                     </div>
-                                    {/* <div className={cx('next-body')}>
-                                        <div className={cx('next-body-left')}>
-                                            <span className={cx('next-body-left-icon')}>
-                                                <i className="bi bi-person-workspace"></i>
-                                            </span>
-                                            <span>
-                                                <strong> Kinh nghiệm làm việc</strong>
-                                            </span>
-                                        </div>
-                                        <div className={cx('next-body-right')}></div>
-                                    </div>
-                                    <div className={cx('hoc-van')}>
-                                        <div className="mb-3">
-                                            <ul>
-                                                <li>
-                                                    <strong>Trưởng phòng kinh doanh - phát triển đối tác</strong>
-                                                </li>
-                                                <li>
-                                                    <span className={cx('fw-500-title', 'me-1')}>Công ty:</span> Đại học
-                                                    Công Nghệ TP HCM - HUTECH
-                                                </li>
-                                                <li>
-                                                    <span className={cx('fw-500-title', 'me-1')}>Mô tả:</span> Xây dựng,
-                                                    triển khai kế hoạch kinh doanh theo định hướng của BGĐ Tìm kiếm đối
-                                                    tác, cơ hội hợp tác B2B chào bán các sản phẩm dịch vụ của công ty.
-                                                    Đề xuất cho BGĐ các mô hình, định hướng kinh doanh hiệu quả cho các
-                                                    mảng sản phẩm dịch vụ của công ty Đào tạo hướng dẫn, xây dựng và
-                                                    phát triển lực lượng nhân sự bán hàng Kiểm soát tiến độ thực hiện
-                                                    KPI của phòng, của cá nhân
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div className="mb-3">
-                                            <ul>
-                                                <li>
-                                                    <strong>Trưởng phòng kinh doanh - phát triển đối tác</strong>
-                                                </li>
-                                                <li>
-                                                    <span className={cx('fw-600', 'me-1')}>Công ty:</span> Đại học Công
-                                                    Nghệ TP HCM - HUTECH
-                                                </li>
-                                                <li>
-                                                    <span className={cx('fw-500', 'me-1')}>Mô tả:</span> Xây dựng, triển
-                                                    khai kế hoạch kinh doanh theo định hướng của BGĐ Tìm kiếm đối tác,
-                                                    cơ hội hợp tác B2B chào bán các sản phẩm dịch vụ của công ty. Đề
-                                                    xuất cho BGĐ các mô hình, định hướng kinh doanh hiệu quả cho các
-                                                    mảng sản phẩm dịch vụ của công ty Đào tạo hướng dẫn, xây dựng và
-                                                    phát triển lực lượng nhân sự bán hàng Kiểm soát tiến độ thực hiện
-                                                    KPI của phòng, của cá nhân
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div> */}
                                     <div className={cx('next-body')}>
                                         <div className={cx('next-body-left')}>
                                             <span className={cx('next-body-left-icon')}>
@@ -277,29 +204,70 @@ function TrangChiTiet({ data, isDeXuat = true }) {
                                         <div className={cx('next-body-right')}></div>
                                     </div>
                                     <div className={cx('trinh-do-tieng-anh')}>
-                                        <div className={cx('trinh-do-tieng-anh-top')}>
-                                            <div className={cx('title-name')}>Tên Môn</div>
-                                            <div className={cx('title-name')}>Nghe</div>
-                                            <div className={cx('title-name')}>Nói</div>
-                                            <div className={cx('title-name')}>Đọc</div>
-                                            <div className={cx('title-name')}>Viết</div>
-                                        </div>
-                                        <div className={cx('trinh-do-tieng-anh-body')}>
-                                            <div className={cx('item-result')}>
-                                                <div className={cx('title-result--render')}>Tiếng anh</div>
-                                                <div className={cx('title-result--render')}>Trung bình</div>
-                                                <div className={cx('title-result--render')}>Trung bình</div>
-                                                <div className={cx('title-result--render')}>Trung bình</div>
-                                                <div className={cx('title-result--render')}>Trung bình</div>
-                                            </div>
-                                            <div className={cx('item-result')}>
-                                                <div className={cx('title-result--render')}>Tiếng Pháp</div>
-                                                <div className={cx('title-result--render')}>Trung bình</div>
-                                                <div className={cx('title-result--render')}>Trung bình</div>
-                                                <div className={cx('title-result--render')}>Trung bình</div>
-                                                <div className={cx('title-result--render')}>Trung bình</div>
-                                            </div>
-                                        </div>
+                                        <Radio.Group value={data.tiengAnh}>
+                                            <Radio
+                                                value="Basic"
+                                                style={{ margin: '6px' }}
+                                                className={cx(data.tiengAnh === 'Basic' ? 'trinh-do-ht' : 'disabled')}
+                                            >
+                                                Basic Level: Có khả năng sử dụng tiếng Anh trong các tình huống hàng
+                                                ngày, hiểu và sử dụng các cấu trúc cơ bản, có khả năng đọc hiểu văn bản
+                                                đơn giản và viết các câu hoặc đoạn văn ngắn.
+                                            </Radio>
+                                            <Radio
+                                                value="Intermediate"
+                                                style={{ margin: '6px' }}
+                                                className={cx(
+                                                    data.tiengAnh === 'Intermediate' ? 'trinh-do-ht' : 'disabled',
+                                                )}
+                                            >
+                                                Intermediate Level: Có khả năng giao tiếp lưu loát trong nhiều tình
+                                                huống, hiểu và sử dụng các cấu trúc ngữ pháp phức tạp hơn, có khả năng
+                                                đọc hiểu các văn bản thông thường và viết các bài văn có cấu trúc.
+                                            </Radio>
+                                            <Radio
+                                                value="Advanced"
+                                                style={{ margin: '6px' }}
+                                                className={cx(
+                                                    data.tiengAnh === 'Advanced' ? 'trinh-do-ht' : 'disabled',
+                                                )}
+                                            >
+                                                Advanced Level: Có khả năng giao tiếp tự nhiên và lưu loát trong hầu hết
+                                                các tình huống, hiểu và sử dụng các cấu trúc ngữ pháp phức tạp, có khả
+                                                năng đọc hiểu các văn bản chuyên ngành và viết các bài văn có cấu trúc
+                                                logic.
+                                            </Radio>
+                                            <Radio
+                                                value="Fluent"
+                                                style={{ margin: '6px' }}
+                                                className={cx(data.tiengAnh === 'Fluent' ? 'trinh-do-ht' : 'disabled')}
+                                            >
+                                                Fluent Level: Có khả năng giao tiếp tự nhiên và lưu loát như người bản
+                                                xứ, sử dụng linh hoạt các cấu trúc ngữ pháp, đọc hiểu và phân tích các
+                                                văn bản phức tạp, viết các bài văn có nội dung sâu sắc và phong cách
+                                                chuyên nghiệp.
+                                            </Radio>
+                                            <Radio
+                                                value="Native"
+                                                style={{ margin: '6px' }}
+                                                className={cx(data.tiengAnh === 'Native' ? 'trinh-do-ht' : 'disabled')}
+                                            >
+                                                Native Level: Sử dụng tiếng Anh thành thạo như người bản xứ, giao tiếp
+                                                tự nhiên và linh hoạt, sử dụng thành thạo các cấu trúc ngôn ngữ, đọc
+                                                hiểu và phân tích các văn bản chuyên ngành phức tạp, viết các bài văn
+                                                một cách chính xác và sáng tạo.
+                                            </Radio>
+                                            <Radio
+                                                value="Expert"
+                                                style={{ margin: '6px' }}
+                                                className={cx(data.tiengAnh === 'Expert' ? 'trinh-do-ht' : 'disabled')}
+                                            >
+                                                Expert Level: Sử dụng tiếng Anh với sự thành thạo cao nhất, có khả năng
+                                                giao tiếp tự nhiên và linh hoạt ở mọi tình huống, sử dụng một cách tinh
+                                                vi các cấu trúc ngôn ngữ, đọc hiểu và phân tích các văn bản chuyên ngành
+                                                phức tạp, viết các bài văn một cách chuyên nghiệp và sáng tạo.
+                                            </Radio>
+                                        </Radio.Group>
                                     </div>
                                 </div>
                             )}

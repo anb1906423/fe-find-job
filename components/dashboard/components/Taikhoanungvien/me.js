@@ -42,9 +42,10 @@ const MeProfile = () => {
             setIsLoading(true);
 
             const Res = await axios(
-                `${backendAPI}/${roleUserLogin === roleUser.UngVien
-                    ? 'ung-vien'
-                    : roleUserLogin === roleUser.NhaTuyenDung
+                `${backendAPI}/${
+                    roleUserLogin === roleUser.UngVien
+                        ? 'ung-vien'
+                        : roleUserLogin === roleUser.NhaTuyenDung
                         ? 'nha-tuyen-dung'
                         : 'admin'
                 }/${userID}`,
@@ -61,10 +62,10 @@ const MeProfile = () => {
                 roleUserLogin === roleUser.UngVien
                     ? data.avatar
                     : data.logoCty
-                        ? roleUserLogin === roleUser.UngVien
-                            ? data.avatar
-                            : data.logoCty
-                        : 'https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_960_720.png',
+                    ? roleUserLogin === roleUser.UngVien
+                        ? data.avatar
+                        : data.logoCty
+                    : 'https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_960_720.png',
             );
             setIsUpLoadAvatar(
                 roleUserLogin === roleUser.UngVien ? (data.avatar ? false : true) : data.logoCty ? false : true,
@@ -76,8 +77,8 @@ const MeProfile = () => {
                         ? data.avatar
                         : null
                     : data.logoCty
-                        ? data.logoCty
-                        : null,
+                    ? data.logoCty
+                    : null,
             );
         } catch (error) {
             console.log(error);
@@ -123,16 +124,19 @@ const MeProfile = () => {
 
         if (_.isEmpty(data)) return;
 
-        setIsLoading(true);
-
         // đăng tải ảnh
         let ResImg;
 
         if (isUpLoadAvatar) {
-            ResImg = await UploadImage({
-                file: avatar,
-                upload_preset: REACT_APP_UPLOAD_PRESET,
-            });
+            if (!avatar) {
+                alert('Bạn chưa chọn hình ảnh !');
+            } else {
+                setIsLoading(true);
+                ResImg = await UploadImage({
+                    file: avatar,
+                    upload_preset: REACT_APP_UPLOAD_PRESET,
+                });
+            }
         }
 
         if (!ResImg && isUpLoadAvatar) return;
@@ -145,9 +149,10 @@ const MeProfile = () => {
 
         try {
             const Res = await axios.put(
-                `${backendAPI}/${roleUserLogin === roleUser.UngVien
-                    ? 'ung-vien'
-                    : roleUserLogin === roleUser.NhaTuyenDung
+                `${backendAPI}/${
+                    roleUserLogin === roleUser.UngVien
+                        ? 'ung-vien'
+                        : roleUserLogin === roleUser.NhaTuyenDung
                         ? 'nha-tuyen-dung'
                         : 'admin'
                 }/${userID}`,
@@ -175,12 +180,8 @@ const MeProfile = () => {
                 {isLogin ? (
                     <div className="container">
                         <h5 className={cx('tieu-de', 'text-center', 'py-4')}>
-                            {roleUserLogin === roleUser.UngVien && (
-                                'THÔNG TIN CÁ NHÂN'
-                            )}
-                            {roleUserLogin === roleUser.NhaTuyenDung && (
-                                "THÔNG TIN CÔNG TY"
-                            )}
+                            {roleUserLogin === roleUser.UngVien && 'THÔNG TIN CÁ NHÂN'}
+                            {roleUserLogin === roleUser.NhaTuyenDung && 'THÔNG TIN CÔNG TY'}
                             {/* Xin chào bạn dưới đây là thông tin của bạn */}
                         </h5>
                         <div className={cx('content')}>
