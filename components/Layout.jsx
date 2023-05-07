@@ -11,6 +11,7 @@ import axios from 'axios';
 import * as actions from '../store/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 const Layout = ({ children }) => {
     const dispatch = useDispatch();
@@ -74,15 +75,23 @@ const Layout = ({ children }) => {
         },
     });
 
+    const params = useRouter();
+
+    console.log(params.asPath);
+
     return (
         <>
-            <GoogleOAuthProvider clientId="755648065622-1ojcq32mdcsls91tp86q4h6kuod74g0c.apps.googleusercontent.com">
-                <div>
-                    <Header />
-                    <div className="cont">{children}</div>
-                    <Footer />
-                </div>
-            </GoogleOAuthProvider>
+            {params?.asPath === '/create-cv' ? (
+                <div className="cont">{children}</div>
+            ) : (
+                <GoogleOAuthProvider clientId="755648065622-1ojcq32mdcsls91tp86q4h6kuod74g0c.apps.googleusercontent.com">
+                    <div>
+                        <Header />
+                        <div className="cont">{children}</div>
+                        <Footer />
+                    </div>
+                </GoogleOAuthProvider>
+            )}
         </>
     );
 };
