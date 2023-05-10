@@ -382,11 +382,11 @@ export default function NhaTuyenDungUngTuyenManage() {
                         <div className="d-flex justify-content-end">
                             <button
                                 onClick={() => handleAppointment('cancel')}
-                                className="btn btn-success p-2 my-3 mx-2"
+                                className="btn btn-success p-2 px-4 my-3 mx-2"
                             >
                                 Huỷ lịch hẹn
                             </button>
-                            <button onClick={handleAppointment} className="btn btn-primary p-2 my-3 mx-2">
+                            <button onClick={handleAppointment} className="btn btn-primary p-2 px-4 my-3 mx-2">
                                 Tạo thời gian hẹn
                             </button>
                         </div>
@@ -473,7 +473,7 @@ export default function NhaTuyenDungUngTuyenManage() {
                                                 <th scope="col">Tiêu đề</th>
                                                 <th scope="col">Email ứng viên</th>
                                                 <th scope="col">Thời gian</th>
-                                                <th scope="col">lịch hẹn PV</th>
+                                                <th scope="col">Lịch hẹn PV</th>
                                                 <th scope="col" className="text-center">
                                                     Hành động
                                                 </th>

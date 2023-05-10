@@ -64,7 +64,7 @@ function TrangChiTiet({ data, isDeXuat = true }) {
                                             <p className={cx('vi-tri')}>
                                                 <span>{data.viTriMongMuon ? data.viTriMongMuon : 'Đang cập nhật'}</span>
                                             </p>
-                                            <div className={cx('ve-ban-than')}>
+                                            <div className={cx('ve-ban-than')} style={{ marginTop: "18px" }}>
                                                 <div className={cx('ve-ban-than-left')}>
                                                     <p>
                                                         <i className="bi bi-calendar2-date"></i>

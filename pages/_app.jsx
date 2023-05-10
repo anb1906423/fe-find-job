@@ -3,6 +3,7 @@ import reduxStore, { persistor } from '../redux';
 import dynamic from 'next/dynamic';
 import { Provider } from 'react-redux';
 import Script from 'next/script';
+import Head from 'next/head';
 
 import '../styles/globals.scss';
 import '../styles/profile.scss';
@@ -24,6 +25,10 @@ export default function MyApp({ Component, pageProps }) {
                     integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
                     crossOrigin="anonymous"
                 />
+                <Head>
+					<title>Your Career We Care</title>
+					<link rel="icon" href="../img/favicon.png" />
+				</Head>
                 <Component {...pageProps} persistor={persistor} />
             </Layout>
         </Provider>

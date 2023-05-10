@@ -133,7 +133,7 @@ export default function UngTuyenUngVien() {
                         <th scope="col">Trạng Thái</th>
                         <th scope="col">Thời Gian UT</th>
                         <th scope="col">Thời Gian Hẹn</th>
-                        <th scope="col">Hành động</th>
+                        {/* <th scope="col">Hành động</th> */}
                     </tr>
                 </thead>
                 <tbody>
@@ -160,7 +160,7 @@ export default function UngTuyenUngVien() {
                                         ? item.time_Appointment
                                         : 'NTD chưa hẹn lịch'}
                                 </td>
-                                <td>
+                                {/* <td>
                                     {(item.isConfirmedNTD && item.time_Appointment) || item.time_again_Appointment ? (
                                         <button
                                             onClick={() => {
@@ -177,7 +177,7 @@ export default function UngTuyenUngVien() {
                                             <i className="bi bi-tools"></i>
                                         </button>
                                     )}
-                                </td>
+                                </td> */}
                             </tr>
                         ))
                     ) : (
