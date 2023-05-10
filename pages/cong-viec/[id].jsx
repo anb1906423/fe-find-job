@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import { Modal } from 'antd';
@@ -18,7 +18,7 @@ import {
     FaEdit,
 } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
-import { swalert } from '../../mixins/swal.mixin';
+import { swalert, swtoast } from '../../mixins/swal.mixin';
 import { useRouter } from 'next/router';
 import _ from 'lodash';
 import { LayThongTinUngVien } from '../../services/siteServices';
@@ -61,6 +61,12 @@ const ChiTietCongViec = (props) => {
     };
 
     const handleShowModelUngTuyen = () => {
+        if (props.isButtonDisabled) {
+            swtoast.fire({
+                text: "Đã hết thời gian nộp hồ sơ!!"
+            })
+            return;
+        }
         if (role || role === 0) {
             if (role !== -1) {
                 swalert.fire({

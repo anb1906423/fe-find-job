@@ -70,7 +70,7 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                 des: data.gioiThieu,
                 mucTieuNgheNghiep: data.mucTieuNgheNghiep,
                 docThan: data.docThan,
-                trinhDoTiengAnh: data.trinhDoTiengAnh,
+                trinhDoTiengAnh: data.tiengAnh,
             }));
         }
     }, [data]);
@@ -355,7 +355,7 @@ function UngVienProfile({ cx = () => {}, data, handleSublit = () => {} }) {
                 </div>
                 <div className="col-12 mt-3" style={{ textAlign: 'justify' }}>
                     <label htmlFor="muctie-nghe-nghiep">Trình độ tiếng Anh:</label>
-                    <Radio.Group onChange={handleChange} name="trinhDoTiengAnh">
+                    <Radio.Group onChange={handleChange} name="trinhDoTiengAnh" value={ungVienState.trinhDoTiengAnh}>
                         <Radio value="Basic" style={{ margin: '6px' }}>
                             {' '}
                             Basic Level: Có khả năng sử dụng tiếng Anh trong các tình huống hàng ngày, hiểu và sử dụng

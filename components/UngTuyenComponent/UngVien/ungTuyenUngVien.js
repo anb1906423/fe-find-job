@@ -124,7 +124,7 @@ export default function UngTuyenUngVien() {
                     />
                 </div>
             </Modal>
-            <table className="table">
+            <table className="table align-middle">
                 <thead className="table-dark">
                     <tr>
                         <th scope="col">STT</th>

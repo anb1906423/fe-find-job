@@ -466,7 +466,7 @@ export default function NhaTuyenDungUngTuyenManage() {
                             <div className={cx('content')}>
                                 <h5>Danh sách hồ sơ ứng tuyển</h5>
                                 <div className="mt-3">
-                                    <table className="table">
+                                    <table className="table align-middle">
                                         <thead className="table-dark">
                                             <tr>
                                                 <th scope="col">#</th>

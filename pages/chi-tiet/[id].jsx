@@ -17,8 +17,10 @@ import {
     DollarCircleOutlined,
     ClockCircleOutlined
 } from '@ant-design/icons';
+import ChiTietCongViec from '../cong-viec/[id]';
 
 const cx = classNames.bind(style);
+import OtherJobsBox from '../../components/jobDetail/OtherJobsBox';
 
 function convertTime(timeString) {
     const date = new Date(timeString);
@@ -41,6 +43,27 @@ export default function NhaTuyenDungUngTuyenManage({ danhSachNTD, nhaTuyenDung }
     // data of list ung tuyem
     const [isLoading, setIsLoading] = useState(false);
     const [otherJobList, setOtherJobList] = useState([])
+
+    const [isOpen, setIsOpen] = useState(false);
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+    const [selectedJobId, setSelectedJobId] = useState(null);
+    const handleItemClick = (jobId) => {
+        setSelectedJobId(jobId);
+    };
+
+    const showModal = () => {
+        setIsOpen(true);
+        // router.push(`/cong-viec/${props.id}`);
+    };
+
+    const endDate = new Date();
+
+    // useEffect(() => {
+    //     // So sánh thời gian hiện tại với hạn nộp hồ sơ
+    //     if (endDate.toISOString() > props.hanNopHoSo) {
+    //         setIsButtonDisabled(true);
+    //     }
+    // }, []);
 
     useEffect(() => {
         danhSachNTD && danhSachNTD.map((item) => {
@@ -111,12 +134,23 @@ export default function NhaTuyenDungUngTuyenManage({ danhSachNTD, nhaTuyenDung }
                                     <h6>Việc làm đang tuyển dụng</h6>
                                     <div>
                                         {
-                                            otherJobList && otherJobList.map((item, index) => {
+                                            otherJobList &&
+                                            otherJobList.map((item, index) => {
+                                                const isOpen = item.id === selectedJobId;
+                                                
                                                 return (
-                                                    <div className='hiring-jobs' key={index}>
+                                                    <div className="hiring-jobs" key={index}>
+                                                        {/* <ChiTietCongViec
+                                                            setIsOpen={setIsOpen}
+                                                            isButtonDisabled={isButtonDisabled}
+                                                            isOpen={isOpen}
+                                                            {...item}
+                                                            tenCty={item.tenCongty}
+                                                        /> */}
+
                                                         <div className="row">
                                                             <div className="col-12 info-box">
-                                                                <div>
+                                                                <div onClick={() => handleItemClick(item.id)}>
                                                                     <div className="">
                                                                         <h6 className="text-uppercase chuc-danh">{item.chucDanh}</h6>
                                                                     </div>
@@ -138,7 +172,7 @@ export default function NhaTuyenDungUngTuyenManage({ danhSachNTD, nhaTuyenDung }
                                                             </div>
                                                         </div>
                                                     </div>
-                                                )
+                                                );
                                             })
                                         }
                                     </div>
