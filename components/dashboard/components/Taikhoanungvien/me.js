@@ -181,7 +181,7 @@ const MeProfile = () => {
                     <div className="container">
                         <h5 className={cx('tieu-de', 'text-center', 'py-4')}>
                             {roleUserLogin === roleUser.UngVien && 'THÔNG TIN CÁ NHÂN'}
-                            {roleUserLogin === roleUser.NhaTuyenDung && 'THÔNG TIN CÔNG TY'}
+                            {roleUserLogin === roleUser.NhaTuyenDung && 'THÔNG TIN TỔNG QUAN'}
                             {/* Xin chào bạn dưới đây là thông tin của bạn */}
                         </h5>
                         <div className={cx('content')}>

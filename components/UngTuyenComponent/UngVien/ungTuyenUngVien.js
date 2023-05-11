@@ -143,12 +143,12 @@ export default function UngTuyenUngVien() {
                                 <th scope="row">{index + 1}</th>
                                 <td>{item.tenCongty}</td>
                                 <td>{item.soDienThoai}</td>
-                                <td>{`${item.isNotify && 'Đã nhận tin'} và nhà tuyển dụng ${
+                                <td>{`${item.isNotify && 'NTD'} ${
                                     item.isNew ? 'chưa xem hồ sơ' : `đã xem hồ sơ`
                                 }`}</td>
                                 <td>
                                     {new Date(+item.time).toLocaleTimeString('vi-VI')}
-                                    {` ngày `}
+                                    {` `}
                                     {new Date(+item.time).toLocaleDateString('vi-VI')}
                                 </td>
                                 <td>
@@ -158,7 +158,7 @@ export default function UngTuyenUngVien() {
                                             : 'Chưa có lịch hẹn'
                                         : item.time_Appointment
                                         ? item.time_Appointment
-                                        : 'NTD chưa hẹn lịch'}
+                                        : 'Chưa có lịch hẹn'}
                                 </td>
                                 {/* <td>
                                     {(item.isConfirmedNTD && item.time_Appointment) || item.time_again_Appointment ? (

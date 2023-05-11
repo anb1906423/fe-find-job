@@ -6,6 +6,7 @@ const initialState = {
     userPersist: null,
     role: null,
     accessToken: '',
+    userState: false,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -19,6 +20,7 @@ const userReducer = (state = initialState, action) => {
                 role: action.userInfo.role,
                 accessToken: action.userInfo.accessToken,
                 isLoginFireBase: action.userInfo.isLoginFireBase,
+                userState: action.userInfo.userState,
             };
 
         case actionTypes.USER_LOGOUT_SUCCESS:
@@ -29,6 +31,7 @@ const userReducer = (state = initialState, action) => {
                 userPersist: null,
                 role: null,
                 accessToken: '',
+                userState: false,
             };
         case actionTypes.UPDATE_USER_SUCCESS:
             return {

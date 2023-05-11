@@ -513,7 +513,7 @@ export default function NhaTuyenDungUngTuyenManage() {
                                                         <td>
                                                             {' '}
                                                             {new Date(+item.time).toLocaleTimeString('vi-VI')}
-                                                            {` ngày `}
+                                                            {` `}
                                                             {new Date(+item.time).toLocaleDateString('vi-VI')}
                                                         </td>
                                                         <td>{item.time_Appointment || 'Chưa có lịch hẹn phỏng vấn'}</td>
