@@ -34,6 +34,7 @@ const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 export default function PostComponent() {
     const userData = useSelector((state) => state.user);
+    console.log(userData);
 
     const [isEdit, setIsEdit] = useState(false);
 
@@ -270,7 +271,7 @@ export default function PostComponent() {
             setDataPost((prev) => {
                 return {
                     ...prev,
-                    titleLoading: 'Đang tải dữ liệu của bạn lên server!',
+                    titleLoading: 'Loading...',
                 };
             });
 
