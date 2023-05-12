@@ -111,7 +111,7 @@ export default function NhaTuyenDungUngTuyenManage({ danhSachNTD, nhaTuyenDung }
                                 <div
                                     className={cx('avatar')}
                                     style={{
-                                        backgroundImage: `url(${dataNTD?.anhCongTy ? dataNTD?.anhCongTy : '../img/no-avatar.jpg'})`,
+                                        backgroundImage: `url(${dataNTD?.logoCty ? dataNTD?.logoCty : '../img/no-avatar.jpg'})`,
                                     }}
                                 >
                                 </div>

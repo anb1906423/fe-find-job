@@ -50,6 +50,7 @@ const DangNhapUngVien = () => {
                     id: Res.data.id,
                     accessToken: Res.data.accessToken,
                     isLoginFireBase: Res.data.isLoginFireBase,
+                    userState: Res.data.state,
                 };
 
                 dispatch(actions.userLoginSuccess(data));
@@ -80,6 +81,7 @@ const DangNhapUngVien = () => {
                     matKhau: '12345678',
                     soDienThoai: user?.phoneNumber,
                     isLoginFireBase: true,
+                    userState: user?.state,
                 };
 
                 const handleSaveUser = async () => {
@@ -97,6 +99,7 @@ const DangNhapUngVien = () => {
                                 id: ResLoginFireBase.data.id,
                                 accessToken: ResLoginFireBase.data.accessToken,
                                 isLoginFireBase: ResLoginFireBase.data.isLoginFireBase,
+                                userState: ResLoginFireBase.data.state,
                             };
                             console.log(data);
 

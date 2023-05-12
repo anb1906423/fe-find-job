@@ -21,7 +21,7 @@ import {
 } from '../../services/siteServices';
 import { GioiTinhYeuCau, provinces } from '../../data/data';
 import Link from 'next/link';
-import { swalert } from '../../mixins/swal.mixin';
+import { swalert, swtoast } from '../../mixins/swal.mixin';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import convertTime from '../../app/@func/convertTime/convertTime';
@@ -267,31 +267,38 @@ export default function PostComponent() {
         };
 
         try {
-            setIsLoading(true);
-            setDataPost((prev) => {
-                return {
-                    ...prev,
-                    titleLoading: 'Loading...',
-                };
-            });
-
-            isEdit ? await updatePostNhaTuyenDung(params.query?.id, dataBuild) : await createNewPost(dataBuild);
-
-            setIsLoading(false);
-
-            swalert
-                .fire({
-                    title: 'Chúc mừng',
-                    icon: 'success',
-                    text: isEdit ? 'Bạn đã sửa bài viết thành công!' : 'Bạn đã tạo bài viết thành công!',
-                    showCloseButton: true,
-                    showCancelButton: false,
-                })
-                .then(async (result) => {
-                    if (result.isConfirmed) {
-                        handleResetState();
-                    }
+            if (userData.userState) {
+                setIsLoading(true);
+                setDataPost((prev) => {
+                    return {
+                        ...prev,
+                        titleLoading: 'Loading...',
+                    };
                 });
+
+                isEdit ? await updatePostNhaTuyenDung(params.query?.id, dataBuild) : await createNewPost(dataBuild);
+
+                setIsLoading(false);
+
+                swalert
+                    .fire({
+                        title: 'Chúc mừng',
+                        icon: 'success',
+                        text: isEdit ? 'Bạn đã sửa bài viết thành công!' : 'Bạn đã tạo bài viết thành công!',
+                        showCloseButton: true,
+                        showCancelButton: false,
+                    })
+                    .then(async (result) => {
+                        if (result.isConfirmed) {
+                            handleResetState();
+                        }
+                    });
+            } else {
+                swtoast.fire({
+                    text: "Tài khoản của bạn đã bị khóa!!"
+                })
+                return;
+            }
         } catch (error) {
             console.log(error);
         }

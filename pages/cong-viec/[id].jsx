@@ -80,6 +80,13 @@ const ChiTietCongViec = (props) => {
                 return;
             }
 
+            if (!userInfo.userState) {
+                swtoast.fire({
+                    text: "Tài khoản của bạn đã bị khóa!!"
+                })
+                return;
+            }
+
             setIsOpenModel(true);
         } else {
             router.push('/dang-nhap/ung-vien');
